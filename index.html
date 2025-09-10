@@ -32,85 +32,135 @@
 
   <style>
     :root{
-      --bg:#0b1220; --surface:#0f172a; --card:#111827; --muted:#94a3b8;
-      --text:#e5e7eb; --accent:#22c55e; --accent-2:#0ea5e9; --ring:rgba(14,165,233,.35);
+      --bg:#050a06;          /* fundo quase preto com tom esverdeado */
+      --surface:#07110b;     /* navbar/áreas semi-translúcidas */
+      --card:#0a1610;        /* cartões/painéis */
+      --text:#e6ffe8;        /* texto claro levemente esverdeado */
+      --muted:#8ab59d;       /* texto secundário */
+      --accent:#39ff14;      /* neon green principal */
+      --accent-2:#00e5a8;    /* verde água para detalhes */
+      --ring:rgba(57,255,20,.45);
+      --edge:#153e25;        /* bordas discretas */
+      --grid:rgba(57,255,20,.08);
       --max: 960px;
     }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#ffffff; --surface:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --ring:rgba(14,165,233,.25); }
-      body{ background-image: radial-gradient(80vw 40vh at 50% -10%, #e0f2fe 0, transparent 60%);}
-    }
+  
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      background: var(--bg); color: var(--text);
-      line-height: 1.6;
-      background-image: radial-gradient(70vw 30vh at 50% -10%, #0ea5e930 0, transparent 60%);
+      margin:0; line-height:1.6; color: var(--text);
+      background-color: var(--bg);
+      /* fundo cibernético: halos + linhas horizontais */
+      background-image:
+        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.09), transparent 60%),
+        radial-gradient(60vw 40vh at 120% 10%, rgba(0,229,168,.07), transparent 60%),
+        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.06) 24px 25px),
+        linear-gradient(#050a06, #050a06);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
+  
+    /* fallback claro com mesmo clima */
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#0b140f; --surface:#0c1712; --card:#0f1e17; --text:#ecffee; --muted:#a3d5bf; }
+      body{ background-image:
+        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.12), transparent 60%),
+        radial-gradient(60vw 40vh at 120% 10%, rgba(0,229,168,.1), transparent 60%),
+        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.07) 24px 25px),
+        linear-gradient(#0b140f, #0b140f); }
+    }
+  
     a{ color: var(--accent-2); text-decoration: none }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 8px }
+  
     header{
       position: sticky; top:0; z-index: 10; backdrop-filter: blur(10px);
-      background: color-mix(in oklab, var(--surface) 70%, transparent);
-      border-bottom: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+      background: rgba(7,17,11,.75);
+      border-bottom: 1px solid var(--edge);
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
     }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px }
     .row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-    .brand{ display:flex; align-items:center; gap:10px; padding: 12px 0 }
-    .brand b{ font-size: 18px; letter-spacing:.3px }
+  
+    .brand{ display:flex; align-items:center; gap:12px; padding: 12px 0 }
+    .logo{ height: 32px; width: auto; filter: drop-shadow(0 0 8px rgba(57,255,20,.55)); }
+    @media (min-width: 760px){ .logo{ height: 36px } }
+  
     nav ul{ display:flex; gap:14px; padding:0; margin:0; list-style:none; overflow:auto }
     nav a{ display:block; padding:10px 12px; border-radius: 10px; color: var(--text) }
-    nav a:hover{ background: color-mix(in oklab, var(--text) 8%, transparent) }
+    nav a:hover{ background: rgba(57,255,20,.08); box-shadow: inset 0 0 0 1px rgba(57,255,20,.18) }
+  
     main{ padding: 16px 0 64px }
+  
     .hero{
-      display:grid; gap:18px; padding: 48px 0 16px; text-align:center;
+      position:relative; display:grid; gap:18px; padding: 60px 0 16px; text-align:center; overflow:hidden;
     }
-    .kicker{ color: var(--muted); text-transform: uppercase; letter-spacing:.12em; font-weight: 600 }
-    h1{ font-size: clamp(32px, 5vw, 56px); margin: 0; line-height: 1.1 }
+    .hero::after{ /* “scanlines” sutis */
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.2;
+      background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.12) 2px 3px);
+    }
+    .kicker{ color: var(--accent-2); text-transform: uppercase; letter-spacing:.12em; font-weight: 700 }
+    h1{ font-size: clamp(32px, 5vw, 56px); margin:0; line-height:1.1;
+        text-shadow: 0 0 10px rgba(57,255,20,.6), 0 0 30px rgba(0,229,168,.35); }
     .lead{ font-size: clamp(16px, 2.1vw, 20px); color: var(--muted); margin: 0 auto; max-width: 70ch }
+  
     .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 6px }
     .badge{
-      padding: 6px 10px; border-radius: 999px; font-size: 14px; background: color-mix(in oklab, var(--text) 8%, transparent); color: var(--text);
-      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      padding: 6px 10px; border-radius: 999px; font-size: 14px;
+      background: rgba(16,32,24,.6); color: var(--text);
+      border: 1px solid var(--edge);
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.16), 0 0 16px rgba(57,255,20,.12);
     }
-    .countdown{
-      display:flex; gap:12px; justify-content:center; margin: 8px auto 0; flex-wrap: wrap;
+  
+    .countdown{ display:flex; gap:12px; justify-content:center; margin: 8px auto 0; flex-wrap: wrap }
+    .tile{
+      background: rgba(13,25,18,.8); border:1px solid var(--edge); border-radius: 14px; padding: 12px 14px; min-width: 86px;
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 24px rgba(0,229,168,.12);
     }
-    .tile{ background: var(--card); border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
-      border-radius: 14px; padding: 12px 14px; min-width: 86px }
-    .tile b{ display:block; font-size: 22px; line-height: 1.1 }
-    .tile small{ color: var(--muted); text-transform: uppercase; letter-spacing: .1em }
-
+    .tile b{ display:block; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 22px; line-height: 1.1; letter-spacing: .5px }
+    .tile small{ color: var(--muted); text-transform: uppercase; letter-spacing: .12em }
+  
     .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px }
     .btn{
       display:inline-flex; align-items:center; gap:10px; border-radius: 12px; padding: 12px 14px;
-      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
-      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 90%, transparent), color-mix(in oklab, var(--text) 6%, transparent));
-      color: var(--text); font-weight: 600; cursor: pointer;
+      border: 1px solid var(--edge); color: var(--text); font-weight: 700; cursor: pointer;
+      background: linear-gradient(180deg, rgba(18,36,26,.9), rgba(10,24,16,.9));
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.2), 0 0 24px rgba(0,229,168,.2);
+      text-shadow: 0 0 6px rgba(57,255,20,.4);
     }
-    .btn:hover{ transform: translateY(-1px) }
+    .btn:hover{ transform: translateY(-1px); box-shadow: inset 0 0 0 1px rgba(57,255,20,.35), 0 0 32px rgba(57,255,20,.28) }
     .btn .icon{ width: 18px; height: 18px }
-
+  
     section{ padding: 40px 0; scroll-margin-top: 72px }
-    h2{ font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 10px }
+    h2{ font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 10px; text-shadow: 0 0 8px rgba(0,229,168,.35) }
     p{ margin: 0 0 10px }
     .grid{ display:grid; gap:16px }
     @media(min-width: 760px){ .grid-2{ grid-template-columns: 1fr 1fr } }
-
-    .card{ background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 14px; padding: 16px }
+  
+    .card{
+      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.08)), var(--card);
+      border: 1px solid var(--edge); border-radius: 14px; padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 28px rgba(0,229,168,.1);
+    }
     .list{ display:grid; gap: 8px; margin: 8px 0 0; padding: 0 0 0 18px }
-
-    details{ background: var(--card); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 12px; padding: 12px 14px }
+  
+    details{
+      background: rgba(13,25,18,.8); border:1px solid var(--edge); border-radius: 12px; padding: 12px 14px;
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12);
+    }
     details + details{ margin-top: 8px }
-    summary{ cursor: pointer; font-weight: 600 }
-
-    footer{ border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 32px 0 48px; font-size: 14px }
+    summary{ cursor: pointer; font-weight: 700; color: var(--text) }
+  
+    footer{ border-top: 1px solid var(--edge); color: var(--muted); padding: 32px 0 48px; font-size: 14px }
     .foot-cols{ display:grid; gap: 12px }
     @media(min-width:760px){ .foot-cols{ grid-template-columns: 2fr 1fr } }
-
+  
     .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
-  </style>
+  
+    @media (prefers-reduced-motion: reduce){
+      .btn:hover{ transform:none }
+      .hero::after{ opacity:.1 }
+    }
+  </style>  
 
   <!-- Schema.org / Event -->
   <script type="application/ld+json">
@@ -149,9 +199,8 @@
   <header>
     <div class="wrap row">
       <div class="brand" aria-label="FECART — CIBER 2025">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.09 6.26H20l-5 3.64L17.18 18 12 13.98 6.82 18 9 11.9 4 8.26h5.91L12 2z"/></svg>
-        <b>FECART — CIBER 2025</b>
-      </div>
+        <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
+      </div>      
       <nav aria-label="Seções">
         <ul>
           <li><a href="#sobre">O que é</a></li>
