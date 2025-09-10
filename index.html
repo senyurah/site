@@ -4,10 +4,9 @@
   <meta charset="utf-8" />
   <!-- Viewport com suporte a notch -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <!-- Hint de cores e web-app -->
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050a06">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0b140f">
+  <!-- Paleta fixa (verde/preto) e PWA hints -->
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#061009">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="FECART — CIBER">
@@ -37,79 +36,125 @@
   <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
 
   <style>
+    /* =================== PALETA BASE (verde & preto) =================== */
     :root{
-      --bg:#050a06;          /* fundo quase preto com tom esverdeado */
-      --surface:#07110b;     /* navbar/áreas semi-translúcidas */
-      --card:#0a1610;        /* cartões/painéis */
+      --bg:#061009;          /* preto esverdeado */
+      --surface:#07140e;     /* navbar/áreas translúcidas */
+      --card:#0a1a12;        /* cartões/painéis */
       --text:#e6ffe8;        /* texto claro levemente esverdeado */
-      --muted:#8ab59d;       /* texto secundário */
+      --muted:#a6d9bf;       /* texto secundário */
       --accent:#39ff14;      /* neon green principal */
-      --accent-2:#00e5a8;    /* verde água para detalhes */
+      --accent-2:#16f2a0;    /* tom secundário (ainda verde) */
       --ring:rgba(57,255,20,.45);
-      --edge:#153e25;        /* bordas discretas */
+      --edge:#164d2f;        /* bordas discretas */
       --grid:rgba(57,255,20,.08);
       --max: 960px;
     }
-  
+
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
     body{
       margin:0; line-height:1.6; color: var(--text);
       background-color: var(--bg);
-      /* fundo cibernético: halos + linhas horizontais */
+      /* fundo cibernético: halos + “scanlines” muito sutis */
       background-image:
         radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.09), transparent 60%),
-        radial-gradient(60vw 40vh at 120% 10%, rgba(0,229,168,.07), transparent 60%),
-        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.06) 24px 25px),
-        linear-gradient(#050a06, #050a06);
+        radial-gradient(60vw 40vh at 120% 10%, rgba(22,242,160,.07), transparent 60%),
+        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.05) 24px 25px),
+        linear-gradient(var(--bg), var(--bg));
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
-  
-    /* fallback claro com mesmo clima */
+
+    /* sem “modo claro”: manter paleta verde/preto sempre */
     @media (prefers-color-scheme: light){
-      :root{ --bg:#0b140f; --surface:#0c1712; --card:#0f1e17; --text:#ecffee; --muted:#a3d5bf; }
+      :root{ --bg:#061009; --surface:#07140e; --card:#0a1a12; --text:#e6ffe8; --muted:#a6d9bf; }
       body{ background-image:
-        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.12), transparent 60%),
-        radial-gradient(60vw 40vh at 120% 10%, rgba(0,229,168,.1), transparent 60%),
-        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.07) 24px 25px),
-        linear-gradient(#0b140f, #0b140f); }
+        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.09), transparent 60%),
+        radial-gradient(60vw 40vh at 120% 10%, rgba(22,242,160,.07), transparent 60%),
+        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.05) 24px 25px),
+        linear-gradient(var(--bg), var(--bg)); }
     }
-  
+
     a{ color: var(--accent-2); text-decoration: none }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 8px }
-  
-    header{
-      position: sticky; top:0; z-index: 10; backdrop-filter: blur(10px);
-      background: rgba(7,17,11,.75);
+
+    /* =================== HEADER (com imagem + tema CP verde) =================== */
+    header.cp-header{
+      position: sticky; top:0; z-index: 10; backdrop-filter: blur(8px);
+      background:
+        linear-gradient(0deg, rgba(6,16,9,.88), rgba(6,16,9,.88)),
+        url("assets/img/cp-top.jpg");
+      background-size: cover; background-position: center;
       border-bottom: 1px solid var(--edge);
       box-shadow: 0 10px 40px rgba(0,0,0,.35);
-      /* safe area top aplicado via var mais abaixo */
+      padding-top: max(0px, env(safe-area-inset-top, 0px));
     }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px }
     .row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-  
-    .brand{ display:flex; align-items:center; gap:12px; padding: 12px 0 }
-    .logo{ height: 32px; width: auto; filter: drop-shadow(0 0 8px rgba(57,255,20,.55)); }
-    @media (min-width: 760px){ .logo{ height: 36px } }
-  
-    nav ul{ display:flex; gap:14px; padding:0; margin:0; list-style:none; overflow:auto }
-    nav a{ display:block; padding:10px 12px; border-radius: 10px; color: var(--text) }
-    nav a:hover{ background: rgba(57,255,20,.08); box-shadow: inset 0 0 0 1px rgba(57,255,20,.18) }
-  
-    main{ padding: 16px 0 64px }
-  
-    .hero{
-      position:relative; display:grid; gap:18px; padding: 60px 0 16px; text-align:center; overflow:hidden;
+
+    .cp-bar{
+      position:relative; min-height:56px;
+      box-shadow: inset 0 -2px 0 rgba(57,255,20,.55);
     }
-    .hero::after{ /* “scanlines” sutis */
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.2;
+    .cp-bar::before{
+      content:"";
+      position:absolute; left:-10px; top:0; width:18px; height:56px;
+      background:linear-gradient(180deg, var(--accent), #22cc0f);
+      clip-path: polygon(0 0,100% 0, 10% 100%, 0 100%);
+      filter: drop-shadow(0 0 6px rgba(57,255,20,.4));
+    }
+
+    .brand{ display:flex; align-items:center; gap:12px; padding: 12px 0 }
+    .logo{ height: 34px; width: auto; filter: drop-shadow(0 0 8px rgba(57,255,20,.55)); }
+    @media (min-width: 760px){ .logo{ height: 38px } }
+
+    .cp-nav ul{ display:flex; gap:0; padding:0; margin:0; list-style:none; overflow:auto }
+    .cp-nav li{ position:relative; }
+    .cp-nav li + li{ border-left:1px solid rgba(255,255,255,.08); }
+    .cp-nav li.sep{ width:42px; border-left:0; pointer-events:none; }
+    .cp-nav a{
+      text-transform:uppercase; letter-spacing:.06em; font-weight:800;
+      padding:16px 16px; color:#e5ffe9; display:block;
+    }
+    .cp-nav a.has-sub::after{
+      content:"▾"; font-size:.9em; margin-left:8px; opacity:.75;
+    }
+    .cp-nav a:hover{ color:var(--accent-2); text-shadow:0 0 10px rgba(22,242,160,.55); }
+
+    .cp-cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:56px; padding:0 20px; margin-left:12px;
+      background:linear-gradient(180deg, #1b3a28, #0d2116);
+      color:#eaffef; border-left:1px solid rgba(255,255,255,.08);
+      font-weight:900; letter-spacing:.08em; text-transform:uppercase;
+      box-shadow: inset 0 -2px 0 rgba(57,255,20,.55), 0 0 24px rgba(57,255,20,.18);
+    }
+    .cp-cta:hover{
+      filter:brightness(1.05);
+      box-shadow: inset 0 -2px 0 rgba(57,255,20,.75), 0 0 36px rgba(57,255,20,.28);
+      transform: translateY(-1px);
+    }
+
+    /* =================== MAIN =================== */
+    main{ padding: 16px 0 64px }
+
+    .hero{
+      position:relative; display:grid; gap:18px; padding: 72px 0 16px; text-align:center; overflow:hidden;
+      /* duas imagens: sua hero com overlay verde + fundo do tema */
+      background:
+        linear-gradient(180deg, rgba(6,16,9,.70) 0%, rgba(6,16,9,.92) 60%, rgba(6,16,9,.96) 100%),
+        url("assets/img/cp-bg.jpg");
+      background-size: cover; background-position: center;
+    }
+    .hero::after{ /* scanlines sutis */
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
       background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.12) 2px 3px);
     }
     .kicker{ color: var(--accent-2); text-transform: uppercase; letter-spacing:.12em; font-weight: 700 }
-    h1{ font-size: clamp(32px, 5vw, 56px); margin:0; line-height:1.1;
-        text-shadow: 0 0 10px rgba(57,255,20,.6), 0 0 30px rgba(0,229,168,.35); }
-    .lead{ font-size: clamp(16px, 2.1vw, 20px); color: var(--muted); margin: 0 auto; max-width: 70ch }
-  
+    h1{ font-size: clamp(32px, 5vw + .5rem, 64px); margin:0; line-height:1.1;
+        text-shadow: 0 0 10px rgba(57,255,20,.6), 0 0 30px rgba(22,242,160,.35); }
+    .lead{ font-size: clamp(16px, 1.6vw + .2rem, 22px); color: var(--muted); margin: 0 auto; max-width: 70ch }
+
     .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 6px }
     .badge{
       padding: 6px 10px; border-radius: 999px; font-size: 14px;
@@ -117,74 +162,68 @@
       border: 1px solid var(--edge);
       box-shadow: inset 0 0 0 1px rgba(57,255,20,.16), 0 0 16px rgba(57,255,20,.12);
     }
-  
+
     .countdown{ display:flex; gap:12px; justify-content:center; margin: 8px auto 0; flex-wrap: wrap }
     .tile{
       background: rgba(13,25,18,.8); border:1px solid var(--edge); border-radius: 14px; padding: 12px 14px; min-width: 86px;
-      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 24px rgba(0,229,168,.12);
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 24px rgba(22,242,160,.12);
     }
     .tile b{ display:block; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 22px; line-height: 1.1; letter-spacing: .5px }
     .tile small{ color: var(--muted); text-transform: uppercase; letter-spacing: .12em }
-  
+
     .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px }
     .btn{
       display:inline-flex; align-items:center; gap:10px; border-radius: 12px; padding: 12px 14px;
       border: 1px solid var(--edge); color: var(--text); font-weight: 700; cursor: pointer;
       background: linear-gradient(180deg, rgba(18,36,26,.9), rgba(10,24,16,.9));
-      box-shadow: inset 0 0 0 1px rgba(57,255,20,.2), 0 0 24px rgba(0,229,168,.2);
-      text-shadow: 0 0 6px rgba(57,255,20,.4);
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.2), 0 0 24px rgba(22,242,160,.2);
+      text-shadow: 0 0 6px rgba(57,255,20,.35);
     }
     .btn:hover{ transform: translateY(-1px); box-shadow: inset 0 0 0 1px rgba(57,255,20,.35), 0 0 32px rgba(57,255,20,.28) }
     .btn .icon{ width: 18px; height: 18px }
-  
-    section{ padding: 40px 0; scroll-margin-top: 72px }
-    h2{ font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 10px; text-shadow: 0 0 8px rgba(0,229,168,.35) }
+
+    section{ padding: 40px 0; scroll-margin-top: 86px }
+    h2{ font-size: clamp(22px, 2.6vw + .2rem, 36px); margin: 0 0 10px; text-shadow: 0 0 8px rgba(22,242,160,.35) }
     p{ margin: 0 0 10px }
     .grid{ display:grid; gap:16px }
     @media(min-width: 760px){ .grid-2{ grid-template-columns: 1fr 1fr } }
-  
+
     .card{
       background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.08)), var(--card);
       border: 1px solid var(--edge); border-radius: 14px; padding: 16px;
-      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 28px rgba(0,229,168,.1);
+      box-shadow: inset 0 0 0 1px rgba(57,255,20,.12), 0 0 28px rgba(22,242,160,.1);
     }
     .list{ display:grid; gap: 8px; margin: 8px 0 0; padding: 0 0 0 18px }
-  
+
     details{
       background: rgba(13,25,18,.8); border:1px solid var(--edge); border-radius: 12px; padding: 12px 14px;
       box-shadow: inset 0 0 0 1px rgba(57,255,20,.12);
     }
     details + details{ margin-top: 8px }
     summary{ cursor: pointer; font-weight: 700; color: var(--text) }
-  
+
     footer{ border-top: 1px solid var(--edge); color: var(--muted); padding: 32px 0 48px; font-size: 14px }
     .foot-cols{ display:grid; gap: 12px }
     @media(min-width:760px){ .foot-cols{ grid-template-columns: 2fr 1fr } }
-  
+
     .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
-  
+
     @media (prefers-reduced-motion: reduce){
       .btn:hover{ transform:none }
-      .hero::after{ opacity:.1 }
+      .hero::after{ opacity:.12 }
     }
 
-    /* ========= SUPORTE MOBILE (SAFE AREAS / NOTCH) ========= */
+    /* ========= SAFE AREAS / NOTCH ========= */
     :root{
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-right: env(safe-area-inset-right, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
       --safe-left: env(safe-area-inset-left, 0px);
     }
-    header{ padding-top: max(0px, var(--safe-top)); }
     body{
       padding-left: max(0px, var(--safe-left));
       padding-right: max(0px, var(--safe-right));
     }
-
-    /* ========= TIPOGRAFIA FLUIDA / LEGIBILIDADE ========= */
-    h1{ font-size: clamp(32px, 5vw + 0.5rem, 64px); }
-    h2{ font-size: clamp(22px, 2.6vw + 0.2rem, 36px); }
-    .lead{ font-size: clamp(16px, 1.6vw + 0.2rem, 22px); }
 
     /* ========= LARGURA MÁXIMA ADAPTATIVA ========= */
     @media (min-width: 1200px){ :root{ --max: 1100px; } }
@@ -197,27 +236,11 @@
       .lead, .badges, .countdown, .cta{ justify-content: flex-start; margin-left: auto; margin-right: auto; }
     }
 
-    /* ========= OTIMIZAÇÕES TOUCH/ANDROID ========= */
+    /* ========= TOUCH ========= */
     * { -webkit-tap-highlight-color: rgba(57,255,20,.2); }
     button, .btn, a{ touch-action: manipulation; }
-    :focus-visible{ scroll-margin-top: 90px; }
-
-    /* ========= SCROLL SUAVE EM TELAS GRANDES ========= */
-    @media (min-width: 1600px){
-      html{ scroll-behavior: smooth; }
-    }
-
-    /* ========= FULL-BLEED ESTÉTICO (aplicado na hero) ========= */
-    .section-bleed{ position: relative; isolation: isolate; }
-    .section-bleed::before{
-      content:""; position: absolute; inset: 0; z-index: -1;
-      background:
-        radial-gradient(40vw 40vh at -10% 10%, rgba(57,255,20,.10), transparent 60%),
-        radial-gradient(40vw 40vh at 110% 30%, rgba(0,229,168,.10), transparent 60%),
-        linear-gradient(90deg, rgba(57,255,20,.06), transparent 20%, transparent 80%, rgba(0,229,168,.06));
-      mask: linear-gradient(#000,#000);
-    }
-  </style>  
+    :focus-visible{ scroll-margin-top: 100px; }
+  </style>
 
   <!-- Schema.org / Event -->
   <script type="application/ld+json">
@@ -253,26 +276,31 @@
 <body>
   <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
 
-  <header>
-    <div class="wrap row">
+  <!-- HEADER com imagem e CTA -->
+  <header class="cp-header">
+    <div class="wrap row cp-bar">
       <div class="brand" aria-label="FECART — CIBER 2025">
         <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
-      </div>      
-      <nav aria-label="Seções">
+      </div>
+
+      <nav aria-label="Seções" class="cp-nav">
         <ul>
-          <li><a href="#sobre">O que é</a></li>
-          <li><a href="#ciber">Cibersegurança</a></li>
-          <li><a href="#quem-somos">Quem somos</a></li>
-          <li><a href="#local">Local & Data</a></li>
-          <li><a href="#importancia">Importância</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#sobre" class="has-sub">O que é</a></li>
+          <li><a href="#ciber" class="has-sub">Cibersegurança</a></li>
+          <li><a href="#quem-somos" class="has-sub">Quem somos</a></li>
+          <li class="sep"></li>
+          <li><a href="#local" class="has-sub">Local & Data</a></li>
+          <li><a href="#importancia" class="has-sub">Importância</a></li>
+          <li><a href="#faq" class="has-sub">FAQ</a></li>
         </ul>
       </nav>
+
+      <a class="cp-cta" href="#local" role="button" aria-label="Ver informações do local">VER LOCAL</a>
     </div>
   </header>
 
   <main id="conteudo" class="wrap">
-    <section class="hero section-bleed" aria-labelledby="titulo">
+    <section class="hero" aria-labelledby="titulo">
       <p class="kicker">Colégio FECAP</p>
       <h1 id="titulo">FECART — CIBER | 27 de setembro de 2025</h1>
       <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
