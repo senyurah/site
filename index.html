@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FECART — FECAP | 27/09/2025</title>
+  <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade.">
+  <link rel="canonical" href="<!-- TODO: coloque a URL do GitHub Pages aqui, ex.: https://seuusuario.github.io/fecart/ -->">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FECART — FECAP | 27/09/2025">
+  <meta property="og:description" content="Evento no Colégio FECAP. O que é a FECART, Cibersegurança, quem somos, local, data e importância social.">
+  <meta property="og:image" content="<!-- TODO: URL absoluta de uma imagem social 1200x630 -->">
+  <meta property="og:url" content="<!-- TODO: URL do site publicado -->">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="#0ea5e9">
+
+  <style>
+    :root{
+      --bg:#0b1220; --surface:#0f172a; --card:#111827; --muted:#94a3b8;
+      --text:#e5e7eb; --accent:#22c55e; --accent-2:#0ea5e9; --ring:rgba(14,165,233,.35);
+      --max: 960px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --surface:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --ring:rgba(14,165,233,.25); }
+      body{ background-image: radial-gradient(80vw 40vh at 50% -10%, #e0f2fe 0, transparent 60%);}
+    }
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      background: var(--bg); color: var(--text);
+      line-height: 1.6;
+      background-image: radial-gradient(70vw 30vh at 50% -10%, #0ea5e930 0, transparent 60%);
+    }
+    a{ color: var(--accent-2); text-decoration: none }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 8px }
+    header{
+      position: sticky; top:0; z-index: 10; backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--surface) 70%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+    }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px }
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
+    .brand{ display:flex; align-items:center; gap:10px; padding: 12px 0 }
+    .brand b{ font-size: 18px; letter-spacing:.3px }
+    nav ul{ display:flex; gap:14px; padding:0; margin:0; list-style:none; overflow:auto }
+    nav a{ display:block; padding:10px 12px; border-radius: 10px; color: var(--text) }
+    nav a:hover{ background: color-mix(in oklab, var(--text) 8%, transparent) }
+    main{ padding: 16px 0 64px }
+    .hero{
+      display:grid; gap:18px; padding: 48px 0 16px; text-align:center;
+    }
+    .kicker{ color: var(--muted); text-transform: uppercase; letter-spacing:.12em; font-weight: 600 }
+    h1{ font-size: clamp(32px, 5vw, 56px); margin: 0; line-height: 1.1 }
+    .lead{ font-size: clamp(16px, 2.1vw, 20px); color: var(--muted); margin: 0 auto; max-width: 70ch }
+    .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 6px }
+    .badge{
+      padding: 6px 10px; border-radius: 999px; font-size: 14px; background: color-mix(in oklab, var(--text) 8%, transparent); color: var(--text);
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    }
+    .countdown{
+      display:flex; gap:12px; justify-content:center; margin: 8px auto 0; flex-wrap: wrap;
+    }
+    .tile{ background: var(--card); border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      border-radius: 14px; padding: 12px 14px; min-width: 86px }
+    .tile b{ display:block; font-size: 22px; line-height: 1.1 }
+    .tile small{ color: var(--muted); text-transform: uppercase; letter-spacing: .1em }
+
+    .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; border-radius: 12px; padding: 12px 14px;
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 90%, transparent), color-mix(in oklab, var(--text) 6%, transparent));
+      color: var(--text); font-weight: 600; cursor: pointer;
+    }
+    .btn:hover{ transform: translateY(-1px) }
+    .btn .icon{ width: 18px; height: 18px }
+
+    section{ padding: 40px 0; scroll-margin-top: 72px }
+    h2{ font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 10px }
+    p{ margin: 0 0 10px }
+    .grid{ display:grid; gap:16px }
+    @media(min-width: 760px){ .grid-2{ grid-template-columns: 1fr 1fr } }
+
+    .card{ background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 14px; padding: 16px }
+    .list{ display:grid; gap: 8px; margin: 8px 0 0; padding: 0 0 0 18px }
+
+    details{ background: var(--card); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 12px; padding: 12px 14px }
+    details + details{ margin-top: 8px }
+    summary{ cursor: pointer; font-weight: 600 }
+
+    footer{ border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 32px 0 48px; font-size: 14px }
+    .foot-cols{ display:grid; gap: 12px }
+    @media(min-width:760px){ .foot-cols{ grid-template-columns: 2fr 1fr } }
+
+    .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
+  </style>
+
+  <!-- Schema.org / Event -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"FECART",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "startDate":"2025-09-27",
+    "endDate":"2025-09-27",
+    "description":"<!-- TODO: descreva brevemente a FECART -->",
+    "location":{
+      "@type":"Place",
+      "name":"Colégio/Faculdade FECAP — Campus Liberdade",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Av. da Liberdade, 532",
+        "addressLocality":"São Paulo",
+        "addressRegion":"SP",
+        "postalCode":"01502-001",
+        "addressCountry":"BR"
+      }
+    },
+    "organizer":{
+      "@type":"Organization",
+      "name":"FECAP",
+      "url":"https://www.fecap.br/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <div class="wrap row">
+      <div class="brand" aria-label="FECART 2025">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.09 6.26H20l-5 3.64L17.18 18 12 13.98 6.82 18 9 11.9 4 8.26h5.91L12 2z"/></svg>
+        <b>FECART 2025</b>
+      </div>
+      <nav aria-label="Seções">
+        <ul>
+          <li><a href="#sobre">O que é</a></li>
+          <li><a href="#ciber">Cibersegurança</a></li>
+          <li><a href="#quem-somos">Quem somos</a></li>
+          <li><a href="#local">Local & Data</a></li>
+          <li><a href="#importancia">Importância</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="wrap">
+    <section class="hero" aria-labelledby="titulo">
+      <p class="kicker">Colégio FECAP</p>
+      <h1 id="titulo">FECART — 27 de setembro de 2025</h1>
+      <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça nossos projetos, incluindo o curso de <strong>Cibersegurança</strong>.</p>
+
+      <div class="badges">
+        <span class="badge" aria-label="Data do evento">📅 27/09/2025 (sábado)</span>
+        <span class="badge" aria-label="Local do evento">📍 Av. da Liberdade, 532 — São Paulo/SP</span>
+      </div>
+
+      <div class="countdown" role="status" aria-live="polite">
+        <div class="tile"><b id="dd">--</b><small>dias</small></div>
+        <div class="tile"><b id="hh">--</b><small>horas</small></div>
+        <div class="tile"><b id="mm">--</b><small>min</small></div>
+        <div class="tile"><b id="ss">--</b><small>seg</small></div>
+      </div>
+
+      <div class="cta">
+        <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2v2H5a2 2 0 00-2 2v2h18V6a2 2 0 00-2-2h-2V2h-2v2H9V2H7zm14 8H3v10a2 2 0 002 2h14a2 2 0 002-2V10z"/></svg>
+          Adicionar ao calendário (.ics)
+        </button>
+
+        <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5a2 2 0 00-2 2v2h18V5a2 2 0 00-2-2zm1 6H4v8a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg>
+          Adicionar no Google Calendar
+        </a>
+
+        <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+          Como chegar
+        </a>
+
+        <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3.5A10.5 10.5 0 0 0 3.5 20l.3.3L2 22l3-1.1.3.2A10.5 10.5 0 1 0 20 3.5zM12 5a7 7 0 0 1 6.1 10.4c-.2.3-.6.4-.9.2l-2-1.2a1 1 0 0 0-1.1.1l-.8.6c-2.7-.9-4.2-2.5-5.1-5.1l.6-.8c.3-.3.4-.8.1-1.1L7.6 6.8c-.2-.3-.1-.8.2-1A7 7 0 0 1 12 5z"/></svg>
+          Compartilhar no WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>O que é a FECART</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <!-- TODO: Substitua pelo texto oficial da FECART -->
+          <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
+        </div>
+        <div class="card">
+          <ul class="list">
+            <li>Exposição de projetos e demonstrações</li>
+            <li>Trilhas temáticas e vivências</li>
+            <li>Conexão com cursos e carreira</li>
+            <li>Aberto à comunidade — <!-- TODO: confirme se a entrada é gratuita --></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ciber">
+      <h2>Curso de Cibersegurança</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <!-- TODO: Edite com dados do curso conforme o site do Colégio/Graduação -->
+          <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
+          <ul class="list">
+            <li>Temas: Segurança de redes, criptografia, testes de invasão éticos, resposta a incidentes.</li>
+            <li>Competências: análise de risco, hardening, gestão de vulnerabilidades.</li>
+            <li>Perfil: curiosidade, pensamento crítico, trabalho em equipe.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p><strong>Carreiras & continuidade</strong></p>
+          <ul class="list">
+            <li>Analista/Operador de Segurança (SOC), Blue Team/Red Team júnior</li>
+            <li>Certificações iniciais: <!-- TODO: ex.: Security+, AZ-900, etc. --></li>
+            <li>Continuidade acadêmica na FECAP: <!-- TODO: relacione cursos --> </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="quem-somos">
+      <h2>Quem somos</h2>
+      <div class="card">
+        <!-- TODO: Ajuste conforme “Sobre o Colégio” em fecap.br -->
+        <p>O Colégio FECAP integra a Fundação Escola de Comércio Álvares Penteado (FECAP), instituição referência em educação desde 1902, com tradição em formar protagonistas em negócios, tecnologia e cidadania.</p>
+      </div>
+    </section>
+
+    <section id="local">
+      <h2>Local & Data</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <p><strong>Data:</strong> 27/09/2025 (sábado) — evento de dia inteiro</p>
+          <p><strong>Local:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
+          <p><strong>Endereço:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502‑001</p>
+          <div class="cta" style="justify-content:flex-start">
+            <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Abrir no app de mapas</a>
+            <button class="btn" id="btn-copy" type="button">Copiar endereço</button>
+          </div>
+        </div>
+        <div class="card">
+          <p><strong>Como chegar</strong></p>
+          <ul class="list">
+            <li>Metrô: Estação Liberdade (linha 1‑Azul), a poucos minutos a pé.</li>
+            <li>Ônibus/Carro: utilize o link “Como chegar” acima para rotas atualizadas.</li>
+            <li>Acessibilidade: verifique as orientações do campus no site da FECAP.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="importancia">
+      <h2>Importância para a sociedade</h2>
+      <div class="card">
+        <!-- TODO: Substitua por texto institucional -->
+        <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Precisa se inscrever?</summary>
+        <p><!-- TODO: Instruções de inscrição/visitantes --></p>
+      </details>
+      <details>
+        <summary>Qual o horário?</summary>
+        <p><!-- TODO: Horário oficial do evento (ex.: 9h–17h). O botão de calendário está configurado como evento de dia inteiro. --></p>
+      </details>
+      <details>
+        <summary>Posso levar convidados?</summary>
+        <p><!-- TODO: Política de convidados --></p>
+      </details>
+      <details>
+        <summary>Quem posso contatar?</summary>
+        <p><!-- TODO: Contato do evento (email/telefone) --></p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-cols">
+      <div>
+        <p>© <span id="ano"></span> FECAP / FECART. Todos os direitos reservados.</p>
+        <p><small>Este site é informativo. Confirme informações oficiais nos canais da FECAP.</small></p>
+      </div>
+      <div>
+        <p><small>Última atualização: <time id="lastmod"></time></small></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Contagem regressiva (até 27/09/2025 00:00 local) =====
+    const EVENT_DATE = new Date('2025-09-27T00:00:00'); // all-day
+    const $ = (id) => document.getElementById(id);
+    function tick(){
+      const now = new Date();
+      let ms = EVENT_DATE - now;
+      if (ms < 0) ms = 0;
+      const s = Math.floor(ms/1000);
+      const d = Math.floor(s/86400);
+      const h = Math.floor((s%86400)/3600);
+      const m = Math.floor((s%3600)/60);
+      const ss= s%60;
+      $('dd').textContent = String(d).padStart(2,'0');
+      $('hh').textContent = String(h).padStart(2,'0');
+      $('mm').textContent = String(m).padStart(2,'0');
+      $('ss').textContent = String(ss).padStart(2,'0');
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ===== Botão: gerar .ICS (all-day) =====
+    function downloadICS(){
+      const title = 'FECART — FECAP';
+      const desc  = 'FECART no Colégio FECAP. Mais informações: ' + location.href;
+      const loc   = 'Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001';
+      // all-day: DTSTART/DTEND com VALUE=DATE (DTEND é dia seguinte)
+      const dtStart = '20250927';
+      const dtEnd   = '20250928';
+      const uid = 'fecart-' + Date.now() + '@fecap';
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//FECART//pt-BR',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        'UID:' + uid,
+        'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
+        'DTSTART;VALUE=DATE:' + dtStart,
+        'DTEND;VALUE=DATE:' + dtEnd,
+        'SUMMARY:' + title,
+        'DESCRIPTION:' + desc.replace(/\n/g,'\\n'),
+        'LOCATION:' + loc,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+      const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'FECART-2025.ics';
+      document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+    }
+    $('btn-ics').addEventListener('click', downloadICS);
+
+    // ===== Link Google Calendar (all-day) =====
+    const gcal = new URL('https://calendar.google.com/calendar/render');
+    gcal.searchParams.set('action','TEMPLATE');
+    gcal.searchParams.set('text','FECART — FECAP');
+    gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
+    gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
+    // all-day: dates = YYYYMMDD/YYYYMMDD (DTEND = dia seguinte)
+    gcal.searchParams.set('dates','20250927/20250928');
+    $('btn-gcal').href = gcal.toString();
+
+    // ===== Compartilhar no WhatsApp =====
+    const msg = encodeURIComponent('Vem para a FECART no Colégio FECAP! Dia 27/09/2025. 🧭 Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
+    $('btn-whats').href = 'https://wa.me/?text=' + msg;
+
+    // ===== Copiar endereço =====
+    $('btn-copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
+        const t = $('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
+        setTimeout(()=> t.textContent = old, 1200);
+      } catch(e){ alert('Não foi possível copiar.'); }
+    });
+
+    // ===== Geo link fallback (se abrir no desktop) =====
+    $('btn-geo').addEventListener('click', (e) => {
+      if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        // no desktop, mantém o link padrão geo, mas também abre o Google Maps web
+        e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
+      }
+    });
+
+    // Rodapé dinâmico
+    $('ano').textContent = new Date().getFullYear();
+    $('lastmod').textContent = new Date(document.lastModified).toLocaleDateString('pt-BR');
+  </script>
+</body>
+</html>
