@@ -5,414 +5,193 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#061009">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="FECART — CIBER">
 
-  <!-- SEO básico -->
   <title>FECART — CIBER | 27/09/2025</title>
   <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade.">
   <link rel="canonical" href="https://senyurah.github.io/site/">
 
-  <!-- Open Graph -->
-  <meta property="og:locale" content="pt_BR">
+  <!-- OG básico -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="FECART — CIBER | 27/09/2025">
-  <meta property="og:description" content="Participe da FECART — CIBER no Colégio FECAP em 27/09/2025. Conheça Cibersegurança, projetos e impacto social.">
-  <meta property="og:url" content="https://senyurah.github.io/site/">
-  <meta property="og:site_name" content="FECART — CIBER">
-  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png?v=2">
-  <meta property="og:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:description" content="Participe da FECART — CIBER no Colégio FECAP em 27/09/2025.">
+  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png">
 
-  <!-- Twitter / X -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FECART — CIBER | 27/09/2025">
-  <meta name="twitter:description" content="Evento FECART — CIBER | Colégio FECAP | 27/09/2025. Inovação, tecnologia e sociedade.">
-  <meta name="twitter:image" content="https://senyurah.github.io/site/og-image.png?v=2">
-  <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
-
-  <!-- Tipografia inspirada no jogo (diegetic) -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonte cyberpunk -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== PALETA BASE (verde & preto) =================== */
     :root{
-      --bg:#061009;          /* preto esverdeado */
-      --surface:#07140e;     /* navbar/áreas translúcidas */
-      --card:#0a1a12;        /* cartões/painéis */
-      --text:#e6ffe8;        /* texto claro levemente esverdeado */
-      --muted:#a6d9bf;       /* texto secundário */
-      --accent:#39ff14;      /* neon green principal */
-      --accent-2:#16f2a0;    /* tom secundário (verde-água) */
-      --ring:rgba(57,255,20,.45);
-      --edge:#164d2f;        /* linhas discretas */
-      --grid:rgba(57,255,20,.08);
-      --max: 960px;
+      --bg:#061009;
+      --card:#0a1a12;
+      --text:#e6ffe8;
+      --muted:#a6d9bf;
+      --accent:#39ff14;
+      --accent-2:#16f2a0;
+      --max:1100px;
     }
-
-    * { box-sizing: border-box }
-    html { scroll-behavior: smooth }
+    *{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0; line-height:1.6; color: var(--text);
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.09), transparent 60%),
-        radial-gradient(60vw 40vh at 120% 10%, rgba(22,242,160,.07), transparent 60%),
-        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.05) 24px 25px),
-        linear-gradient(var(--bg), var(--bg));
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family:"Rajdhani",system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:var(--accent-2);text-decoration:none}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(0,0,0,.85);
+      border-bottom:2px solid var(--accent);
+    }
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+    .row{display:flex;align-items:center;justify-content:space-between}
+    .brand img{height:38px}
+
+    nav ul{display:flex;gap:0;list-style:none}
+    nav li{border-left:2px solid rgba(57,255,20,.25)}
+    nav li:first-child{border-left:0}
+    nav a{
+      padding:14px 18px;
+      text-transform:uppercase;
+      font-weight:700;
+      color:var(--text);
+      display:block;
+    }
+    nav a:hover{background:rgba(57,255,20,.15)}
+
+    /* BOTÃO HAMBURGUER */
+    .menu-toggle{
+      background:none;border:2px solid var(--accent);
+      padding:6px 10px;color:var(--accent);
+      font-size:20px;cursor:pointer;display:none;
+    }
+    @media(max-width:760px){
+      nav ul{display:none;flex-direction:column;width:100%}
+      nav ul.open{display:flex;background:rgba(0,0,0,.95);border-top:2px solid var(--accent)}
+      nav li{border:0;border-top:2px solid rgba(57,255,20,.25)}
+      .menu-toggle{display:block}
     }
 
-    /* sem modo claro – mantém verde/preto */
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#061009; --surface:#07140e; --card:#0a1a12; --text:#e6ffe8; --muted:#a6d9bf; }
-      body{ background-image:
-        radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.09), transparent 60%),
-        radial-gradient(60vw 40vh at 120% 10%, rgba(22,242,160,.07), transparent 60%),
-        repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.05) 24px 25px),
-        linear-gradient(var(--bg), var(--bg)); }
-    }
-
-    a{ color: var(--accent-2); text-decoration: none }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 8px }
-
-    /* =================== HEADER (com imagem + tema CP verde) =================== */
-    header.cp-header{
-      position: sticky; top:0; z-index: 10; backdrop-filter: blur(8px);
-      background:
-        linear-gradient(0deg, rgba(6,16,9,.88), rgba(6,16,9,.88)),
-        url("assets/img/cp-top.jpg");
-      background-size: cover; background-position: center;
-      border-bottom: 1px solid var(--edge);
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-      padding-top: max(0px, env(safe-area-inset-top, 0px));
-    }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px }
-    .row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-
-    .cp-bar{
-      position:relative; min-height:56px;
-      box-shadow: inset 0 -2px 0 rgba(57,255,20,.55);
-    }
-    .cp-bar::before{
-      content:""; position:absolute; left:-10px; top:0; width:18px; height:56px;
-      background:linear-gradient(180deg, var(--accent), #22cc0f);
-      clip-path: polygon(0 0,100% 0, 10% 100%, 0 100%);
-      filter: drop-shadow(0 0 6px rgba(57,255,20,.4));
-    }
-
-    .brand{ display:flex; align-items:center; gap:12px; padding: 12px 0 }
-    .logo{ height: 34px; width: auto; filter: drop-shadow(0 0 8px rgba(57,255,20,.55)); }
-    @media (min-width: 760px){ .logo{ height: 38px } }
-
-    .cp-nav ul{ display:flex; gap:0; padding:0; margin:0; list-style:none; overflow:auto }
-    .cp-nav li{ position:relative; }
-    .cp-nav li + li{ border-left:1px solid rgba(255,255,255,.08); }
-    .cp-nav li.sep{ width:42px; border-left:0; pointer-events:none; }
-    .cp-nav a{
-      text-transform:uppercase; letter-spacing:.06em; font-weight:800;
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      padding:16px 16px; color:#e5ffe9; display:block;
-    }
-    .cp-nav a.has-sub::after{
-      content:"▾"; font-size:.9em; margin-left:8px; opacity:.75;
-    }
-    .cp-nav a:hover{ color:var(--accent-2); text-shadow:0 0 10px rgba(22,242,160,.55); }
-
-    .cp-cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      height:56px; padding:0 20px; margin-left:12px;
-      background:linear-gradient(180deg, #1b3a28, #0d2116);
-      color:#eaffef; border-left:1px solid rgba(255,255,255,.08);
-      font-weight:900; letter-spacing:.08em; text-transform:uppercase;
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      box-shadow: inset 0 -2px 0 rgba(57,255,20,.55), 0 0 24px rgba(57,255,20,.18);
-    }
-    .cp-cta:hover{ filter:brightness(1.05); box-shadow: inset 0 -2px 0 rgba(57,255,20,.75), 0 0 36px rgba(57,255,20,.28); transform: translateY(-1px) }
-
-    /* =================== MAIN =================== */
-    main{ padding: 16px 0 64px }
-
-    .hero{
-      position:relative; display:grid; gap:18px; padding: 72px 0 16px; text-align:center; overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(6,16,9,.72) 0%, rgba(6,16,9,.90) 55%, rgba(6,16,9,.96) 100%),
-        url("assets/img/cp-bg.jpg");
-      background-size: cover; background-position: center;
-    }
-    .hero::after{ /* scanlines sutis */
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
-      background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.12) 2px 3px);
-    }
-    .kicker{ color: var(--accent-2); text-transform: uppercase; letter-spacing:.12em; font-weight: 700; font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    /* HERO */
+    .hero{text-align:center;padding:60px 16px}
     h1{
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(32px, 5vw + .5rem, 64px); margin:0; line-height:1.1;
-      text-shadow: 0 0 10px rgba(57,255,20,.6), 0 0 30px rgba(22,242,160,.35);
+      font-size:clamp(28px,5vw,56px);
+      text-shadow:0 0 12px var(--accent);
+      margin-bottom:12px;
     }
-    .lead{ font-size: clamp(16px, 1.6vw + .2rem, 22px); color: var(--muted); margin: 0 auto; max-width: 70ch }
+    .lead{color:var(--muted);max-width:70ch;margin:0 auto 20px}
 
-    .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 6px }
+    .badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
     .badge{
-      padding: 6px 10px; border-radius: 999px; font-size: 14px;
-      background: rgba(16,32,24,.6); color: var(--text);
-      /* Sem borda: apenas glow e leve “wireframe” */
-      box-shadow:
-        0 0 0 1px rgba(57,255,20,.10) inset,
-        0 0 14px rgba(22,242,160,.15);
+      padding:6px 12px;
+      background:rgba(0,0,0,.7);
+      color:var(--text);
+      border:2px solid var(--accent);
+      font-size:14px;
     }
 
-    .countdown{ display:flex; gap:12px; justify-content:center; margin: 8px auto 0; flex-wrap: wrap }
+    .countdown{display:flex;gap:12px;justify-content:center;margin:16px 0;flex-wrap:wrap}
     .tile{
-      background: rgba(13,25,18,.82);
-      border-radius: 14px; padding: 12px 14px; min-width: 86px;
-      box-shadow:
-        0 0 0 1px rgba(57,255,20,.08) inset,
-        0 0 24px rgba(22,242,160,.14);
+      background:rgba(0,0,0,.7);
+      border:2px solid var(--accent);
+      padding:10px 14px;
+      min-width:90px;
+      text-align:center;
     }
-    .tile b{ display:block; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 22px; line-height: 1.1; letter-spacing: .5px }
-    .tile small{ color: var(--muted); text-transform: uppercase; letter-spacing: .12em }
+    .tile b{font-size:22px;display:block}
 
-    .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px }
+    /* BOTÕES */
+    .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
     .btn{
-      display:inline-flex; align-items:center; gap:10px; border-radius: 12px; padding: 12px 14px;
-      color: var(--text); font-weight: 800; cursor: pointer;
-      text-transform: uppercase; letter-spacing:.06em;
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      /* Sem borda sólida: só gradiente + glow */
-      background: linear-gradient(180deg, rgba(18,36,26,.92), rgba(10,24,16,.92));
-      box-shadow:
-        0 0 0 1px rgba(57,255,20,.20) inset,
-        0 0 26px rgba(22,242,160,.20);
-      text-shadow: 0 0 6px rgba(57,255,20,.30);
+      background:rgba(0,0,0,.85);
+      border:2px solid var(--accent);
+      padding:10px 16px;
+      font-weight:700;
+      text-transform:uppercase;
+      cursor:pointer;
+      color:var(--text);
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow:
-        0 0 0 1px rgba(57,255,20,.35) inset,
-        0 0 36px rgba(57,255,20,.28) }
-    .btn .icon{ width: 18px; height: 18px }
+    .btn:hover{background:var(--accent);color:#000}
 
-    section{ padding: 40px 0; scroll-margin-top: 86px }
+    /* SEÇÕES */
+    section{padding:40px 16px}
     h2{
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(22px, 2.6vw + .2rem, 36px); margin: 0 0 12px;
-      text-shadow: 0 0 8px rgba(22,242,160,.35)
+      margin-bottom:14px;
+      text-shadow:0 0 8px var(--accent);
+      text-transform:uppercase;
     }
-    /* “sub-linha” fininha sob títulos, no lugar de bordas */
-    h2 + *{ position:relative; }
-    h2 + *::before{
-      content:""; position:absolute; left:0; right:0; top:-8px; height:1px;
-      background: linear-gradient(90deg, rgba(57,255,20,.0), rgba(57,255,20,.26), rgba(57,255,20,.0));
-    }
+    .grid{display:grid;gap:16px}
+    @media(min-width:760px){.grid-2{grid-template-columns:1fr 1fr}}
 
-    p{ margin: 0 0 10px }
-    .grid{ display:grid; gap:16px }
-    @media(min-width: 760px){ .grid-2{ grid-template-columns: 1fr 1fr } }
-
-    /* Cards sem borda sólida – só layers e glow */
     .card{
-      background: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.10)), var(--card);
-      border-radius: 14px; padding: 16px;
-      box-shadow:
-        0 0 0 1px rgba(57,255,20,.10) inset,
-        0 0 28px rgba(22,242,160,.10);
+      background:rgba(0,0,0,.7);
+      border:2px solid var(--accent);
+      padding:18px;
     }
-    .list{
-      display:grid; gap: 8px; margin: 8px 0 0; padding: 0 0 0 18px
-    }
+    .list{margin:8px 0 0;padding-left:20px}
 
-    /* Details/FAQ no estilo HUD (sem borda) */
-    details{
-      background: rgba(13,25,18,.85);
-      border-radius: 12px; padding: 0; margin: 8px 0;
-      box-shadow:
-        0 0 0 1px rgba(57,255,20,.10) inset,
-        0 0 16px rgba(22,242,160,.12);
-      overflow:hidden;
+    /* FAQ */
+    .faq-actions{display:flex;gap:10px;margin:10px 0 20px}
+    .faq-list details{
+      background:rgba(0,0,0,.7);
+      border:2px solid var(--accent);
+      margin:8px 0;
     }
-    summary{
-      list-style:none; cursor:pointer; font-weight:800; color:var(--text);
-      padding: 14px 44px 14px 14px; position:relative;
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      text-transform: none; letter-spacing:.02em;
+    .faq-list summary{
+      padding:14px;
+      font-weight:700;
+      cursor:pointer;
+      list-style:none;
     }
-    summary::-webkit-details-marker{ display:none; }
-    details summary::after{
-      content:"▾"; position:absolute; right:12px; top:10px; opacity:.85;
-      width:26px; height:26px; line-height:26px; text-align:center; border-radius:8px;
-      color:#09140c; background: var(--accent);
-      box-shadow: 0 0 14px rgba(57,255,20,.30);
-      font-weight:900;
-      transform: rotate(-90deg);
-      transition: transform .2s ease;
-    }
-    details[open] summary::after{ transform: rotate(0deg) }
-    details p{ padding: 0 14px 14px; color: var(--muted) }
-    .faq-actions{ display:flex; gap:8px; margin:8px 0 16px }
-    .btn-ghost{
-      background: transparent;
-      box-shadow: 0 0 0 1px rgba(57,255,20,.18) inset;
-      color: var(--text);
-    }
-    .btn-ghost:hover{
-      background: rgba(16,32,24,.35);
-      box-shadow: 0 0 0 1px rgba(57,255,20,.30) inset;
-    }
+    .faq-list p{padding:0 14px 14px;color:var(--muted)}
 
-    footer{ color: var(--muted); padding: 32px 0 48px; font-size: 14px }
-    footer .wrap{ border-top: 1px solid var(--edge); padding-top: 24px }
-    .foot-cols{ display:grid; gap: 12px }
-    @media(min-width:760px){ .foot-cols{ grid-template-columns: 2fr 1fr } }
-
-    .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
-
-    @media (prefers-reduced-motion: reduce){
-      .btn:hover{ transform:none }
-      .hero::after{ opacity:.12 }
-    }
-
-    /* ========= SAFE AREAS / NOTCH ========= */
-    :root{
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-right: env(safe-area-inset-right, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --safe-left: env(safe-area-inset-left, 0px);
-    }
-    body{ padding-left: max(0px, var(--safe-left)); padding-right: max(0px, var(--safe-right)); }
-
-    /* ========= LARGURA MÁXIMA ADAPTATIVA ========= */
-    @media (min-width: 1200px){ :root{ --max: 1100px; } }
-    @media (min-width: 1440px){ :root{ --max: 1280px; } }
-    @media (min-width: 1800px){ :root{ --max: 1440px; } }
-
-    /* ========= ULTRAWIDE ========= */
-    @media (min-aspect-ratio: 21/9) and (min-width: 1600px){
-      .hero{ text-align: left; }
-      .lead, .badges, .countdown, .cta{ justify-content: flex-start; margin-left: auto; margin-right: auto; }
-    }
-
-    /* ========= TOUCH ========= */
-    * { -webkit-tap-highlight-color: rgba(57,255,20,.2); }
-    button, .btn, a{ touch-action: manipulation; }
-    :focus-visible{ scroll-margin-top: 100px; }
+    /* FOOTER */
+    footer{border-top:2px solid var(--accent);padding:20px;font-size:14px;color:var(--muted);text-align:center}
   </style>
-
-  <!-- Schema.org / Event -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Event",
-    "name":"FECART — CIBER",
-    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
-    "eventStatus":"https://schema.org/EventScheduled",
-    "startDate":"2025-09-27T13:00:00-03:00",
-    "endDate":"2025-09-27T17:00:00-03:00",
-    "description":"A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.",
-    "location":{
-      "@type":"Place",
-      "name":"Colégio/Faculdade FECAP — Campus Liberdade (Laboratório 200, entrada perto do ginásio)",
-      "address":{
-        "@type":"PostalAddress",
-        "streetAddress":"Av. da Liberdade, 532",
-        "addressLocality":"São Paulo",
-        "addressRegion":"SP",
-        "postalCode":"01502-001",
-        "addressCountry":"BR"
-      }
-    },
-    "organizer":{
-      "@type":"Organization",
-      "name":"FECAP",
-      "url":"https://www.fecap.br/"
-    }
-  }
-  </script>
-
-  <!-- FAQPage (SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Precisa se inscrever?","acceptedAnswer":{"@type":"Answer","text":"Não. A visita é livre e a entrada é gratuita. Se houver orientação diferente perto da data, atualizamos no site."}},
-      {"@type":"Question","name":"Qual o horário do evento?","acceptedAnswer":{"@type":"Answer","text":"27/09/2025 (sábado), das 13h às 17h."}},
-      {"@type":"Question","name":"Onde acontece dentro do campus?","acceptedAnswer":{"@type":"Answer","text":"No Laboratório 200, com entrada perto do ginásio (3º andar), no Campus Liberdade."}},
-      {"@type":"Question","name":"Quem pode participar?","acceptedAnswer":{"@type":"Answer","text":"Aberto à comunidade: estudantes, famílias, amigos e interessad@s em tecnologia."}},
-      {"@type":"Question","name":"O que levar?","acceptedAnswer":{"@type":"Answer","text":"Curiosidade. Opcional: garrafinha de água e, se solicitado na portaria, um documento de identificação."}}
-    ]
-  }
-  </script>
 </head>
 <body>
-  <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- HEADER com imagem e CTA -->
-  <header class="cp-header">
-    <div class="wrap row cp-bar">
-      <div class="brand" aria-label="FECART — CIBER 2025">
-        <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
-      </div>
-
-      <nav aria-label="Seções" class="cp-nav">
-        <ul>
-          <li><a href="#sobre" class="has-sub">O que é</a></li>
-          <li><a href="#ciber" class="has-sub">Cibersegurança</a></li>
-          <li><a href="#quem-somos" class="has-sub">Quem somos</a></li>
-          <li class="sep"></li>
-          <li><a href="#local" class="has-sub">Local & Data</a></li>
-          <li><a href="#importancia" class="has-sub">Importância</a></li>
-          <li><a href="#faq" class="has-sub">FAQ</a></li>
+  <header>
+    <div class="wrap row">
+      <div class="brand"><img src="logo.png" alt="FECART — CIBER"></div>
+      <button class="menu-toggle" id="menu-btn">☰</button>
+      <nav>
+        <ul id="menu">
+          <li><a href="#sobre">O que é</a></li>
+          <li><a href="#ciber">Cibersegurança</a></li>
+          <li><a href="#quem-somos">Quem somos</a></li>
+          <li><a href="#local">Local & Data</a></li>
+          <li><a href="#importancia">Importância</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </nav>
-
-      <a class="cp-cta" href="#local" role="button" aria-label="Ver informações do local">VER LOCAL</a>
     </div>
   </header>
 
-  <main id="conteudo" class="wrap">
-    <section class="hero" aria-labelledby="titulo">
-      <p class="kicker">Colégio FECAP</p>
-      <h1 id="titulo">FECART — CIBER | 27 de setembro de 2025</h1>
-      <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
+  <main class="wrap">
+    <section class="hero">
+      <h1>FECART — CIBER | 27 de setembro de 2025</h1>
+      <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o curso de <strong>Cibersegurança</strong>.</p>
 
       <div class="badges">
-        <span class="badge" aria-label="Data do evento">27/09/2025 (sábado) — 13h–17h</span>
-        <span class="badge" aria-label="Local do evento">Av. da Liberdade, 532 — São Paulo/SP</span>
-        <span class="badge" aria-label="Ambiente">Laboratório 200 (entrada perto do ginásio no terceiro andar)</span>
+        <span class="badge">27/09/2025 — 13h–17h</span>
+        <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
+        <span class="badge">Laboratório 200 (entrada perto do ginásio)</span>
       </div>
 
-      <div class="countdown" role="status" aria-live="polite">
-        <div class="tile"><b id="dd">--</b><small>dias</small></div>
-        <div class="tile"><b id="hh">--</b><small>horas</small></div>
-        <div class="tile"><b id="mm">--</b><small>min</small></div>
-        <div class="tile"><b id="ss">--</b><small>seg</small></div>
+      <div class="countdown">
+        <div class="tile"><b id="dd">--</b>dias</div>
+        <div class="tile"><b id="hh">--</b>h</div>
+        <div class="tile"><b id="mm">--</b>min</div>
+        <div class="tile"><b id="ss">--</b>seg</div>
       </div>
 
       <div class="cta">
-        <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2v2H5a2 2 0 00-2 2v2h18V6a2 2 0 00-2-2h-2V2h-2v2H9V2H7zm14 8H3v10a2 2 0 002 2h14a2 2 0 002-2V9z"/></svg>
-          Adicionar ao calendário (.ics)
-        </button>
-
-        <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5a2 2 0 00-2 2v2h18V5a2 2 0 00-2-2zm1 6H4v8a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg>
-          Adicionar no Google Calendar
-        </a>
-
-        <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
-           href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-          Como chegar
-        </a>
-
-        <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3.5A10.5 10.5 0 0 0 3.5 20l.3.3L2 22l3-1.1.3.2A10.5 10.5 0 1 0 20 3.5zM12 5a7 7 0 0 1 6.1 10.4c-.2.3-.6.4-.9.2l-2-1.2a1 1 0 0 0-1.1.1l-.8.6c-2.7-.9-4.2-2.5-5.1-5.1l.6-.8c.3-.3.4-.8.1-1.1L7.6 6.8c-.2-.3-.1-.8.2-1A7 7 0 0 1 12 5z"/></svg>
-          Compartilhar no WhatsApp
-        </a>
+        <button class="btn" id="btn-ics">.ICS</button>
+        <a class="btn" id="btn-gcal" href="#">Google Calendar</a>
+        <a class="btn" id="btn-mapa" href="#">Como chegar</a>
+        <a class="btn" id="btn-whats" href="#">Compartilhar</a>
       </div>
     </section>
 
@@ -420,14 +199,14 @@
       <h2>O que é a FECART</h2>
       <div class="grid grid-2">
         <div class="card">
-          <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
+          <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas em arte, ciência e tecnologia. É um espaço de integração entre estudantes, famílias e comunidade.</p>
         </div>
         <div class="card">
           <ul class="list">
-            <li>Exposição de projetos e demonstrações</li>
-            <li>Trilhas temáticas e vivências</li>
-            <li>Conexão com cursos e carreira</li>
-            <li>Aberto à comunidade — Entrada gratuita</li>
+            <li>Exposição de projetos</li>
+            <li>Trilhas temáticas</li>
+            <li>Conexão com carreira</li>
+            <li>Entrada gratuita</li>
           </ul>
         </div>
       </div>
@@ -438,18 +217,13 @@
       <div class="grid grid-2">
         <div class="card">
           <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
-          <ul class="list">
-            <li>Temas: Segurança da Informação, Redes de Computadores, Governança e Legalidade em Cibersegurança.</li>
-            <li>Competências: análise de risco, hardening, gestão de vulnerabilidades.</li>
-            <li>Perfil: curiosidade, pensamento crítico, trabalho em equipe.</li>
-          </ul>
         </div>
         <div class="card">
-          <p><strong>Carreiras & continuidade</strong></p>
+          <p><strong>Carreiras</strong></p>
           <ul class="list">
-            <li>Analista de Segurança da Informação/Cibernética.</li>
-            <li>Certificações iniciais: Técnico em Cibersegurança.</li>
-            <li>Continuidade acadêmica na FECAP: Ciência de Dados.</li>
+            <li>Analista de Segurança da Informação</li>
+            <li>Técnico em Cibersegurança</li>
+            <li>Continuidade em cursos da FECAP</li>
           </ul>
         </div>
       </div>
@@ -458,7 +232,7 @@
     <section id="quem-somos">
       <h2>Quem somos</h2>
       <div class="card">
-        <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
+        <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil, unindo ensino técnico e acadêmico.</p>
       </div>
     </section>
 
@@ -466,199 +240,71 @@
       <h2>Local & Data</h2>
       <div class="grid grid-2">
         <div class="card">
-          <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
-          <p><strong>Local:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
+          <p><strong>Data:</strong> 27/09/2025 — 13h–17h</p>
+          <p><strong>Local:</strong> Colégio FECAP — Campus Liberdade</p>
           <p><strong>Ambiente:</strong> Laboratório 200 (entrada perto do ginásio)</p>
-          <p><strong>Endereço:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001</p>
-          <div class="cta" style="justify-content:flex-start">
-            <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Abrir no app de mapas</a>
-            <button class="btn" id="btn-copy" type="button">Copiar endereço</button>
-          </div>
         </div>
         <div class="card">
-          <p><strong>Como chegar</strong></p>
+          <p><strong>Como chegar:</strong></p>
           <ul class="list">
-            <li>Metrô: Estação Liberdade (linha 1-Azul), a poucos minutos a pé.</li>
-            <li>Ônibus/Carro: utilize o link “Como chegar” acima para rotas atualizadas.</li>
-            <li>Acessibilidade: verifique as orientações do campus no site da FECAP.</li>
+            <li>Metrô Liberdade (Linha 1-Azul)</li>
+            <li>Ônibus/Carro: use Google Maps</li>
+            <li>Acessibilidade: elevadores disponíveis</li>
           </ul>
         </div>
       </div>
-    </section>    
+    </section>
 
     <section id="importancia">
-      <h2>Importância para a sociedade</h2>
+      <h2>Importância</h2>
       <div class="card">
-        <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
+        <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Aproxima famílias, escola e comunidade e incentiva carreiras em ciência e tecnologia com impacto social.</p>
       </div>
     </section>
 
-    <!-- FAQ melhorado (com botões expandir/recolher) -->
-    <section id="faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">FAQ — perguntas frequentes</h2>
-
+    <section id="faq">
+      <h2>FAQ</h2>
       <div class="faq-actions">
-        <button class="btn btn-ghost" id="faq-expand">Expandir tudo</button>
-        <button class="btn btn-ghost" id="faq-collapse">Recolher tudo</button>
+        <button class="btn" id="faq-expand">Expandir</button>
+        <button class="btn" id="faq-collapse">Recolher</button>
       </div>
-
       <div class="faq-list">
-        <details>
-          <summary>Precisa se inscrever?</summary>
-          <p><strong>Não.</strong> A visita é livre e a <em>entrada é gratuita</em>. Se houver orientação diferente perto da data, atualizamos aqui.</p>
-        </details>
-
-        <details>
-          <summary>Qual o horário do evento?</summary>
-          <p>Dia <strong>27/09/2025 (sábado)</strong>, das <strong>13h às 17h</strong>. Chegue com 10–15 minutos de antecedência para aproveitar tudo, especialmente as demonstrações no Laboratório 200.</p>
-        </details>
-
-        <details>
-          <summary>Onde exatamente acontece dentro do campus?</summary>
-          <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja também a seção <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
-        </details>
-
-        <details>
-          <summary>Quem pode participar?</summary>
-          <p>Aberto à comunidade: estudantes, famílias, amigos e interessad@s em tecnologia. Recomendamos <strong>acompanhamento de responsáveis para menores</strong>.</p>
-        </details>
-
-        <details>
-          <summary>O que devo levar?</summary>
-          <p>Curiosidade 😊. Opcional: garrafinha de água e, se solicitado na portaria, um documento de identificação. Evite mochilas muito grandes.</p>
-        </details>
-
-        <details>
-          <summary>Há acessibilidade?</summary>
-          <p>O campus conta com acessos e elevadores. Se precisar de apoio específico, fale com a equipe no local ou mande DM no Instagram <strong>@fecapciber_</strong> antes da visita.</p>
-        </details>
-
-        <details>
-          <summary>Posso levar convidados?</summary>
-          <p><strong>Sim!</strong> Traga amig@s e família. A FECART é um momento de integração com a comunidade.</p>
-        </details>
-
-        <details>
-          <summary>Posso fotografar e gravar?</summary>
-          <p>Sim, desde que respeite as pessoas nas imagens (peça autorização quando necessário). Se postar, marque <strong>@fecapciber_</strong> e use <code>#FECART</code> e <code>#FECAP</code>.</p>
-        </details>
-
-        <details>
-          <summary>Tem estacionamento? Qual a melhor forma de chegar?</summary>
-          <p>Recomendamos <strong>Metrô Liberdade (Linha 1–Azul)</strong>, a poucos minutos a pé. Há estacionamentos particulares na região; verifique disponibilidade e tarifas no dia.</p>
-        </details>
-
-        <details>
-          <summary>Vai ter Wi-Fi para visitantes?</summary>
-          <p>Pode haver rede para visitantes, mas <strong>a disponibilidade é limitada</strong>. Se puder, use dados móveis.</p>
-        </details>
+        <details><summary>Precisa se inscrever?</summary><p>Não, entrada livre e gratuita.</p></details>
+        <details><summary>Qual o horário?</summary><p>Das 13h às 17h em 27/09/2025.</p></details>
+        <details><summary>Onde acontece?</summary><p>No Laboratório 200, entrada pelo ginásio.</p></details>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap foot-cols">
-      <div>
-        <p>© <span id="ano"></span> Rafael Gomes Julien. Todos os direitos reservados.</p>
-        <p><small>Este site é informativo. Confirme informações oficiais nos canais da FECAP.</small></p>
-      </div>
-      <div>
-        <p><small>Última atualização: <time id="lastmod"></time></small></p>
-      </div>
-    </div>
+    <p>© <span id="ano"></span> Rafael Gomes Julien — Site informativo.</p>
   </footer>
 
   <script>
-    // ===== Contagem regressiva (até 27/09/2025 13:00 local) =====
-    const EVENT_DATE = new Date('2025-09-27T13:00:00'); // horário local
-    const $ = (id) => document.getElementById(id);
+    // Countdown
+    const EVENT_DATE=new Date('2025-09-27T13:00:00');
     function tick(){
-      const now = new Date();
-      let ms = EVENT_DATE - now;
-      if (ms < 0) ms = 0;
-      const s = Math.floor(ms/1000);
-      const d = Math.floor(s/86400);
-      const h = Math.floor((s%86400)/3600);
-      const m = Math.floor((s%3600)/60);
-      const ss= s%60;
-      $('dd').textContent = String(d).padStart(2,'0');
-      $('hh').textContent = String(h).padStart(2,'0');
-      $('mm').textContent = String(m).padStart(2,'0');
-      $('ss').textContent = String(ss).padStart(2,'0');
+      let now=new Date(),ms=EVENT_DATE-now;if(ms<0)ms=0;
+      let s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),ss=s%60;
+      document.getElementById('dd').textContent=d;
+      document.getElementById('hh').textContent=h;
+      document.getElementById('mm').textContent=m;
+      document.getElementById('ss').textContent=ss;
     }
-    tick(); setInterval(tick, 1000);
+    tick();setInterval(tick,1000);
 
-    // ===== Botão: gerar .ICS (13:00–17:00 BRT = 16:00–20:00Z) =====
-    function downloadICS(){
-      const title = 'FECART — CIBER';
-      const desc  = 'FECART no Colégio FECAP. Mais informações: ' + location.href;
-      const loc   = 'Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001';
-      const dtStart = '20250927T160000Z';
-      const dtEnd   = '20250927T200000Z';
-      const uid = 'fecart-' + Date.now() + '@fecap';
-      const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//FECART//pt-BR',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
-        'BEGIN:VEVENT',
-        'UID:' + uid,
-        'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
-        'DTSTART:' + dtStart,
-        'DTEND:' + dtEnd,
-        'SUMMARY:' + title,
-        'DESCRIPTION:' + desc.replace(/\n/g,'\\n'),
-        'LOCATION:' + loc,
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\r\n');
-      const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'FECART-2025.ics';
-      document.body.appendChild(a); a.click();
-      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
-    }
-    document.getElementById('btn-ics').addEventListener('click', downloadICS);
+    // FAQ expand/collapse
+    const faqs=[...document.querySelectorAll('#faq details')];
+    document.getElementById('faq-expand').onclick=()=>faqs.forEach(f=>f.open=true);
+    document.getElementById('faq-collapse').onclick=()=>faqs.forEach(f=>f.open=false);
 
-    // ===== Link Google Calendar (13:00–17:00 BRT = 16:00–20:00Z) =====
-    const gcal = new URL('https://calendar.google.com/calendar/render');
-    gcal.searchParams.set('action','TEMPLATE');
-    gcal.searchParams.set('text','FECART — CIBER');
-    gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
-    gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
-    gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z'); // UTC
-    document.getElementById('btn-gcal').href = gcal.toString();
+    // Menu hambúrguer
+    const btn=document.getElementById('menu-btn');
+    const menu=document.getElementById('menu');
+    btn.onclick=()=>menu.classList.toggle('open');
 
-    // ===== Compartilhar no WhatsApp =====
-    const msg = encodeURIComponent('Vem para a FECART — CIBER no Colégio FECAP! 27/09/2025, 13h–17h. 🧭 Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    document.getElementById('btn-whats').href = 'https://wa.me/?text=' + msg;
-
-    // ===== Copiar endereço =====
-    document.getElementById('btn-copy').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
-        const t = document.getElementById('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
-        setTimeout(()=> t.textContent = old, 1200);
-      } catch(e){ alert('Não foi possível copiar.'); }
-    });
-
-    // ===== Geo link fallback (desktop) =====
-    document.getElementById('btn-geo').addEventListener('click', (e) => {
-      if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-        e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
-      }
-    });
-
-    // ===== FAQ: expandir/recolher tudo =====
-    const allFaqs = [...document.querySelectorAll('#faq details')];
-    document.getElementById('faq-expand')?.addEventListener('click', () => allFaqs.forEach(d => d.open = true));
-    document.getElementById('faq-collapse')?.addEventListener('click', () => allFaqs.forEach(d => d.open = false));
-
-    // Rodapé dinâmico
-    document.getElementById('ano').textContent = new Date().getFullYear();
-    document.getElementById('lastmod').textContent = new Date(document.lastModified).toLocaleDateString('pt-BR');
+    // Rodapé ano
+    document.getElementById('ano').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
