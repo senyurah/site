@@ -1,208 +1,191 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#061009">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>FECART — CIBER | 27/09/2025</title>
   <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade.">
   <link rel="canonical" href="https://senyurah.github.io/site/">
 
-  <!-- OG básico -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="FECART — CIBER | 27/09/2025">
-  <meta property="og:description" content="Participe da FECART — CIBER no Colégio FECAP em 27/09/2025.">
-  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png">
-
-  <!-- Fonte cyberpunk -->
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0b140f">
 
   <style>
-    :root{
-      --bg:#061009;
-      --card:#0a1a12;
-      --text:#e6ffe8;
-      --muted:#a6d9bf;
-      --accent:#39ff14;
-      --accent-2:#16f2a0;
-      --max:1100px;
+    :root {
+      --bg: #050a06;
+      --text: #e6ffe8;
+      --muted: #9bcfa7;
+      --accent: #6bff75; /* verde suavizado */
+      --max: 960px;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:"Rajdhani",system-ui,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-    a{color:var(--accent-2);text-decoration:none}
 
-    /* HEADER */
-    header{
-      position:sticky;top:0;z-index:100;
-      background:rgba(0,0,0,.85);
-      border-bottom:2px solid var(--accent);
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.5;
     }
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .row{display:flex;align-items:center;justify-content:space-between}
-    .brand img{height:38px}
+    a { color: var(--accent); text-decoration: none; }
 
-    nav ul{display:flex;gap:0;list-style:none}
-    nav li{border-left:2px solid rgba(57,255,20,.25)}
-    nav li:first-child{border-left:0}
-    nav a{
-      padding:14px 18px;
-      text-transform:uppercase;
+    /* Header e menu */
+    header {
+      background: rgba(0,0,0,.85);
+      padding: 10px 20px;
+      border-bottom: 2px solid var(--accent);
+      position: sticky; top:0; z-index: 1000;
+    }
+    nav {
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    nav a {
+      padding: 8px 12px;
       font-weight:700;
-      color:var(--text);
-      display:block;
     }
-    nav a:hover{background:rgba(57,255,20,.15)}
 
-    /* BOTÃO HAMBURGUER */
-    .menu-toggle{
-      background:none;border:2px solid var(--accent);
-      padding:6px 10px;color:var(--accent);
-      font-size:20px;cursor:pointer;display:none;
+    /* Menu mobile */
+    .menu-toggle {
+      display:none;
+      background:none;
+      border:2px solid var(--accent);
+      color:var(--accent);
+      font-size:1.5rem;
+      padding:6px 12px;
+      cursor:pointer;
     }
     @media(max-width:760px){
-      nav ul{display:none;flex-direction:column;width:100%}
-      nav ul.open{display:flex;background:rgba(0,0,0,.95);border-top:2px solid var(--accent)}
-      nav li{border:0;border-top:2px solid rgba(57,255,20,.25)}
-      .menu-toggle{display:block}
+      nav {
+        display:none;
+        flex-direction:column;
+        align-items:center;
+        gap:12px;
+        padding:20px 0;
+        border-top:2px solid var(--accent);
+        animation: fadeSlide .3s ease;
+      }
+      nav.active { display:flex; }
+      .menu-toggle { display:block; margin-left:auto; }
+    }
+    @keyframes fadeSlide {
+      from { opacity:0; transform: translateY(-10px); }
+      to { opacity:1; transform: translateY(0); }
     }
 
-    /* HERO */
-    .hero{text-align:center;padding:60px 16px}
-    h1{
-      font-size:clamp(28px,5vw,56px);
-      text-shadow:0 0 12px var(--accent);
-      margin-bottom:12px;
-    }
-    .lead{color:var(--muted);max-width:70ch;margin:0 auto 20px}
+    main { max-width: var(--max); margin: 0 auto; padding: 20px; text-align: center; }
 
-    .badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .badge{
-      padding:6px 12px;
-      background:rgba(0,0,0,.7);
-      color:var(--text);
-      border:2px solid var(--accent);
-      font-size:14px;
-    }
+    h1, h2 { color: var(--accent); margin-bottom: 10px; }
+    h1 { font-size: 2.5rem; text-shadow: 0 0 15px var(--accent); }
+    h2 { font-size: 1.6rem; }
 
-    .countdown{display:flex;gap:12px;justify-content:center;margin:16px 0;flex-wrap:wrap}
-    .tile{
-      background:rgba(0,0,0,.7);
-      border:2px solid var(--accent);
-      padding:10px 14px;
-      min-width:90px;
+    /* Countdown */
+    .countdown { display:flex; justify-content:center; gap:12px; margin:20px 0; flex-wrap:wrap; }
+    .tile {
+      border: 2px solid var(--accent);
+      padding: 12px 18px;
       text-align:center;
+      flex: 1 1 100px;
     }
-    .tile b{font-size:22px;display:block}
+    .tile b { font-size: 1.5rem; display:block; }
+    .tile small { display:block; margin-top:4px; font-size: .9rem; color: var(--muted); }
 
-    /* BOTÕES */
-    .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-    .btn{
-      background:rgba(0,0,0,.85);
-      border:2px solid var(--accent);
-      padding:10px 16px;
+    /* Botões */
+    .cta { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin:20px 0; }
+    .btn {
+      border: 2px solid var(--accent);
+      background: transparent;
+      color: var(--text);
+      padding: 10px 16px;
       font-weight:700;
-      text-transform:uppercase;
       cursor:pointer;
-      color:var(--text);
+      text-transform: uppercase;
+      transition: background .2s, color .2s;
     }
-    .btn:hover{background:var(--accent);color:#000}
+    .btn:hover { background: var(--accent); color:#000; }
 
-    /* SEÇÕES */
-    section{padding:40px 16px}
-    h2{
-      margin-bottom:14px;
-      text-shadow:0 0 8px var(--accent);
-      text-transform:uppercase;
+    /* Cards */
+    .grid { display:grid; gap:16px; margin: 20px 0; }
+    @media(min-width:760px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .card {
+      border: 2px solid var(--accent);
+      padding:16px;
+      text-align:left;
     }
-    .grid{display:grid;gap:16px}
-    @media(min-width:760px){.grid-2{grid-template-columns:1fr 1fr}}
-
-    .card{
-      background:rgba(0,0,0,.7);
-      border:2px solid var(--accent);
-      padding:18px;
-    }
-    .list{margin:8px 0 0;padding-left:20px}
 
     /* FAQ */
-    .faq-actions{display:flex;gap:10px;margin:10px 0 20px}
-    .faq-list details{
-      background:rgba(0,0,0,.7);
-      border:2px solid var(--accent);
+    .faq-actions { margin:10px 0; display:flex; justify-content:center; gap:8px; }
+    .faq-list details {
+      border: 2px solid var(--accent);
       margin:8px 0;
+      overflow:hidden;
+      transition: all .3s ease;
     }
-    .faq-list summary{
-      padding:14px;
-      font-weight:700;
+    .faq-list summary {
       cursor:pointer;
-      list-style:none;
+      padding:12px 16px;
+      font-weight:700;
+      text-align:left;
     }
-    .faq-list p{padding:0 14px 14px;color:var(--muted)}
+    .faq-list p { padding: 0 16px 16px; text-align:left; color: var(--muted); }
 
-    /* FOOTER */
-    footer{border-top:2px solid var(--accent);padding:20px;font-size:14px;color:var(--muted);text-align:center}
+    details[open] summary ~ * {
+      animation: sweep .3s ease-in-out;
+    }
+    @keyframes sweep {
+      0% {opacity:0; transform: translateY(-5px);}
+      100% {opacity:1; transform: translateY(0);}
+    }
+
+    footer {
+      border-top:2px solid var(--accent);
+      margin-top:40px;
+      padding:20px;
+      font-size:.9rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap row">
-      <div class="brand"><img src="logo.png" alt="FECART — CIBER"></div>
-      <button class="menu-toggle" id="menu-btn">☰</button>
-      <nav>
-        <ul id="menu">
-          <li><a href="#sobre">O que é</a></li>
-          <li><a href="#ciber">Cibersegurança</a></li>
-          <li><a href="#quem-somos">Quem somos</a></li>
-          <li><a href="#local">Local & Data</a></li>
-          <li><a href="#importancia">Importância</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </nav>
-    </div>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <nav id="menu">
+      <a href="#sobre">O que é</a>
+      <a href="#ciber">Cibersegurança</a>
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#local">Local & Data</a>
+      <a href="#faq">FAQ</a>
+    </nav>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>FECART — CIBER | 27 de setembro de 2025</h1>
-      <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o curso de <strong>Cibersegurança</strong>.</p>
+  <main>
+    <h1>FECART — CIBER | 27 de setembro de 2025</h1>
+    <p>Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
-      <div class="badges">
-        <span class="badge">27/09/2025 — 13h–17h</span>
-        <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
-        <span class="badge">Laboratório 200 (entrada perto do ginásio)</span>
-      </div>
+    <div class="countdown">
+      <div class="tile"><b id="dd">--</b><small>dias</small></div>
+      <div class="tile"><b id="hh">--</b><small>horas</small></div>
+      <div class="tile"><b id="mm">--</b><small>minutos</small></div>
+      <div class="tile"><b id="ss">--</b><small>segundos</small></div>
+    </div>
 
-      <div class="countdown">
-        <div class="tile"><b id="dd">--</b>dias</div>
-        <div class="tile"><b id="hh">--</b>h</div>
-        <div class="tile"><b id="mm">--</b>min</div>
-        <div class="tile"><b id="ss">--</b>seg</div>
-      </div>
-
-      <div class="cta">
-        <button class="btn" id="btn-ics">.ICS</button>
-        <a class="btn" id="btn-gcal" href="#">Google Calendar</a>
-        <a class="btn" id="btn-mapa" href="#">Como chegar</a>
-        <a class="btn" id="btn-whats" href="#">Compartilhar</a>
-      </div>
-    </section>
+    <div class="cta">
+      <button class="btn" id="btn-ics">.ics</button>
+      <a class="btn" id="btn-gcal" target="_blank">Google Calendar</a>
+      <a class="btn" id="btn-mapa" target="_blank">Como chegar</a>
+      <a class="btn" id="btn-whats" target="_blank">Compartilhar</a>
+    </div>
 
     <section id="sobre">
       <h2>O que é a FECART</h2>
       <div class="grid grid-2">
         <div class="card">
-          <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas em arte, ciência e tecnologia. É um espaço de integração entre estudantes, famílias e comunidade.</p>
+          <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade.</p>
         </div>
         <div class="card">
-          <ul class="list">
+          <ul>
             <li>Exposição de projetos</li>
             <li>Trilhas temáticas</li>
             <li>Conexão com carreira</li>
@@ -216,11 +199,11 @@
       <h2>Curso de Cibersegurança</h2>
       <div class="grid grid-2">
         <div class="card">
-          <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
+          <p>Fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
         </div>
         <div class="card">
           <p><strong>Carreiras</strong></p>
-          <ul class="list">
+          <ul>
             <li>Analista de Segurança da Informação</li>
             <li>Técnico em Cibersegurança</li>
             <li>Continuidade em cursos da FECAP</li>
@@ -236,32 +219,6 @@
       </div>
     </section>
 
-    <section id="local">
-      <h2>Local & Data</h2>
-      <div class="grid grid-2">
-        <div class="card">
-          <p><strong>Data:</strong> 27/09/2025 — 13h–17h</p>
-          <p><strong>Local:</strong> Colégio FECAP — Campus Liberdade</p>
-          <p><strong>Ambiente:</strong> Laboratório 200 (entrada perto do ginásio)</p>
-        </div>
-        <div class="card">
-          <p><strong>Como chegar:</strong></p>
-          <ul class="list">
-            <li>Metrô Liberdade (Linha 1-Azul)</li>
-            <li>Ônibus/Carro: use Google Maps</li>
-            <li>Acessibilidade: elevadores disponíveis</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="importancia">
-      <h2>Importância</h2>
-      <div class="card">
-        <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Aproxima famílias, escola e comunidade e incentiva carreiras em ciência e tecnologia com impacto social.</p>
-      </div>
-    </section>
-
     <section id="faq">
       <h2>FAQ</h2>
       <div class="faq-actions">
@@ -269,42 +226,54 @@
         <button class="btn" id="faq-collapse">Recolher</button>
       </div>
       <div class="faq-list">
-        <details><summary>Precisa se inscrever?</summary><p>Não, entrada livre e gratuita.</p></details>
-        <details><summary>Qual o horário?</summary><p>Das 13h às 17h em 27/09/2025.</p></details>
-        <details><summary>Onde acontece?</summary><p>No Laboratório 200, entrada pelo ginásio.</p></details>
+        <details>
+          <summary>Precisa se inscrever?</summary>
+          <p>Não, entrada livre e gratuita.</p>
+        </details>
+        <details>
+          <summary>Qual o horário?</summary>
+          <p>Das 13h às 17h em 27/09/2025.</p>
+        </details>
+        <details>
+          <summary>Onde participar?</summary>
+          <p>No Laboratório 200, entrada pelo ginásio.</p>
+        </details>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="ano"></span> Rafael Gomes Julien — Site informativo.</p>
+    <p>© 2025 Rafael Gomes Julien — Analista de Segurança da Informação e Cibernética.</p>
   </footer>
 
   <script>
+    // Menu toggle
+    const menuToggle=document.getElementById('menu-toggle');
+    const menu=document.getElementById('menu');
+    menuToggle.addEventListener('click',()=>menu.classList.toggle('active'));
+
     // Countdown
-    const EVENT_DATE=new Date('2025-09-27T13:00:00');
+    const EVENT_DATE = new Date('2025-09-27T13:00:00');
+    const $ = (id)=>document.getElementById(id);
     function tick(){
-      let now=new Date(),ms=EVENT_DATE-now;if(ms<0)ms=0;
-      let s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),ss=s%60;
-      document.getElementById('dd').textContent=d;
-      document.getElementById('hh').textContent=h;
-      document.getElementById('mm').textContent=m;
-      document.getElementById('ss').textContent=ss;
+      let diff = EVENT_DATE - new Date();
+      if(diff<0) diff=0;
+      const s=Math.floor(diff/1000);
+      const d=Math.floor(s/86400);
+      const h=Math.floor((s%86400)/3600);
+      const m=Math.floor((s%3600)/60);
+      const ss=s%60;
+      $('dd').textContent=d;
+      $('hh').textContent=h;
+      $('mm').textContent=m;
+      $('ss').textContent=ss;
     }
-    tick();setInterval(tick,1000);
+    setInterval(tick,1000); tick();
 
     // FAQ expand/collapse
-    const faqs=[...document.querySelectorAll('#faq details')];
-    document.getElementById('faq-expand').onclick=()=>faqs.forEach(f=>f.open=true);
-    document.getElementById('faq-collapse').onclick=()=>faqs.forEach(f=>f.open=false);
-
-    // Menu hambúrguer
-    const btn=document.getElementById('menu-btn');
-    const menu=document.getElementById('menu');
-    btn.onclick=()=>menu.classList.toggle('open');
-
-    // Rodapé ano
-    document.getElementById('ano').textContent=new Date().getFullYear();
+    const allFaqs=[...document.querySelectorAll('#faq details')];
+    document.getElementById('faq-expand').onclick=()=>allFaqs.forEach(d=>d.open=true);
+    document.getElementById('faq-collapse').onclick=()=>allFaqs.forEach(d=>d.open=false);
   </script>
 </body>
 </html>
