@@ -2,7 +2,15 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Viewport com suporte a notch -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Hint de cores e web-app -->
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050a06">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0b140f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FECART — CIBER">
 
   <!-- SEO básico -->
   <title>FECART — CIBER | 27/09/2025</title>
@@ -27,8 +35,6 @@
   <meta name="twitter:description" content="Evento FECART — CIBER | Colégio FECAP | 27/09/2025. Inovação, tecnologia e sociedade.">
   <meta name="twitter:image" content="https://senyurah.github.io/site/og-image.png?v=2">
   <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
-
-  <meta name="theme-color" content="#0b140f">
 
   <style>
     :root{
@@ -77,6 +83,7 @@
       background: rgba(7,17,11,.75);
       border-bottom: 1px solid var(--edge);
       box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      /* safe area top aplicado via var mais abaixo */
     }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px }
     .row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
@@ -160,6 +167,56 @@
       .btn:hover{ transform:none }
       .hero::after{ opacity:.1 }
     }
+
+    /* ========= SUPORTE MOBILE (SAFE AREAS / NOTCH) ========= */
+    :root{
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+    }
+    header{ padding-top: max(0px, var(--safe-top)); }
+    body{
+      padding-left: max(0px, var(--safe-left));
+      padding-right: max(0px, var(--safe-right));
+    }
+
+    /* ========= TIPOGRAFIA FLUIDA / LEGIBILIDADE ========= */
+    h1{ font-size: clamp(32px, 5vw + 0.5rem, 64px); }
+    h2{ font-size: clamp(22px, 2.6vw + 0.2rem, 36px); }
+    .lead{ font-size: clamp(16px, 1.6vw + 0.2rem, 22px); }
+
+    /* ========= LARGURA MÁXIMA ADAPTATIVA ========= */
+    @media (min-width: 1200px){ :root{ --max: 1100px; } }
+    @media (min-width: 1440px){ :root{ --max: 1280px; } }
+    @media (min-width: 1800px){ :root{ --max: 1440px; } }
+
+    /* ========= ULTRAWIDE (21:9, 32:9) ========= */
+    @media (min-aspect-ratio: 21/9) and (min-width: 1600px){
+      .hero{ text-align: left; }
+      .lead, .badges, .countdown, .cta{ justify-content: flex-start; margin-left: auto; margin-right: auto; }
+    }
+
+    /* ========= OTIMIZAÇÕES TOUCH/ANDROID ========= */
+    * { -webkit-tap-highlight-color: rgba(57,255,20,.2); }
+    button, .btn, a{ touch-action: manipulation; }
+    :focus-visible{ scroll-margin-top: 90px; }
+
+    /* ========= SCROLL SUAVE EM TELAS GRANDES ========= */
+    @media (min-width: 1600px){
+      html{ scroll-behavior: smooth; }
+    }
+
+    /* ========= FULL-BLEED ESTÉTICO (aplicado na hero) ========= */
+    .section-bleed{ position: relative; isolation: isolate; }
+    .section-bleed::before{
+      content:""; position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(40vw 40vh at -10% 10%, rgba(57,255,20,.10), transparent 60%),
+        radial-gradient(40vw 40vh at 110% 30%, rgba(0,229,168,.10), transparent 60%),
+        linear-gradient(90deg, rgba(57,255,20,.06), transparent 20%, transparent 80%, rgba(0,229,168,.06));
+      mask: linear-gradient(#000,#000);
+    }
   </style>  
 
   <!-- Schema.org / Event -->
@@ -215,7 +272,7 @@
   </header>
 
   <main id="conteudo" class="wrap">
-    <section class="hero" aria-labelledby="titulo">
+    <section class="hero section-bleed" aria-labelledby="titulo">
       <p class="kicker">Colégio FECAP</p>
       <h1 id="titulo">FECART — CIBER | 27 de setembro de 2025</h1>
       <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Participe e conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
@@ -419,7 +476,7 @@
       document.body.appendChild(a); a.click();
       setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
     }
-    $('btn-ics').addEventListener('click', downloadICS);
+    document.getElementById('btn-ics').addEventListener('click', downloadICS);
 
     // ===== Link Google Calendar (13:00–17:00 BRT = 16:00–20:00Z) =====
     const gcal = new URL('https://calendar.google.com/calendar/render');
@@ -428,31 +485,31 @@
     gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
     gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
     gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z'); // UTC
-    $('btn-gcal').href = gcal.toString();
+    document.getElementById('btn-gcal').href = gcal.toString();
 
     // ===== Compartilhar no WhatsApp =====
     const msg = encodeURIComponent('Vem para a FECART — CIBER no Colégio FECAP! 27/09/2025, 13h–17h. 🧭 Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    $('btn-whats').href = 'https://wa.me/?text=' + msg;
+    document.getElementById('btn-whats').href = 'https://wa.me/?text=' + msg;
 
     // ===== Copiar endereço =====
-    $('btn-copy').addEventListener('click', async () => {
+    document.getElementById('btn-copy').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
-        const t = $('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
+        const t = document.getElementById('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
         setTimeout(()=> t.textContent = old, 1200);
       } catch(e){ alert('Não foi possível copiar.'); }
     });
 
     // ===== Geo link fallback (desktop) =====
-    $('btn-geo').addEventListener('click', (e) => {
+    document.getElementById('btn-geo').addEventListener('click', (e) => {
       if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
         e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
       }
     });
 
     // Rodapé dinâmico
-    $('ano').textContent = new Date().getFullYear();
-    $('lastmod').textContent = new Date(document.lastModified).toLocaleDateString('pt-BR');
+    document.getElementById('ano').textContent = new Date().getFullYear();
+    document.getElementById('lastmod').textContent = new Date(document.lastModified).toLocaleDateString('pt-BR');
   </script>
 </body>
 </html>
