@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== VARS (sobrepostas por temas e JS) =================== */
+    /* =================== VARS =================== */
     :root{
       --bg:#050a06;
       --text:#e6ffe8;
@@ -115,6 +115,24 @@
       background:transparent; font-size:16px; font-weight:800; color:var(--text);
       text-transform:uppercase; letter-spacing:.06em; cursor:pointer; z-index:50;
     }
+
+    /* ======= VISIBILIDADE POR TEMA (DESKTOP) ======= */
+    /* Estado base: mostra FECART, esconde Intranet */
+    #fecart{ display:block }
+    #intranet{ display:none }
+    nav li.intranet-only{ display:none }          /* link intranet escondido no padrão */
+
+    /* Em QUALQUER tema diferente de Zetatech: esconde FECART e mostra Intranet + link */
+    html:not([data-theme="zetatech"]) #fecart{ display:none !important }
+    html:not([data-theme="zetatech"]) #intranet{ display:block }
+    html:not([data-theme="zetatech"]) .fecart-nav{ display:none !important }
+    html:not([data-theme="zetatech"]) nav li.intranet-only{ display:list-item }
+
+    /* Em Zetatech: garante que a Intranet fique oculta (mesmo se houver HTML carregado) */
+    html[data-theme="zetatech"] #intranet{ display:none !important }
+    html[data-theme="zetatech"] nav li.intranet-only{ display:none !important }
+
+    /* ======= MOBILE: SEMPRE só FECART ======= */
     @media(max-width:760px){
       .menu-toggle{ display:block }
       nav{
@@ -132,7 +150,10 @@
       @keyframes neonBlink{ 0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) } 50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) } }
       body.menu-open{ overflow:hidden }
       .session{ display:none }                 /* intranet oculta no mobile */
-      .intranet-only{ display:none !important }/* esconde o link da intranet no mobile */
+      #intranet{ display:none !important }     /* intranet SEMPRE escondida no mobile */
+      nav li.intranet-only{ display:none !important }
+      #fecart{ display:block !important }      /* FECART SEMPRE visível no mobile */
+      .fecart-nav{ display:list-item !important }
     }
 
     /* =================== HERO (FECART) =================== */
@@ -207,7 +228,7 @@
     .datatable tbody tr:hover{ background:rgba(var(--accent-rgb),.06) }
 
     /* Terminal strip (easter eggs) */
-    .term-strip{ border-top:1px solid var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas; color:rgba(var(--accent-rgb),.55); background:rgba(0,0,0,.35); font-size:12px; line-height:1.4 }
+    .term-strip{ border-top:1px solid var(--accent); font-family: ui-monospace; color:rgba(var(--accent-rgb),.55); background:rgba(0,0,0,.35); font-size:12px; line-height:1.4 }
     .term-strip .wrap{ display:flex; gap:16px; padding:8px 20px; align-items:center; justify-content:space-between; flex-wrap:wrap }
     .ticker{ opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
     .ticker .dot{ color:var(--accent) }
@@ -218,7 +239,7 @@
     /* ====== BOOT / LOGIN (DESKTOP) ====== */
     #boot{ position:fixed; inset:0; background:#000; z-index:9999; display:none }
     #boot.active{ display:block }
-    .boot-wrap{ max-width:900px; margin:0 auto; padding:24px; color:#9be3a6; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:14px }
+    .boot-wrap{ max-width:900px; margin:0 auto; padding:24px; color:#9be3a6; font-family: ui-monospace; font-size:14px }
     .boot-screen{ border:1px solid #1aff64; background:#020402; padding:16px; box-shadow:0 0 24px rgba(0,255,128,.12), inset 0 0 0 1px rgba(0,255,128,.08); min-height:50vh; overflow:auto }
     .boot-line{ color:#9be3a6 }
     .boot-warn{ color:#ffc857 }
@@ -273,7 +294,7 @@
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
       <nav id="menu" aria-label="Seções">
         <ul>
-          <!-- itens da FECART (serão ocultados em temas ≠ zetatech) -->
+          <!-- itens da FECART (ficam ocultos em temas ≠ zetatech via CSS) -->
           <li class="fecart-nav"><a href="#sobre">O que é</a></li>
           <li class="fecart-nav"><a href="#ciber">Cibersegurança</a></li>
           <li class="fecart-nav"><a href="#quem-somos">Quem somos</a></li>
@@ -281,7 +302,7 @@
           <li class="fecart-nav"><a href="#importancia">Importância</a></li>
           <li class="fecart-nav"><a href="#faq">FAQ</a></li>
 
-          <!-- link da Intranet (escondido no Zetatech e no mobile) -->
+          <!-- link da Intranet (só aparece em temas ≠ zetatech e nunca no mobile) -->
           <li class="intranet-only"><a href="#intranet">Intranet</a></li>
         </ul>
       </nav>
@@ -295,10 +316,9 @@
   </header>
 
   <main id="conteudo">
-
-    <!-- ======== BLOCO FECART (será ocultado em temas ≠ Zetatech) ======== -->
+    <!-- ======== BLOCO FECART ======== -->
     <div id="fecart">
-      <!-- HERO (PT) -->
+      <!-- HERO -->
       <section class="hero">
         <div class="wrap">
           <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
@@ -331,7 +351,7 @@
         </div>
       </section>
 
-      <!-- SOBRE (PT) -->
+      <!-- SOBRE -->
       <section id="sobre">
         <div class="wrap">
           <h2><span class="glitch" data-text="O que é a FECART">O que é a FECART</span></h2>
@@ -351,7 +371,7 @@
         </div>
       </section>
 
-      <!-- CIBER (PT) -->
+      <!-- CIBER -->
       <section id="ciber">
         <div class="wrap">
           <h2><span class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</span></h2>
@@ -376,7 +396,7 @@
         </div>
       </section>
 
-      <!-- QUEM SOMOS (PT) -->
+      <!-- QUEM SOMOS -->
       <section id="quem-somos">
         <div class="wrap">
           <h2><span class="glitch" data-text="Quem somos">Quem somos</span></h2>
@@ -386,7 +406,7 @@
         </div>
       </section>
 
-      <!-- LOCAL (PT) -->
+      <!-- LOCAL -->
       <section id="local">
         <div class="wrap">
           <h2><span class="glitch" data-text="Local & Data">Local &amp; Data</span></h2>
@@ -413,7 +433,7 @@
         </div>
       </section>
 
-      <!-- IMPORTÂNCIA (PT) -->
+      <!-- IMPORTÂNCIA -->
       <section id="importancia">
         <div class="wrap">
           <h2><span class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</span></h2>
@@ -423,7 +443,7 @@
         </div>
       </section>
 
-      <!-- FAQ (PT) -->
+      <!-- FAQ -->
       <section id="faq" aria-labelledby="faq-title">
         <div class="wrap">
           <h2 id="faq-title"><span class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</span></h2>
@@ -470,7 +490,7 @@
     <!-- ======== /BLOCO FECART ======== -->
 
     <!-- =================== INTRANET (DESKTOP ONLY) =================== -->
-    <section id="intranet" class="intranet-only" aria-labelledby="intr-title" style="display:none">
+    <section id="intranet" class="intranet-only" aria-labelledby="intr-title">
       <div class="wrap">
         <h2 id="intr-title"><span class="glitch" data-text="Corporate Intranet">Corporate Intranet</span></h2>
         <div id="intranet-content"><!-- preenchido via JS --></div>
@@ -511,12 +531,12 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       /* ========= Helpers ========= */
-      const $ = (s,scope=document)=>scope.querySelector(s);
+      const $  = (s,scope=document)=>scope.querySelector(s);
       const $$ = (s,scope=document)=>[...scope.querySelectorAll(s)];
       const root = document.documentElement;
       const isMobile = matchMedia('(max-width: 760px)').matches;
 
-      /* ========= Themes map ========= */
+      /* ========= Themes ========= */
       const THEMES = {
         zetatech: { bg:'#050a06', text:'#e6ffe8', muted:'#a5e5b7', accent:'#6bff75', rgb:'107,255,117', soft:'rgba(107,255,117,.10)', ring:'rgba(107,255,117,.45)' },
         netwatch: { bg:'#0b0506', text:'#ffeaea', muted:'#ffcccc', accent:'#ff4d58', rgb:'255,77,88', soft:'rgba(255,77,88,.10)', ring:'rgba(255,77,88,.45)' },
@@ -550,34 +570,27 @@
         setCursor(t.accent);
       }
 
-      function togglePublicVsIntranet(theme){
-        const fecart = $('#fecart');
-        const intranet = $('#intranet');
-        const intranetLink = $('nav li.intranet-only');
-        const fecartNavItems = $$('.fecart-nav');
-
-        if(theme === 'zetatech'){
-          // mostrar FECART, esconder Intranet e o link da Intranet
-          fecart && (fecart.style.display = '');
-          intranet && (intranet.style.display = 'none');
-          intranetLink && (intranetLink.style.display = 'none');
-          fecartNavItems.forEach(li => li.style.display = '');
-        } else {
-          // esconder FECART, mostrar Intranet e o link da Intranet; esconder itens do menu que apontam para a FECART
-          fecart && (fecart.style.display = 'none');
-          intranet && (intranet.style.display = '');
-          intranetLink && (intranetLink.style.display = '');
-          fecartNavItems.forEach(li => li.style.display = 'none');
-        }
-      }
-
       function setTheme(name){
         const t = THEMES[name] || THEMES.zetatech;
         document.documentElement.setAttribute('data-theme', name);
         setThemeVars(t);
         $('#role').textContent = ROLES[name] || 'User';
-        togglePublicVsIntranet(name);
-        renderIntranet(name);
+        renderIntranet(name); // conteúdo intranet (se aplicável). A visibilidade é 100% via CSS.
+        greet(name);          // só mostra o "Welcome" na Zetatech
+      }
+
+      /* ========= Greeting (apenas Zetatech) ========= */
+      function greet(theme){
+        if(theme !== 'zetatech') return;
+        const role = ROLES[theme] || 'User';
+        const el = document.createElement('div');
+        el.textContent = `Welcome, ${role}`;
+        el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
+        const hero = document.querySelector('.hero .wrap');
+        if(hero){
+          hero.insertBefore(el, hero.children[2]);
+          setTimeout(()=> el.remove(), 2200);
+        }
       }
 
       /* ========= Countdown (São Paulo -03:00) ========= */
@@ -668,52 +681,21 @@
       $('#faq-expand')?.addEventListener('click', ()=> allFaqs.forEach(slideOpen));
       $('#faq-collapse')?.addEventListener('click', ()=> allFaqs.forEach(slideClose));
 
-      /* ========= Glitch background leve drift ========= */
+      /* ========= Background drift ========= */
       setInterval(()=>{
         const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
         document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
       }, 900);
 
-      /* ========= Intranet: Render por tema ========= */
+      /* ========= Intranet: Render por tema (placeholder denso) ========= */
       function renderIntranet(theme){
         const wrap = $('#intranet-content');
-        if(!wrap) return;
+        if(!wrap){ return; }
 
-        // Zetatech: Intranet não aparece (já é escondida por togglePublicVsIntranet)
         if(theme === 'zetatech'){
-          wrap.innerHTML = '';
+          wrap.innerHTML = ''; // não mostra conteúdo (e CSS já esconde a seção)
           return;
         }
-
-        // Outros temas: logs + tabelas densas (placeholder até especializarmos)
-        wrap.innerHTML = `
-          <div class="subnav">
-            <span class="tag">Mode: <strong id="mode-tag">${theme.charAt(0).toUpperCase()+theme.slice(1)}</strong></span>
-            <span class="tag">Role: <strong id="role-tag">${ROLES[theme]||'User'}</strong></span>
-            <span class="tag">Build: <strong>2.7.9</strong></span>
-            <span class="tag">Uptime: <strong id="uptime">00:00:00</strong></span>
-          </div>
-
-          <div class="densegrid">
-            <div class="terminal" id="log"></div>
-
-            <div class="card">
-              <h3 style="margin-bottom:8px">Operational Intel</h3>
-              <table class="datatable" id="intel-table">
-                <thead><tr><th>Division</th><th>Status</th><th>Risk</th><th>Notes</th></tr></thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:16px">
-            <h3 style="margin-bottom:8px">Active Alerts</h3>
-            <table class="datatable" id="alerts-table">
-              <thead><tr><th>Time</th><th>Source</th><th>Severity</th><th>Message</th></tr></thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        `;
 
         const LOG_SETS = {
           netwatch: [
@@ -806,6 +788,35 @@
           ]
         };
 
+        wrap.innerHTML = `
+          <div class="subnav">
+            <span class="tag">Mode: <strong id="mode-tag">${theme.charAt(0).toUpperCase()+theme.slice(1)}</strong></span>
+            <span class="tag">Role: <strong id="role-tag">${ROLES[theme]||'User'}</strong></span>
+            <span class="tag">Build: <strong>2.7.9</strong></span>
+            <span class="tag">Uptime: <strong id="uptime">00:00:00</strong></span>
+          </div>
+
+          <div class="densegrid">
+            <div class="terminal" id="log"></div>
+
+            <div class="card">
+              <h3 style="margin-bottom:8px">Operational Intel</h3>
+              <table class="datatable" id="intel-table">
+                <thead><tr><th>Division</th><th>Status</th><th>Risk</th><th>Notes</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <h3 style="margin-bottom:8px">Active Alerts</h3>
+            <table class="datatable" id="alerts-table">
+              <thead><tr><th>Time</th><th>Source</th><th>Severity</th><th>Message</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        `;
+
         const log = $('#log'); (LOG_SETS[theme]||[]).forEach(ln=>{
           const div = document.createElement('div'); div.className='line'; div.textContent=ln; log.appendChild(div);
         });
@@ -834,28 +845,7 @@
         }
       }
 
-      /* ========= Greeting ========= */
-      function greet(theme){
-        const role = ROLES[theme] || 'User';
-        const el = document.createElement('div');
-        el.textContent = `Welcome, ${role}`;
-        el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
-        const hero = document.querySelector('.hero .wrap');
-        if(hero && $('#fecart').style.display !== 'none'){
-          hero.insertBefore(el, hero.children[2]);
-          setTimeout(()=> el.remove(), 2200);
-        }
-      }
-
-      /* ========= Session/Theme init ========= */
-      function applySession(theme){
-        setTheme(theme);
-        greet(theme);
-      }
-      // inicia como Zetatech
-      applySession('zetatech');
-
-      /* ========= Boot/Login (desktop only) ========= */
+      /* ========= Boot/Login ========= */
       const boot = $('#boot');
       const bootScreen = $('#boot-screen');
       const loginForm = $('#login-form');
@@ -903,11 +893,14 @@
         await printLine('> ACCESS GRANTED', 'boot-line');
         boot.classList.remove('active');
         loginBtn.disabled = false; loginUser.disabled = false;
-        applySession(theme);
+        setTheme(theme);
       }
 
       $('#logout')?.addEventListener('click', showBoot);
       loginForm?.addEventListener('submit', (e)=>{ e.preventDefault(); verifyAndLogin(loginUser.value); });
+
+      // Inicia como Zetatech (FECART visível, Intranet invisível no desktop)
+      setTheme('zetatech');
 
       // Drift sutil do background
       setInterval(()=>{
@@ -915,7 +908,7 @@
         document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
       }, 900);
 
-      // recolor inicial
+      // recolor inicial (garantia)
       refreshBackground();
       setCursor(getComputedStyle(root).getPropertyValue('--accent').trim());
     });
