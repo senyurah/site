@@ -22,209 +22,146 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- Twitter / X -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FECART — CIBER | 27/09/2025">
   <meta name="twitter:description" content="Evento FECART — CIBER | Colégio FECAP | 27/09/2025. Inovação, tecnologia e sociedade.">
   <meta name="twitter:image" content="https://senyurah.github.io/site/og-image.png?v=3">
   <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
 
-  <!-- Fonte (HUD) -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== VARIÁVEIS =================== */
     :root{
-      --bg:#050a06;          /* preto esverdeado */
-      --text:#e6ffe8;        /* texto claro levemente esverdeado */
-      --muted:#a5e5b7;       /* texto secundário suavizado */
-      --accent:#6bff75;      /* verde neon suave (menos gritante) */
-      --accent-soft: rgba(107,255,117,.12);
+      --bg:#050a06;
+      --text:#e6ffe8;
+      --muted:#a5e5b7;
+      --accent:#6bff75;              /* verde mais suave */
+      --accent-soft: rgba(107,255,117,.10);
       --max: 1100px;
     }
 
-    /* Reset básico */
-    *{ box-sizing: border-box; margin:0; padding:0 }
+    *{ box-sizing:border-box; margin:0; padding:0 }
     img{ max-width:100%; display:block }
     html{ scroll-behavior:smooth }
     body{
-      font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background-color: var(--bg);
-      overflow-x: hidden;
+      font-family:"Rajdhani",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background-color:var(--bg);
+      overflow-x:hidden;
 
-      /* GLITCH base (scanlines + colunas) */
+      /* fundo glitch (scanlines + colunas) */
       background-image:
         repeating-linear-gradient(0deg, transparent 0 2px, rgba(107,255,117,0.05) 2px 3px),
         repeating-linear-gradient(90deg, transparent 0 50px, rgba(107,255,117,0.03) 50px 51px);
-      animation: glitchShift 3s infinite linear;
-    }
-    @keyframes glitchShift {
-      0% { background-position: 0 0, 0 0; }
-      25% { background-position: -5px -10px, 5px 0; }
-      50% { background-position: 5px 10px, -10px 0; }
-      75% { background-position: -3px 5px, 15px -5px; }
-      100% { background-position: 0 0, 0 0; }
-    }
+      animation:glitchShift 3s infinite linear;
 
-    /* Cursor personalizado (retícula neon) */
-    body{
-      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%236bff75" stroke-width="2" fill="none"/></svg>') 12 12, auto;
+      /* cursor neon retangular */
+      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%236bff75" stroke-width="1" fill="none"/></svg>') 12 12, auto;
+    }
+    @keyframes glitchShift{
+      0%{background-position:0 0,0 0}
+      25%{background-position:-5px -10px,5px 0}
+      50%{background-position:5px 10px,-10px 0}
+      75%{background-position:-3px 5px,15px -5px}
+      100%{background-position:0 0,0 0}
     }
 
-    a{ color: var(--accent); text-decoration: none }
-    a:focus-visible, button:focus-visible{ outline:2px solid rgba(107,255,117,.5); outline-offset:2px }
+    a{ color:var(--accent); text-decoration:none }
+    a:focus-visible, button:focus-visible{ outline:2px solid rgba(107,255,117,.45); outline-offset:2px }
 
-    .wrap{ max-width: var(--max); margin:0 auto; padding: 0 20px }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px }
 
-    /* =================== HEADER =================== */
+    /* HEADER */
     header{
-      position: sticky; top:0; z-index: 20;
-      background: rgba(0,0,0,.66);
-      border-bottom: 2px solid var(--accent);
-      backdrop-filter: blur(6px);
+      position:sticky; top:0; z-index:20;
+      background:rgba(0,0,0,.66);
+      border-bottom:1px solid var(--accent);
+      backdrop-filter:blur(6px);
     }
     .bar{ display:flex; align-items:center; justify-content:space-between; min-height:64px }
     .logo{ height:36px }
-
-    nav ul{ list-style:none; display:flex; gap:18px }
+    nav ul{ list-style:none; display:flex; gap:16px }
     nav a{ font-weight:800; letter-spacing:.06em; text-transform:uppercase }
 
-    /* Hamburguer */
+    /* hambúrguer */
     .menu-toggle{
-      display:none; font-size:28px; cursor:pointer; user-select:none;
-      border:2px solid var(--accent); padding:6px 10px; background:transparent;
+      display:none; border:1px solid var(--accent); padding:6px 10px;
+      background:transparent; font-size:16px; font-weight:800; color:var(--text);
+      text-transform:uppercase; letter-spacing:.06em;
     }
-
-    /* Mobile overlay */
-    @media (max-width: 760px){
+    @media(max-width:760px){
       .menu-toggle{ display:block }
       nav{
         position:fixed; left:0; right:0; top:64px;
-        background: rgba(0,0,0,.92);
-        border-top:2px solid var(--accent);
-        transform: translateY(-120%); transition: transform .25s ease;
+        background:rgba(0,0,0,.92);
+        border-top:1px solid var(--accent);
+        transform:translateY(-120%); transition:transform .25s ease;
       }
-      nav.active{ transform: translateY(0) }
+      nav.active{ transform:translateY(0) }
       nav ul{ flex-direction:column; gap:0; padding:14px 16px }
-      nav li + li{ border-top:1px solid rgba(255,255,255,.08) }
-      nav a{ display:block; padding:12px 6px; text-align:center }
-      /* Neon blink effect nos links quando menu aberto */
-      nav.active a{ animation: neonBlink 1.2s infinite alternate }
-      @keyframes neonBlink{
-        0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) }
-        50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) }
-      }
-      body.menu-open{ overflow: hidden } /* trava o scroll por trás do overlay */
+      nav li+li{ border-top:1px solid rgba(255,255,255,.08) }
+      nav a{ display:block; padding:12px; text-align:center }
+      body.menu-open{ overflow:hidden }
     }
 
-    /* =================== HERO =================== */
-    main{ padding: 28px 0 64px }
+    /* HERO */
+    main{ padding:28px 0 64px }
     .hero{
-      text-align:center; padding: 54px 0 8px;
-      background:
-        linear-gradient(180deg, rgba(5,10,6,.6), rgba(5,10,6,.9)),
-        url("assets/img/cp-bg.jpg");
-      background-size:cover; background-position:center;
+      text-align:center; padding:54px 0 8px;
+      background:linear-gradient(180deg, rgba(5,10,6,.55), rgba(5,10,6,.90));
     }
+    h1{ font-size:clamp(28px,4vw + .6rem,54px); margin:6px 0 10px }
+    .lead{ color:var(--muted); font-size:clamp(16px,1.2vw + .2rem,22px) }
 
-    /* Glitch neon nos títulos */
-    .glitch{
-      position:relative; display:inline-block; color: var(--accent);
-      text-shadow: 0 0 8px var(--accent);
-      animation: glitchSkew 2s infinite linear alternate;
-    }
-    .glitch::before,
-    .glitch::after{
-      content: attr(data-text);
-      position:absolute; left:0; top:0; width:100%;
-      color: var(--accent); background: transparent;
-    }
-    .glitch::before{
-      left:2px; text-shadow:-2px 0 #ff00ff; /* roxo */
-      animation: glitchBefore 2s infinite linear alternate-reverse;
-    }
-    .glitch::after{
-      left:-2px; text-shadow:2px 0 #00ffff; /* ciano */
-      animation: glitchAfter 1.5s infinite linear alternate;
-    }
-    @keyframes glitchBefore{
-      0% { clip-path: inset(0 0 80% 0) }
-      20%{ clip-path: inset(10% 0 60% 0) }
-      40%{ clip-path: inset(40% 0 20% 0) }
-      60%{ clip-path: inset(20% 0 40% 0) }
-      80%{ clip-path: inset(30% 0 30% 0) }
-      100%{ clip-path: inset(0 0 80% 0) }
-    }
-    @keyframes glitchAfter{
-      0%{ clip-path: inset(80% 0 0 0) }
-      20%{ clip-path: inset(60% 0 10% 0) }
-      40%{ clip-path: inset(20% 0 40% 0) }
-      60%{ clip-path: inset(40% 0 20% 0) }
-      80%{ clip-path: inset(30% 0 30% 0) }
-      100%{ clip-path: inset(80% 0 0 0) }
-    }
-    @keyframes glitchSkew{
-      0%{ transform: skew(0deg) }
-      50%{ transform: skew(2deg) }
-      100%{ transform: skew(-2deg) }
-    }
-
-    h1{ font-size: clamp(28px, 4vw + .6rem, 54px); margin: 6px 0 10px }
-    .lead{ color: var(--muted); font-size: clamp(16px, 1.4vw + .2rem, 22px) }
-
-    .badges{
-      display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 12px
-    }
+    .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px }
     .badge{
-      border:2px solid var(--accent); padding: 8px 12px; text-transform:none;
-      background: rgba(0,0,0,.35); color: var(--text); font-weight:700; letter-spacing:.02em
+      border:1px solid var(--accent);
+      padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em
     }
 
-    /* =================== COUNTDOWN =================== */
-    .countdown{ display:flex; justify-content:center; gap:14px; margin: 18px 0 8px; flex-wrap: wrap }
+    /* COUNTDOWN */
+    .countwrap{ margin:18px 0 10px }
+    .countwrap .label{ color:var(--muted); margin-bottom:6px; font-weight:700; letter-spacing:.08em; text-transform:uppercase }
+    .countdown{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
     .tile{
-      border:2px solid var(--accent);
-      padding: 10px 14px; min-width: 92px; text-align:center;
-      background: rgba(0,0,0,.35);
+      border:1px solid var(--accent); background:rgba(0,0,0,.25);
+      padding:10px 14px; min-width:90px; text-align:center
     }
-    .tile b{ display:block; font-size: clamp(20px, 2.6vw + .2rem, 28px) }
-    .tile small{ text-transform: uppercase; font-size: 12px; color: var(--muted); letter-spacing:.12em }
+    .tile b{ display:block; font-size:clamp(20px,2.2vw + .2rem,28px) }
+    .tile small{ text-transform:uppercase; font-size:12px; color:var(--muted); letter-spacing:.12em }
 
-    .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin: 16px 0 0 }
+    .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
     .btn{
-      border:2px solid var(--accent); background: transparent; color: var(--text);
-      padding: 10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer
+      border:1px solid var(--accent); background:transparent; color:var(--text);
+      padding:10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer
     }
-    .btn:hover{ background: var(--accent-soft) }
+    .btn:hover{ background:var(--accent-soft) }
 
-    /* =================== SEÇÕES =================== */
-    section{ padding: 40px 0; }
-    h2{ margin-bottom: 14px; font-size: clamp(22px, 2.6vw + .2rem, 34px) }
-    .card{ border:2px solid var(--accent); padding: 16px; background: rgba(0,0,0,.28); }
+    /* SEÇÕES */
+    section{ padding:40px 0 }
+    h2{ margin-bottom:14px; font-size:clamp(22px,2.2vw + .2rem,34px) }
     .grid{ display:grid; gap:16px }
-    @media(min-width:760px){ .grid-2{ grid-template-columns: 1fr 1fr } }
+    @media(min-width:760px){ .grid-2{ grid-template-columns:1fr 1fr } }
+    .card{ border:1px solid var(--accent); padding:16px; background:rgba(0,0,0,.22) }
     .list{ display:grid; gap:8px; margin:8px 0 0; padding-left:18px }
 
-    /* =================== FAQ (slide) =================== */
+    /* FAQ com slide */
     .faq-actions{ display:flex; gap:10px; margin-bottom:10px }
-    .btn-ghost{ border:2px solid var(--accent); background: transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase }
-    .btn-ghost:hover{ background: var(--accent-soft) }
+    .btn-ghost{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase }
+    .btn-ghost:hover{ background:var(--accent-soft) }
 
     .faq-list details{
-      border:2px solid var(--accent); margin-bottom:10px; background: rgba(0,0,0,.28)
+      border:1px solid var(--accent); margin-bottom:10px; background:rgba(0,0,0,.22); overflow:hidden
     }
     .faq-list summary{
-      list-style:none; cursor:pointer; font-weight:800; padding: 12px 14px
+      list-style:none; cursor:pointer; font-weight:800; padding:12px 14px
     }
-    .faq-list p{ padding: 0 14px 14px; color: var(--muted) }
+    .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
-    /* =================== RODAPÉ =================== */
-    footer{ border-top:2px solid var(--accent); color: var(--muted); padding: 28px 0 40px; text-align:center }
-
-    /* Acessibilidade/Touch */
-    *{ -webkit-tap-highlight-color: rgba(107,255,117,.2) }
+    /* RODAPÉ */
+    footer{ border-top:1px solid var(--accent); color:var(--muted); padding:28px 0 40px; text-align:center }
   </style>
 
   <!-- Schema.org / Event -->
@@ -267,7 +204,7 @@
       {"@type":"Question","name":"Precisa se inscrever?","acceptedAnswer":{"@type":"Answer","text":"Não. A visita é livre e a entrada é gratuita."}},
       {"@type":"Question","name":"Qual o horário do evento?","acceptedAnswer":{"@type":"Answer","text":"27/09/2025 (sábado), das 13h às 17h."}},
       {"@type":"Question","name":"Onde acontece dentro do campus?","acceptedAnswer":{"@type":"Answer","text":"No Laboratório 200, com entrada perto do ginásio (3º andar), no Campus Liberdade."}},
-      {"@type":"Question","name":"Quem pode participar?","acceptedAnswer":{"@type":"Answer","text":"Aberto à comunidade: estudantes, famílias, amigos e interessad@s em tecnologia."}},
+      {"@type":"Question","name":"Quem pode participar?","acceptedAnswer":{"@type":"Answer","text":"Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia."}},
       {"@type":"Question","name":"O que levar?","acceptedAnswer":{"@type":"Answer","text":"Curiosidade. Opcional: garrafinha de água e documento de identificação, se solicitado."}}
     ]
   }
@@ -279,7 +216,7 @@
   <header>
     <div class="wrap bar">
       <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
       <nav id="menu" aria-label="Seções">
         <ul>
           <li><a href="#sobre">O que é</a></li>
@@ -298,26 +235,29 @@
     <section class="hero">
       <div class="wrap">
         <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
-        <h1 class="glitch" data-text="FECART — CIBER | 27 de setembro de 2025">FECART — CIBER | 27 de setembro de 2025</h1>
+        <h1>FECART — CIBER | 27 de setembro de 2025</h1>
         <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
         <div class="badges" style="margin-top:14px">
-          <span class="badge">📅 27/09/2025 (sábado) — 13h–17h</span>
-          <span class="badge">📍 Av. da Liberdade, 532 — São Paulo/SP</span>
-          <span class="badge">🧭 Laboratório 200 — entrada perto do ginásio</span>
+          <span class="badge">27/09/2025 (sábado) — 13h–17h</span>
+          <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
+          <span class="badge">Laboratório 200 — entrada perto do ginásio</span>
         </div>
 
         <!-- COUNTDOWN -->
-        <div class="countdown" role="status" aria-live="polite">
-          <div class="tile"><b id="dd">--</b><small>Dias</small></div>
-          <div class="tile"><b id="hh">--</b><small>Horas</small></div>
-          <div class="tile"><b id="mm">--</b><small>Minutos</small></div>
-          <div class="tile"><b id="ss">--</b><small>Segundos</small></div>
+        <div class="countwrap">
+          <div class="label">faltam</div>
+          <div class="countdown" role="status" aria-live="polite">
+            <div class="tile"><b id="dd">--</b><small>Dias</small></div>
+            <div class="tile"><b id="hh">--</b><small>Horas</small></div>
+            <div class="tile"><b id="mm">--</b><small>Minutos</small></div>
+            <div class="tile"><b id="ss">--</b><small>Segundos</small></div>
+          </div>
         </div>
 
         <!-- CTAs -->
         <div class="cta">
-          <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">.ICS</button>
+          <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">Adicionar .ics</button>
           <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
           <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
              href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
@@ -329,7 +269,7 @@
     <!-- SOBRE -->
     <section id="sobre">
       <div class="wrap">
-        <h2 class="glitch" data-text="O que é a FECART">O que é a FECART</h2>
+        <h2>O que é a FECART</h2>
         <div class="grid grid-2">
           <div class="card">
             <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
@@ -349,7 +289,7 @@
     <!-- CIBER -->
     <section id="ciber">
       <div class="wrap">
-        <h2 class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</h2>
+        <h2>Curso de Cibersegurança</h2>
         <div class="grid grid-2">
           <div class="card">
             <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
@@ -374,7 +314,7 @@
     <!-- QUEM SOMOS -->
     <section id="quem-somos">
       <div class="wrap">
-        <h2 class="glitch" data-text="Quem somos">Quem somos</h2>
+        <h2>Quem somos</h2>
         <div class="card">
           <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
         </div>
@@ -384,7 +324,7 @@
     <!-- LOCAL -->
     <section id="local">
       <div class="wrap">
-        <h2 class="glitch" data-text="Local & Data">Local &amp; Data</h2>
+        <h2>Local &amp; Data</h2>
         <div class="grid grid-2">
           <div class="card">
             <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
@@ -411,7 +351,7 @@
     <!-- IMPORTÂNCIA -->
     <section id="importancia">
       <div class="wrap">
-        <h2 class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</h2>
+        <h2>Importância para a sociedade</h2>
         <div class="card">
           <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
         </div>
@@ -421,7 +361,7 @@
     <!-- FAQ -->
     <section id="faq" aria-labelledby="faq-title">
       <div class="wrap">
-        <h2 id="faq-title" class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</h2>
+        <h2 id="faq-title">FAQ — Perguntas frequentes</h2>
 
         <div class="faq-actions">
           <button class="btn-ghost" id="faq-expand">Expandir tudo</button>
@@ -494,7 +434,7 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // ===== Botão: gerar .ICS (13:00–17:00 BRT = 16:00–20:00Z) =====
+    // ===== ICS (13:00–17:00 BRT = 16:00–20:00Z) =====
     function downloadICS(){
       const title = 'FECART — CIBER';
       const desc  = 'FECART no Colégio FECAP. Mais informações: ' + location.href;
@@ -526,47 +466,55 @@
       document.body.appendChild(a); a.click();
       setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
     }
-    $id('btn-ics').addEventListener('click', downloadICS);
+    document.getElementById('btn-ics').addEventListener('click', downloadICS);
 
-    // ===== Link Google Calendar (13:00–17:00 BRT = 16:00–20:00Z) =====
+    // ===== Google Calendar (UTC) =====
     const gcal = new URL('https://calendar.google.com/calendar/render');
     gcal.searchParams.set('action','TEMPLATE');
     gcal.searchParams.set('text','FECART — CIBER');
     gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
     gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
-    gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z'); // UTC
-    $id('btn-gcal').href = gcal.toString();
+    gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
+    document.getElementById('btn-gcal').href = gcal.toString();
 
-    // ===== Compartilhar no WhatsApp =====
-    const msg = encodeURIComponent('Vem para a FECART — CIBER no Colégio FECAP! 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    $id('btn-whats').href = 'https://wa.me/?text=' + msg;
+    // ===== Compartilhar =====
+    const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
+    document.getElementById('btn-whats').href = 'https://wa.me/?text=' + msg;
 
     // ===== Copiar endereço =====
-    $id('btn-copy').addEventListener('click', async () => {
+    document.getElementById('btn-copy').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
-        const t = $id('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
+        const t = document.getElementById('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
         setTimeout(()=> t.textContent = old, 1200);
       } catch(e){ alert('Não foi possível copiar.'); }
     });
 
     // ===== Geo link fallback (desktop) =====
-    $id('btn-geo').addEventListener('click', (e) => {
+    document.getElementById('btn-geo').addEventListener('click', (e) => {
       if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
         e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
       }
     });
 
     // ===== Menu hambúrguer =====
-    const toggle = $id('menu-toggle');
+    const toggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('menu');
     toggle.addEventListener('click', ()=>{
       const active = nav.classList.toggle('active');
       toggle.setAttribute('aria-expanded', active ? 'true' : 'false');
       document.body.classList.toggle('menu-open', active);
     });
+    // fecha o menu ao clicar num link
+    nav.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        nav.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded','false');
+      });
+    });
 
-    // ===== FAQ Expand/Collapse com animação (slide) =====
+    // ===== FAQ slide animado =====
     const allFaqs = [...document.querySelectorAll('#faq details')];
     function slideOpen(el){
       if(el.open) return;
@@ -599,7 +547,7 @@
         el.removeEventListener('transitionend', done);
       });
     }
-    // Intercepta cliques no summary para animar
+    // intercepta o clique para animar
     allFaqs.forEach(d=>{
       const sum = d.querySelector('summary');
       sum.addEventListener('click', (ev)=>{
@@ -607,18 +555,18 @@
         d.open ? slideClose(d) : slideOpen(d);
       });
     });
-    // Botões: Expandir/Recolher
+    // botões
     document.getElementById('faq-expand').addEventListener('click', ()=> allFaqs.forEach(slideOpen));
     document.getElementById('faq-collapse').addEventListener('click', ()=> allFaqs.forEach(slideClose));
 
-    // ===== Glitch random JS (move o background de forma irregular) =====
+    // ===== Glitch aleatório (leve) =====
     setInterval(()=>{
-      const x = (Math.random()*18-9).toFixed(0);
-      const y = (Math.random()*18-9).toFixed(0);
+      const x = (Math.random()*18-9)|0;
+      const y = (Math.random()*18-9)|0;
       document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
     }, 900);
 
-    // Ano automático
+    // ano no rodapé
     document.getElementById('ano').textContent = new Date().getFullYear();
   </script>
 </body>
