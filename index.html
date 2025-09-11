@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR" data-theme="zetatech">
 <head>
@@ -55,7 +54,7 @@
       --accent:#ffcc33; --accent-rgb:255,204,51; --accent-soft:rgba(255,204,51,.12); --ring:rgba(255,204,51,.45);
     }
     html[data-theme="merc"]{
-      /* magenta puxado levemente para o vermelho */
+      /* magenta puxado para o vermelho */
       --bg:#0b0408; --text:#ffe6f3; --muted:#ffcbe6;
       --accent:#ff3a85; --accent-rgb:255,58,133; --accent-soft:rgba(255,58,133,.10); --ring:rgba(255,58,133,.45);
     }
@@ -75,7 +74,7 @@
         repeating-linear-gradient(0deg, transparent 0 2px, rgba(var(--accent-rgb),0.05) 2px 3px),
         repeating-linear-gradient(90deg, transparent 0 50px, rgba(var(--accent-rgb),0.03) 50px 51px);
       animation:glitchShift 3s infinite linear;
-      cursor: default; /* será substituído via JS para refletir o tema */
+      cursor: default;
     }
     @keyframes glitchShift{
       0%{background-position:0 0,0 0}
@@ -133,7 +132,7 @@
       @keyframes neonBlink{ 0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) } 50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) } }
       body.menu-open{ overflow:hidden }
       .session{ display:none }                 /* intranet oculta no mobile */
-      .intranet-only{ display:none !important }/* esconde a intranet */
+      .intranet-only{ display:none !important }/* esconde o link da intranet no mobile */
     }
 
     /* =================== HERO (FECART) =================== */
@@ -274,13 +273,15 @@
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
       <nav id="menu" aria-label="Seções">
         <ul>
-          <li><a href="#sobre">O que é</a></li>
-          <li><a href="#ciber">Cibersegurança</a></li>
-          <li><a href="#quem-somos">Quem somos</a></li>
-          <li><a href="#local">Local & Data</a></li>
-          <li><a href="#importancia">Importância</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <!-- Link de intranet só exibe no desktop com CSS -->
+          <!-- itens da FECART (serão ocultados em temas ≠ zetatech) -->
+          <li class="fecart-nav"><a href="#sobre">O que é</a></li>
+          <li class="fecart-nav"><a href="#ciber">Cibersegurança</a></li>
+          <li class="fecart-nav"><a href="#quem-somos">Quem somos</a></li>
+          <li class="fecart-nav"><a href="#local">Local & Data</a></li>
+          <li class="fecart-nav"><a href="#importancia">Importância</a></li>
+          <li class="fecart-nav"><a href="#faq">FAQ</a></li>
+
+          <!-- link da Intranet (escondido no Zetatech e no mobile) -->
           <li class="intranet-only"><a href="#intranet">Intranet</a></li>
         </ul>
       </nav>
@@ -294,183 +295,185 @@
   </header>
 
   <main id="conteudo">
-    <!-- HERO (PT) -->
-    <section class="hero">
-      <div class="wrap">
-        <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
-        <h1><span class="glitch" data-text="FECART — CIBER | 27 de setembro de 2025">FECART — CIBER | 27 de setembro de 2025</span></h1>
-        <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
-        <div class="badges" style="margin-top:14px">
-          <span class="badge">27/09/2025 (sábado) — 13h–17h</span>
-          <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
-          <span class="badge">Laboratório 200 — entrada perto do ginásio</span>
-        </div>
+    <!-- ======== BLOCO FECART (será ocultado em temas ≠ Zetatech) ======== -->
+    <div id="fecart">
+      <!-- HERO (PT) -->
+      <section class="hero">
+        <div class="wrap">
+          <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
+          <h1><span class="glitch" data-text="FECART — CIBER | 27 de setembro de 2025">FECART — CIBER | 27 de setembro de 2025</span></h1>
+          <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
-        <div class="countwrap">
-          <div class="label">faltam</div>
-          <div class="countdown" role="status" aria-live="polite">
-            <div class="tile"><b id="dd">--</b><small>Dias</small></div>
-            <div class="tile"><b id="hh">--</b><small>Horas</small></div>
-            <div class="tile"><b id="mm">--</b><small>Minutos</small></div>
-            <div class="tile"><b id="ss">--</b><small>Segundos</small></div>
+          <div class="badges" style="margin-top:14px">
+            <span class="badge">27/09/2025 (sábado) — 13h–17h</span>
+            <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
+            <span class="badge">Laboratório 200 — entrada perto do ginásio</span>
           </div>
-        </div>
 
-        <div class="cta">
-          <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">Adicionar .ics</button>
-          <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
-          <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
-          <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE (PT) -->
-    <section id="sobre">
-      <div class="wrap">
-        <h2><span class="glitch" data-text="O que é a FECART">O que é a FECART</span></h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
-          </div>
-          <div class="card">
-            <ul class="list">
-              <li>Exposição de projetos e demonstrações</li>
-              <li>Trilhas temáticas e vivências</li>
-              <li>Conexão com cursos e carreira</li>
-              <li>Aberto à comunidade — Entrada gratuita</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CIBER (PT) -->
-    <section id="ciber">
-      <div class="wrap">
-        <h2><span class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</span></h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
-            <ul class="list">
-              <li>Temas: Segurança da Informação, Redes, Governança e Legalidade.</li>
-              <li>Competências: análise de risco, hardening, gestão de vulnerabilidades.</li>
-              <li>Perfil: curiosidade, pensamento crítico, trabalho em equipe.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <p><strong>Carreiras & continuidade</strong></p>
-            <ul class="list">
-              <li>Analista de Segurança da Informação/Cibernética.</li>
-              <li>Certificações iniciais: Técnico em Cibersegurança.</li>
-              <li>Continuidade acadêmica na FECAP: Ciência de Dados.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUEM SOMOS (PT) -->
-    <section id="quem-somos">
-      <div class="wrap">
-        <h2><span class="glitch" data-text="Quem somos">Quem somos</span></h2>
-        <div class="card">
-          <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOCAL (PT) -->
-    <section id="local">
-      <div class="wrap">
-        <h2><span class="glitch" data-text="Local & Data">Local &amp; Data</span></h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
-            <p><strong>Local:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
-            <p><strong>Ambiente:</strong> Laboratório 200 (entrada perto do ginásio)</p>
-            <p><strong>Endereço:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001</p>
-            <div class="cta" style="justify-content:flex-start">
-              <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Abrir no app de mapas</a>
-              <button class="btn" id="btn-copy" type="button">Copiar endereço</button>
+          <div class="countwrap">
+            <div class="label">faltam</div>
+            <div class="countdown" role="status" aria-live="polite">
+              <div class="tile"><b id="dd">--</b><small>Dias</small></div>
+              <div class="tile"><b id="hh">--</b><small>Horas</small></div>
+              <div class="tile"><b id="mm">--</b><small>Minutos</small></div>
+              <div class="tile"><b id="ss">--</b><small>Segundos</small></div>
             </div>
           </div>
-          <div class="card">
-            <p><strong>Como chegar</strong></p>
-            <ul class="list">
-              <li>Metrô: Estação Liberdade (linha 1-Azul), a poucos minutos a pé.</li>
-              <li>Ônibus/Carro: use o link “Como chegar” acima para rotas atualizadas.</li>
-              <li>Acessibilidade: verifique as orientações do campus no site da FECAP.</li>
-            </ul>
+
+          <div class="cta">
+            <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">Adicionar .ics</button>
+            <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
+            <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
+            <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- IMPORTÂNCIA (PT) -->
-    <section id="importancia">
-      <div class="wrap">
-        <h2><span class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</span></h2>
-        <div class="card">
-          <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
+      <!-- SOBRE (PT) -->
+      <section id="sobre">
+        <div class="wrap">
+          <h2><span class="glitch" data-text="O que é a FECART">O que é a FECART</span></h2>
+          <div class="grid grid-2">
+            <div class="card">
+              <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
+            </div>
+            <div class="card">
+              <ul class="list">
+                <li>Exposição de projetos e demonstrações</li>
+                <li>Trilhas temáticas e vivências</li>
+                <li>Conexão com cursos e carreira</li>
+                <li>Aberto à comunidade — Entrada gratuita</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FAQ (PT) -->
-    <section id="faq" aria-labelledby="faq-title">
-      <div class="wrap">
-        <h2 id="faq-title"><span class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</span></h2>
-
-        <div class="faq-actions">
-          <button class="btn-ghost" id="faq-expand">Expandir tudo</button>
-          <button class="btn-ghost" id="faq-collapse">Recolher tudo</button>
+      <!-- CIBER (PT) -->
+      <section id="ciber">
+        <div class="wrap">
+          <h2><span class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</span></h2>
+          <div class="grid grid-2">
+            <div class="card">
+              <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
+              <ul class="list">
+                <li>Temas: Segurança da Informação, Redes, Governança e Legalidade.</li>
+                <li>Competências: análise de risco, hardening, gestão de vulnerabilidades.</li>
+                <li>Perfil: curiosidade, pensamento crítico, trabalho em equipe.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p><strong>Carreiras & continuidade</strong></p>
+              <ul class="list">
+                <li>Analista de Segurança da Informação/Cibernética.</li>
+                <li>Certificações iniciais: Técnico em Cibersegurança.</li>
+                <li>Continuidade acadêmica na FECAP: Ciência de Dados.</li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="faq-list">
-          <details>
-            <summary>Precisa se inscrever?</summary>
-            <p><strong>Não.</strong> A visita é livre e a <em>entrada é gratuita</em>. Se houver orientação diferente perto da data, atualizamos aqui.</p>
-          </details>
-
-          <details>
-            <summary>Qual o horário do evento?</summary>
-            <p>Dia <strong>27/09/2025 (sábado)</strong>, das <strong>13h às 17h</strong>. Chegue com 10–15 minutos de antecedência para aproveitar as demonstrações no Laboratório 200.</p>
-          </details>
-
-          <details>
-            <summary>Onde acontece dentro do campus?</summary>
-            <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
-          </details>
-
-          <details>
-            <summary>Quem pode participar?</summary>
-            <p>Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia. Recomendamos <strong>acompanhamento de responsáveis para menores</strong>.</p>
-          </details>
-
-          <details>
-            <summary>Posso fotografar e gravar?</summary>
-            <p>Sim, desde que respeite as pessoas nas imagens (peça autorização quando necessário). Se postar, marque <strong>@fecapciber_</strong> e <strong>@fecap</strong> e use <code>#FECART</code> e <code>#FECAP</code>.</p>
-          </details>
-
-          <details>
-            <summary>Tem estacionamento? Melhor forma de chegar?</summary>
-            <p>Recomendamos <strong>Metrô Liberdade (Linha 1–Azul)</strong>, a poucos minutos a pé. Há estacionamentos particulares na região; verifique disponibilidade e tarifas no dia.</p>
-          </details>
+      <!-- QUEM SOMOS (PT) -->
+      <section id="quem-somos">
+        <div class="wrap">
+          <h2><span class="glitch" data-text="Quem somos">Quem somos</span></h2>
+          <div class="card">
+            <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- LOCAL (PT) -->
+      <section id="local">
+        <div class="wrap">
+          <h2><span class="glitch" data-text="Local & Data">Local &amp; Data</span></h2>
+          <div class="grid grid-2">
+            <div class="card">
+              <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
+              <p><strong>Local:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
+              <p><strong>Ambiente:</strong> Laboratório 200 (entrada perto do ginásio)</p>
+              <p><strong>Endereço:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001</p>
+              <div class="cta" style="justify-content:flex-start">
+                <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Abrir no app de mapas</a>
+                <button class="btn" id="btn-copy" type="button">Copiar endereço</button>
+              </div>
+            </div>
+            <div class="card">
+              <p><strong>Como chegar</strong></p>
+              <ul class="list">
+                <li>Metrô: Estação Liberdade (linha 1-Azul), a poucos minutos a pé.</li>
+                <li>Ônibus/Carro: use o link “Como chegar” acima para rotas atualizadas.</li>
+                <li>Acessibilidade: verifique as orientações do campus no site da FECAP.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPORTÂNCIA (PT) -->
+      <section id="importancia">
+        <div class="wrap">
+          <h2><span class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</span></h2>
+          <div class="card">
+            <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ (PT) -->
+      <section id="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <h2 id="faq-title"><span class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</span></h2>
+
+          <div class="faq-actions">
+            <button class="btn-ghost" id="faq-expand">Expandir tudo</button>
+            <button class="btn-ghost" id="faq-collapse">Recolher tudo</button>
+          </div>
+
+          <div class="faq-list">
+            <details>
+              <summary>Precisa se inscrever?</summary>
+              <p><strong>Não.</strong> A visita é livre e a <em>entrada é gratuita</em>. Se houver orientação diferente perto da data, atualizamos aqui.</p>
+            </details>
+
+            <details>
+              <summary>Qual o horário do evento?</summary>
+              <p>Dia <strong>27/09/2025 (sábado)</strong>, das <strong>13h às 17h</strong>. Chegue com 10–15 minutos de antecedência para aproveitar as demonstrações no Laboratório 200.</p>
+            </details>
+
+            <details>
+              <summary>Onde acontece dentro do campus?</summary>
+              <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
+            </details>
+
+            <details>
+              <summary>Quem pode participar?</summary>
+              <p>Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia. Recomendamos <strong>acompanhamento de responsáveis para menores</strong>.</p>
+            </details>
+
+            <details>
+              <summary>Posso fotografar e gravar?</summary>
+              <p>Sim, desde que respeite as pessoas nas imagens (peça autorização quando necessário). Se postar, marque <strong>@fecapciber_</strong> e <strong>@fecap</strong> e use <code>#FECART</code> e <code>#FECAP</code>.</p>
+            </details>
+
+            <details>
+              <summary>Tem estacionamento? Melhor forma de chegar?</summary>
+              <p>Recomendamos <strong>Metrô Liberdade (Linha 1–Azul)</strong>, a poucos minutos a pé. Há estacionamentos particulares na região; verifique disponibilidade e tarifas no dia.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- ======== /BLOCO FECART ======== -->
 
     <!-- =================== INTRANET (DESKTOP ONLY) =================== -->
-    <section id="intranet" class="intranet-only" aria-labelledby="intr-title">
+    <section id="intranet" class="intranet-only" aria-labelledby="intr-title" style="display:none">
       <div class="wrap">
         <h2 id="intr-title"><span class="glitch" data-text="Corporate Intranet">Corporate Intranet</span></h2>
-
-        <div id="intranet-content">
-          <!-- Conteúdo será injetado por renderIntranet(theme) -->
-        </div>
+        <div id="intranet-content"><!-- preenchido via JS --></div>
       </div>
     </section>
   </main>
@@ -521,7 +524,7 @@
         militech: { bg:'#0f0c03', text:'#fff6df', muted:'#f5e3b0', accent:'#ffcc33', rgb:'255,204,51', soft:'rgba(255,204,51,.12)', ring:'rgba(255,204,51,.45)' },
         merc:     { bg:'#0b0408', text:'#ffe6f3', muted:'#ffcbe6', accent:'#ff3a85', rgb:'255,58,133', soft:'rgba(255,58,133,.10)', ring:'rgba(255,58,133,.45)' },
       };
-      const ROLES = { zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'Merc' };
+      const ROLES = { zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'V' };
 
       function setCursor(hex){
         const hh = (hex||'#6bff75').replace('#','');
@@ -546,13 +549,34 @@
         document.body.style.color = t.text;
         setCursor(t.accent);
       }
+
+      function togglePublicVsIntranet(theme){
+        const fecart = $('#fecart');
+        const intranet = $('#intranet');
+        const intranetLink = $('nav li.intranet-only');
+        const fecartNavItems = $$('.fecart-nav');
+
+        if(theme === 'zetatech'){
+          // mostrar FECART, esconder Intranet e o link da Intranet
+          fecart && (fecart.style.display = '');
+          intranet && (intranet.style.display = 'none');
+          intranetLink && (intranetLink.style.display = 'none');
+          fecartNavItems.forEach(li => li.style.display = '');
+        } else {
+          // esconder FECART, mostrar Intranet e o link da Intranet; esconder itens do menu que apontam para a FECART
+          fecart && (fecart.style.display = 'none');
+          intranet && (intranet.style.display = '');
+          intranetLink && (intranetLink.style.display = '');
+          fecartNavItems.forEach(li => li.style.display = 'none');
+        }
+      }
+
       function setTheme(name){
         const t = THEMES[name] || THEMES.zetatech;
         document.documentElement.setAttribute('data-theme', name);
         setThemeVars(t);
-        $('#mode-tag') && ($('#mode-tag').textContent = name.charAt(0).toUpperCase()+name.slice(1));
-        $('#role').textContent = ROLES[name] || 'Merc';
-        $('#role-tag') && ($('#role-tag').textContent = ROLES[name] || 'Merc');
+        $('#role').textContent = ROLES[name] || 'User';
+        togglePublicVsIntranet(name);
         renderIntranet(name);
       }
 
@@ -575,7 +599,7 @@
       }
       tick(); setInterval(tick, 1000);
 
-      /* ========= ICS ========= */
+      /* ========= ICS / GCal / Share ========= */
       $('#btn-ics')?.addEventListener('click', ()=>{
         const ics = [
           'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
@@ -590,7 +614,6 @@
         document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
       });
 
-      /* ========= Google Calendar ========= */
       const gcal = new URL('https://calendar.google.com/calendar/render');
       gcal.searchParams.set('action','TEMPLATE');
       gcal.searchParams.set('text','FECART — CIBER');
@@ -599,7 +622,6 @@
       gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
       $('#btn-gcal') && ($('#btn-gcal').href = gcal.toString());
 
-      /* ========= Compartilhar (WhatsApp) ========= */
       const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
       $('#btn-whats') && ($('#btn-whats').href = 'https://wa.me/?text=' + msg);
 
@@ -618,7 +640,7 @@
         }
       });
 
-      /* ========= Mobile menu (Android fix: só click) ========= */
+      /* ========= Mobile menu ========= */
       const toggle = $('#menu-toggle'); const nav = $('#menu');
       function toggleMenu(){
         const active = nav.classList.toggle('active');
@@ -657,22 +679,13 @@
         const wrap = $('#intranet-content');
         if(!wrap) return;
 
-        // Zetatech: apenas logout (sem conteúdo denso)
+        // Zetatech: Intranet não aparece (já é escondida por togglePublicVsIntranet)
         if(theme === 'zetatech'){
-          wrap.innerHTML = `
-            <div class="subnav">
-              <span class="tag">Mode: <strong id="mode-tag">Zetatech</strong></span>
-              <span class="tag">Role: <strong id="role-tag">Zetatech Agent</strong></span>
-              <span class="tag">Build: <strong>2.7.9</strong></span>
-            </div>
-            <div class="card">
-              <p>Access limited on public landing. Use <strong>Logout</strong> to switch systems.</p>
-            </div>
-          `;
+          wrap.innerHTML = '';
           return;
         }
 
-        // Outros temas: logs + tabelas densas (placeholder genérico até especializarmos)
+        // Outros temas: logs + tabelas densas (placeholder até especializarmos)
         wrap.innerHTML = `
           <div class="subnav">
             <span class="tag">Mode: <strong id="mode-tag">${theme.charAt(0).toUpperCase()+theme.slice(1)}</strong></span>
@@ -702,7 +715,6 @@
           </div>
         `;
 
-        // Datasets enxutos (placeholder até entrarmos no conteúdo final por corp)
         const LOG_SETS = {
           netwatch: [
             '[GRID][INTEL] Darkfiber probe synced',
@@ -794,26 +806,21 @@
           ]
         };
 
-        // Logs
         const log = $('#log'); (LOG_SETS[theme]||[]).forEach(ln=>{
           const div = document.createElement('div'); div.className='line'; div.textContent=ln; log.appendChild(div);
         });
-
-        // Tabela principal
         const tbody = $('#intel-table tbody'); (TABLES[theme]||[]).forEach(row=>{
           const tr = document.createElement('tr');
           row.forEach(cell=>{ const td=document.createElement('td'); td.textContent=cell; tr.appendChild(td); });
           tbody.appendChild(tr);
         });
-
-        // Alerts
         const abody = $('#alerts-table tbody'); (ALERTS[theme]||[]).forEach(row=>{
           const tr = document.createElement('tr');
           row.forEach(cell=>{ const td=document.createElement('td'); td.textContent=cell; tr.appendChild(td); });
           abody.appendChild(tr);
         });
 
-        // Uptime (somente quando intranet “cheia” está visível)
+        // Uptime
         const uptimeEl = $('#uptime');
         if(uptimeEl){
           let startTs = Date.now();
@@ -829,13 +836,15 @@
 
       /* ========= Greeting ========= */
       function greet(theme){
-        const role = {zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'V'}[theme] || 'User';
+        const role = ROLES[theme] || 'User';
         const el = document.createElement('div');
         el.textContent = `Welcome, ${role}`;
         el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
         const hero = document.querySelector('.hero .wrap');
-        hero && hero.insertBefore(el, hero.children[2]);
-        setTimeout(()=> el.remove(), 2200);
+        if(hero && $('#fecart').style.display !== 'none'){
+          hero.insertBefore(el, hero.children[2]);
+          setTimeout(()=> el.remove(), 2200);
+        }
       }
 
       /* ========= Session/Theme init ========= */
@@ -892,7 +901,6 @@
         loginBtn.disabled = true; loginUser.disabled = true;
         await new Promise(r=>setTimeout(r, 3000)); // 3s fixo
         await printLine('> ACCESS GRANTED', 'boot-line');
-        // fecha e limpa (não persiste o log)
         boot.classList.remove('active');
         loginBtn.disabled = false; loginUser.disabled = false;
         applySession(theme);
@@ -907,7 +915,7 @@
         document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
       }, 900);
 
-      // recolor inicial (alguns webviews)
+      // recolor inicial
       refreshBackground();
       setCursor(getComputedStyle(root).getPropertyValue('--accent').trim());
     });
