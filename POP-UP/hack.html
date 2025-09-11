@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atenção à sua segurança</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+            color: #e0f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            user-select: none;
+            cursor: pointer;
+            transition: background 0.5s;
+        }
+
+        #pre-start {
+            font-size: 4vw;
+            animation: blink 1.5s infinite;
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        h1 {
+            font-size: 6vw;
+            margin: 0;
+            color: #ffcc00;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        p {
+            font-size: 3.5vw;
+            margin-top: 15px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        #message-after {
+            display: none;
+            margin-top: 30px;
+            font-size: 3.5vw;
+            color: #aeea00;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tela inicial -->
+    <div id="pre-start">Clique para verificar sua segurança</div>
+
+    <!-- Conteúdo principal -->
+    <div id="main-content">
+        <h1>Atenção: sua segurança pode estar em risco</h1>
+        <p>Esta é uma simulação.<br> Você pode esta exposto a ameaças digitais.</p>
+        <div id="message-after">Analisando e redirecionando para o conteúdo...</div>
+    </div>
+
+    <!-- Áudio de alerta -->
+    <audio id="warningSound" src="warningeffect.mp3" preload="auto"></audio>
+
+    <script>
+        const preStart = document.getElementById('pre-start');
+        const mainContent = document.getElementById('main-content');
+        const warningSound = document.getElementById('warningSound');
+        const messageAfter = document.getElementById('message-after');
+
+        const tempoEspera = 10 * 1000; // 10 segundos
+
+        function iniciarAlerta() {
+            // Tocar som
+            warningSound.currentTime = 0;
+            warningSound.volume = 0.8;
+            warningSound.play().catch(err => {
+                console.warn('Erro ao tocar som:', err);
+            });
+
+            // Vibrar (se suportado)
+            if ('vibrate' in navigator) {
+                navigator.vibrate([300, 100, 300]);
+            }
+
+            // Trocar visual
+            preStart.style.display = 'none';
+            mainContent.style.display = 'block';
+
+            // Redirecionamento após delay
+            setTimeout(() => {
+                messageAfter.style.display = 'block';
+                window.location.href = 'https://wordwall.net/pt/resource/96548678';
+            }, tempoEspera);
+        }
+
+        // Inicia após clique em qualquer lugar do body
+        document.body.addEventListener('click', function handleClickOnce() {
+            iniciarAlerta();
+            document.body.removeEventListener('click', handleClickOnce);
+        });
+    </script>
+</body>
+</html>

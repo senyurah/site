@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta http-equiv="refresh" content="2">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; }
+    h1 { color: #333; }
+    .counter { font-size: 2em; color: #b71c1c; margin: 20px 0; }
+    table { margin: auto; border-collapse: collapse; background: white; }
+    td, th { border: 1px solid #ccc; padding: 6px 12px; }
+    th { background: #eee; }
+    #chart-container { width: 80%; margin: auto; }
+  </style>
+</head>
+<body>
+  <h1>Dashboard do Servidor</h1>
+  <div class="counter">Total de uploads: {{ total }}</div>
+
+  <div id="chart-container">
+    <canvas id="uploadsChart"></canvas>
+  </div>
+
+  <h3>Últimas requisições</h3>
+  <table>
+    <tr><th>Arquivo</th><th>Status</th><th>Timestamp</th></tr>
+    {% for item in logs %}
+    <tr>
+      <td>{{ item.filename }}</td>
+      <td>{{ item.status }}</td>
+      <td>{{ item.time }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Dados serializados corretamente para o JS -->
+  <script id="chart-data" type="application/json">
+    {{ {"labels": times, "counts": counts} | tojson }}
+  </script>
+
+  <script>
+    // @ts-nocheck
+    const raw = document.getElementById('chart-data').textContent;
+    let labels = [], points = [];
+    try {
+      const parsed = JSON.parse(raw);
+      labels = parsed.labels || [];
+      points = parsed.counts || [];
+    } catch (e) {
+      console.error("Falha ao ler dados do gráfico:", e);
+    }
+
+    const ctx = document.getElementById('uploadsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Uploads acumulados',
+          data: points,
+          fill: false,
+          borderColor: 'red',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+      }
+    });
+  </script>
+</body>
+</html>

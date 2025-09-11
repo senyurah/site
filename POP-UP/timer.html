@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aguarde...</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+            color: #e0f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .message {
+            font-size: 4vw;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .countdown {
+            font-size: 15vw;
+            font-weight: 700;
+            color: #aeea00;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.7; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Aguarde enquanto verificamos sua segurança...
+    </div>
+    <div class="countdown" id="countdown">5</div>
+
+    <script>
+        let tempoRestante = 5;
+        const countdownElement = document.getElementById('countdown');
+
+        const interval = setInterval(() => {
+            tempoRestante--;
+            countdownElement.textContent = tempoRestante > 0 ? tempoRestante : '0';
+
+            if (tempoRestante <= 0) {
+                clearInterval(interval);
+                window.location.href = 'https://senyurah.github.io/Pop-UP/hack.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
