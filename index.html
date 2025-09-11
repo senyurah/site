@@ -39,7 +39,6 @@
       --muted:#a5e5b7;
       --accent:#6bff75;              /* verde suave */
       --accent-soft: rgba(107,255,117,.10);
-      --accent-hard: rgba(107,255,117,.35);
       --max: 1100px;
     }
 
@@ -132,7 +131,7 @@
       padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em
     }
 
-    /* Títulos com glitch leve (suavizado) */
+    /* ===== Glitch suave nos títulos ===== */
     .glitch{
       position:relative; display:inline-block; color:var(--text);
       text-shadow: 0 0 6px rgba(107,255,117,.25);
@@ -140,17 +139,15 @@
     .glitch::before,
     .glitch::after{
       content: attr(data-text);
-      position:absolute; left:0; top:0; width:100%; overflow:hidden; pointer-events:none;
-      opacity:.5;
+      position:absolute; left:0; top:0; width:100%;
+      pointer-events:none; opacity:.55; mix-blend-mode:screen;
     }
     .glitch::before{ transform: translate(1px,0); color:#8affff; clip-path: inset(0 0 55% 0); }
     .glitch::after{ transform: translate(-1px,0); color:#ff7bff; clip-path: inset(45% 0 0 0); }
-    @media (prefers-reduced-motion:no-preference){
-      .glitch{ animation:glSkew 2.4s infinite ease-in-out }
-      @keyframes glSkew{
-        0%,100%{ transform: skew(0deg) }
-        50%{ transform: skew(1deg) }
-      }
+    /* animação leve (se disponível) */
+    @media (prefers-reduced-motion: no-preference){
+      .glitch{ animation:glSkew 2.2s infinite ease-in-out }
+      @keyframes glSkew{ 0%,100%{ transform: skew(0deg) } 50%{ transform: skew(1deg) } }
     }
 
     /* ===== Countdown ===== */
@@ -178,20 +175,10 @@
     }
     .btn:hover{ background:var(--accent-soft) }
 
-    /* Linha/quote estilo terminal */
-    .quote{
-      margin:16px auto 0; max-width:70ch; color:var(--muted);
-      font-family:"Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      border-top:1px solid var(--accent); padding-top:10px; opacity:.9;
-      text-align:center;
-    }
-
     /* ===== Seções ===== */
     section{ padding:40px 0 }
-    h2{
-      margin-bottom:10px; font-size:clamp(22px,2.2vw + .2rem,34px); line-height:1.2;
-    }
-    /* barra sutil estilo terminal sob o título */
+    h2{ margin-bottom:10px; font-size:clamp(22px,2.2vw + .2rem,34px); line-height:1.2; }
+    /* barra sutil sob o título */
     h2 + .term-bar{
       height:1px; background:linear-gradient(90deg, transparent, var(--accent), transparent);
       margin:8px 0 14px;
@@ -222,7 +209,7 @@
     }
     .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
-    /* ===== Ticker (Easter Egg corp) ===== */
+    /* ===== Ticker (Megacorps + Easter) ===== */
     .ticker{
       border-top:1px solid var(--accent);
       border-bottom:1px solid var(--accent);
@@ -237,13 +224,12 @@
       color:var(--text);
       text-shadow:0 0 6px rgba(107,255,117,.25);
     }
-    @keyframes marquee{
-      0%{ transform: translateX(0) }
-      100%{ transform: translateX(-50%) }
-    }
+    /* Easter super discreto */
+    .ticker .easter{ opacity:.28; letter-spacing:.03em }
+    @keyframes marquee{ 0%{ transform: translateX(0) } 100%{ transform: translateX(-50%) } }
 
-    /* ===== Rodapé ===== */
-    footer{ border-top:1px solid var(--accent); color:var(--muted); padding:16px 0 40px; text-align:center }
+    /* ===== Rodapé (neutro, sem ©) ===== */
+    footer{ color:var(--muted); padding:12px 0 28px; text-align:center }
 
     /* ===== Netrunner mode (Konami) ===== */
     body.netrunner{
@@ -252,7 +238,6 @@
       --muted:#8fe9a1;
       --accent:#39ff14;
       --accent-soft: rgba(57,255,20,.12);
-      --accent-hard: rgba(57,255,20,.45);
       background-image:
         repeating-linear-gradient(0deg, transparent 0 2px, rgba(57,255,20,0.08) 2px 3px),
         repeating-linear-gradient(90deg, transparent 0 48px, rgba(57,255,20,0.05) 48px 49px);
@@ -271,6 +256,52 @@
     /* Acessibilidade */
     .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
   </style>
+
+  <!-- Schema.org / Event -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"FECART — CIBER",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "startDate":"2025-09-27T13:00:00-03:00",
+    "endDate":"2025-09-27T17:00:00-03:00",
+    "description":"A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade.",
+    "location":{
+      "@type":"Place",
+      "name":"Colégio/Faculdade FECAP — Campus Liberdade (Laboratório 200, entrada perto do ginásio)",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Av. da Liberdade, 532",
+        "addressLocality":"São Paulo",
+        "addressRegion":"SP",
+        "postalCode":"01502-001",
+        "addressCountry":"BR"
+      }
+    },
+    "organizer":{
+      "@type":"Organization",
+      "name":"FECAP",
+      "url":"https://www.fecap.br/"
+    }
+  }
+  </script>
+
+  <!-- FAQPage (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Precisa se inscrever?","acceptedAnswer":{"@type":"Answer","text":"Não. A visita é livre e a entrada é gratuita."}},
+      {"@type":"Question","name":"Qual o horário do evento?","acceptedAnswer":{"@type":"Answer","text":"27/09/2025 (sábado), das 13h às 17h."}},
+      {"@type":"Question","name":"Onde acontece dentro do campus?","acceptedAnswer":{"@type":"Answer","text":"No Laboratório 200, com entrada perto do ginásio (3º andar), no Campus Liberdade."}},
+      {"@type":"Question","name":"Quem pode participar?","acceptedAnswer":{"@type":"Answer","text":"Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia."}},
+      {"@type":"Question","name":"O que levar?","acceptedAnswer":{"@type":"Answer","text":"Curiosidade. Opcional: garrafinha de água e documento de identificação, se solicitado."}}
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
@@ -325,9 +356,6 @@
              href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
           <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
         </div>
-
-        <!-- Johnny & V (visível) -->
-        <p class="quote">“Goodnight... Valerie. Today was a good day.” — Johnny Silverhand</p>
       </div>
     </section>
 
@@ -478,19 +506,19 @@
       </div>
     </section>
 
-    <!-- Ticker (Easter Egg corp) -->
+    <!-- Ticker (Megacorps + Easter Johnny&V) -->
     <div class="ticker" aria-hidden="true">
       <div class="track">
         &nbsp;/ POWERED BY ZETATECH / | \ PROTECTED BY NETWATCH \ | / CERTIFIED BY MILITECH / | \ SHADOWED BY ARASAKA \ &nbsp;&nbsp;&nbsp;
+        <span class="easter">/ GOODNIGHT, VALERIE // TODAY WAS A GOOD DAY /</span> &nbsp;&nbsp;&nbsp;
         / POWERED BY ZETATECH / | \ PROTECTED BY NETWATCH \ | / CERTIFIED BY MILITECH / | \ SHADOWED BY ARASAKA \ &nbsp;&nbsp;&nbsp;
+        <span class="easter">/ GOODNIGHT, VALERIE // TODAY WAS A GOOD DAY /</span> &nbsp;&nbsp;&nbsp;
       </div>
     </div>
   </main>
 
   <footer>
-    <div class="wrap">
-      © <span id="ano"></span> @senyurah. Todos os direitos reservados.
-    </div>
+    <div class="wrap"><!-- rodapé intencionalmente minimal --></div>
   </footer>
 
   <!-- Toast do modo netrunner -->
@@ -674,9 +702,6 @@
       clearTimeout(showToast._h);
       showToast._h = setTimeout(()=> t.classList.remove('show'), 2200);
     }
-
-    // Ano rodapé
-    document.getElementById('ano').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
