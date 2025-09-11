@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="theme-merc">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -33,37 +33,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== VARIÁVEIS BASE =================== */
     :root{
       --bg:#050a06;
-      --text:#e6ffe8;
+      --text:#e6ffe8; /* defaults (serão sobrescritos pelo tema em <html>) */
       --muted:#a5e5b7;
-      --accent:#6bff75;              /* default (merc) – verde suave */
+      --accent:#6bff75;
       --accent-soft: rgba(107,255,117,.10);
-      --accent-aux1:#00eaff;         /* para glitch leve */
-      --accent-aux2:#ff00ff;         /* para glitch leve */
+      --glitch-row: rgba(107,255,117,.05);
+      --glitch-col: rgba(107,255,117,.03);
       --max: 1100px;
     }
 
-    /* Skins serão aplicadas via JS ajustando --accent e --accent-soft */
+    /* ===== TEMAS APLICADOS NA TAG <html> ===== */
+    html.theme-merc{
+      --accent:#a64dff; --accent-soft:rgba(166,77,255,.12);
+      --text:#f2e6ff;   --muted:#d8c9ff;
+      --glitch-row: rgba(166,77,255,.08);
+      --glitch-col: rgba(166,77,255,.04);
+    }
+    html.theme-zetatech{
+      --accent:#00e5ff; --accent-soft:rgba(0,229,255,.12);
+      --text:#d5fbff;   --muted:#a7e9f3;
+      --glitch-row: rgba(0,229,255,.08);
+      --glitch-col: rgba(0,229,255,.04);
+    }
+    html.theme-netwatch{
+      --accent:#ff3b3b; --accent-soft:rgba(255,59,59,.12);
+      --text:#ffe0e0;   --muted:#ffc0c0;
+      --glitch-row: rgba(255,59,59,.08);
+      --glitch-col: rgba(255,59,59,.04);
+    }
+    html.theme-arasaka{
+      --accent:#00d1ff; --accent-soft:rgba(0,209,255,.12);
+      --text:#d9f2ff;   --muted:#bfe6ff;
+      --glitch-row: rgba(0,209,255,.08);
+      --glitch-col: rgba(0,209,255,.04);
+    }
+    html.theme-militech{
+      --accent:#f7c23a; --accent-soft:rgba(247,194,58,.12);
+      --text:#fff2cc;   --muted:#ffe6a3;
+      --glitch-row: rgba(247,194,58,.08);
+      --glitch-col: rgba(247,194,58,.04);
+    }
 
     *{ box-sizing:border-box; margin:0; padding:0 }
     img{ max-width:100%; display:block }
     html{ scroll-behavior:smooth }
+
     body{
       font-family:"Rajdhani",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background-color:var(--bg);
       overflow-x:hidden;
 
-      /* fundo glitch (scanlines + colunas) */
+      /* fundo glitch usa as variáveis do tema */
       background-image:
-        repeating-linear-gradient(0deg, transparent 0 2px, rgba(107,255,117,0.05) 2px 3px),
-        repeating-linear-gradient(90deg, transparent 0 50px, rgba(107,255,117,0.03) 50px 51px);
+        repeating-linear-gradient(0deg, transparent 0 2px, var(--glitch-row) 2px 3px),
+        repeating-linear-gradient(90deg, transparent 0 50px, var(--glitch-col) 50px 51px);
       animation:glitchShift 3s infinite linear;
 
-      /* cursor neon retangular */
-      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%236bff75" stroke-width="1" fill="none"/></svg>') 12 12, auto;
+      /* cursor neutro */
+      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%23cccccc" stroke-width="1" fill="none"/></svg>') 12 12, auto;
     }
     @keyframes glitchShift{
       0%{background-position:0 0,0 0}
@@ -74,55 +104,37 @@
     }
 
     a{ color:var(--accent); text-decoration:none }
-    a:focus-visible, button:focus-visible{ outline:2px solid color-mix(in oklab, var(--accent) 60%, transparent); outline-offset:2px }
+    a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px }
 
-    /* =================== HEADER / STATUS BAR =================== */
+    /* HEADER */
     header{
-      position:sticky; top:0; z-index:30;
+      position:sticky; top:0; z-index:20;
       background:rgba(0,0,0,.66);
       border-bottom:1px solid var(--accent);
       backdrop-filter:blur(6px);
     }
-    .bar{ display:flex; align-items:center; justify-content:space-between; min-height:56px; gap:10px }
-    .logo{ height:34px }
-    nav ul{ list-style:none; display:flex; gap:16px }
+    .bar{ display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:12px }
+    .logo{ height:36px }
+    nav ul{ list-style:none; display:flex; gap:16px; align-items:center }
     nav a{ font-weight:800; letter-spacing:.06em; text-transform:uppercase }
-
-    .right{ display:flex; align-items:center; gap:10px }
-    .badge-user{
-      border:1px solid var(--accent);
-      font-weight:800; text-transform:uppercase; letter-spacing:.06em;
-      padding:6px 8px; background:rgba(0,0,0,.25)
-    }
-    .btn-small{
+    .logout{
       border:1px solid var(--accent); background:transparent; color:var(--text);
       padding:6px 10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer
     }
-    .btn-small:hover{ background:var(--accent-soft) }
+    .logout:hover{ background:var(--accent-soft) }
 
     /* hambúrguer */
     .menu-toggle{
       display:none; border:1px solid var(--accent); padding:6px 10px;
-      background:transparent; font-size:13px; font-weight:800; color:var(--text);
+      background:transparent; font-size:16px; font-weight:800; color:var(--text);
       text-transform:uppercase; letter-spacing:.06em;
     }
-
-    /* Status bar terminal */
-    .statusbar{
-      border-top:1px solid var(--accent);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      font-size:12px; color:var(--muted);
-      background: rgba(0,0,0,.5);
-      padding:4px 20px;
-    }
-    .statusbar .ok{ color:var(--accent) }
-
     @media(max-width:760px){
       .menu-toggle{ display:block }
       nav{
-        position:fixed; left:0; right:0; top:56px;
+        position:fixed; left:0; right:0; top:64px;
         background:rgba(0,0,0,.92);
         border-top:1px solid var(--accent);
         transform:translateY(-120%); transition:transform .25s ease;
@@ -131,32 +143,16 @@
       nav ul{ flex-direction:column; gap:0; padding:14px 16px }
       nav li+li{ border-top:1px solid rgba(255,255,255,.08) }
       nav a{ display:block; padding:12px; text-align:center }
-      body.menu-open{ overflow:hidden }
-      /* Neon blink nos links quando menu aberto */
-      nav.active a{ animation: neonBlink 1.25s ease-in-out infinite alternate }
+      /* neon blink nos links ao abrir menu */
+      nav.active a{ animation: neonBlink 1.2s infinite alternate }
       @keyframes neonBlink{
-        0%{ color:var(--accent); text-shadow: 0 0 4px var(--accent) }
-        70%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) }
-        100%{ color:var(--accent); text-shadow: 0 0 4px var(--accent) }
+        0%,100%{ color:var(--accent); text-shadow:0 0 6px var(--accent), 0 0 10px var(--accent) }
+        50%{ color:#fff; text-shadow:0 0 2px #fff, 0 0 6px var(--accent) }
       }
+      body.menu-open{ overflow:hidden }
     }
 
-    /* =================== GLITCH SUAVE NOS TÍTULOS =================== */
-    .glow{ text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 55%, transparent); }
-    .glitch{
-      position:relative; display:inline-block;
-      text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 55%, transparent);
-    }
-    .glitch::before,
-    .glitch::after{
-      content: attr(data-text);
-      position:absolute; inset:0;
-      pointer-events:none; opacity:.12;
-    }
-    .glitch::before{ transform: translateX(1px); color: var(--accent-aux1) }
-    .glitch::after { transform: translateX(-1px); color: var(--accent-aux2) }
-
-    /* =================== HERO =================== */
+    /* HERO */
     main{ padding:28px 0 64px }
     .hero{
       text-align:center; padding:54px 0 8px;
@@ -164,6 +160,18 @@
     }
     h1{ font-size:clamp(28px,4vw + .6rem,54px); margin:6px 0 10px }
     .lead{ color:var(--muted); font-size:clamp(16px,1.2vw + .2rem,22px) }
+    #welcome{ margin-top:8px; font-weight:800; letter-spacing:.04em; color:var(--text); opacity:.9 }
+
+    /* glitch suave e legível para títulos */
+    .glitch{
+      text-shadow: 0 0 6px var(--accent), 0 0 2px var(--accent);
+      animation: glitchPulse 3s infinite ease-in-out alternate;
+    }
+    @keyframes glitchPulse{
+      0%{ text-shadow:0 0 3px var(--accent) }
+      50%{ text-shadow:0 0 7px var(--accent), 0 0 12px var(--accent) }
+      100%{ text-shadow:0 0 4px var(--accent) }
+    }
 
     .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px }
     .badge{
@@ -171,7 +179,7 @@
       padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em
     }
 
-    /* =================== COUNTDOWN =================== */
+    /* COUNTDOWN */
     .countwrap{ margin:18px 0 10px }
     .countwrap .label{ color:var(--muted); margin-bottom:6px; font-weight:700; letter-spacing:.08em; text-transform:uppercase }
     .countdown{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
@@ -189,7 +197,7 @@
     }
     .btn:hover{ background:var(--accent-soft) }
 
-    /* =================== SEÇÕES =================== */
+    /* SEÇÕES */
     section{ padding:40px 0 }
     h2{ margin-bottom:14px; font-size:clamp(22px,2.2vw + .2rem,34px) }
     .grid{ display:grid; gap:16px }
@@ -197,7 +205,22 @@
     .card{ border:1px solid var(--accent); padding:16px; background:rgba(0,0,0,.22) }
     .list{ display:grid; gap:8px; margin:8px 0 0; padding-left:18px }
 
-    /* =================== FAQ (slide) =================== */
+    /* STRIP CORPORATE + EASTER EGG (Johnny) */
+    .corp-strip{
+      border-top:1px solid var(--accent);
+      border-bottom:1px solid var(--accent);
+      background: rgba(0,0,0,.18);
+      color:var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+      font-size:12px; line-height:1.6;
+      opacity:.75;
+    }
+    .corp-strip .wrap{
+      display:flex; gap:16px; flex-wrap:wrap; justify-content:center; padding:10px 20px;
+    }
+    .corp-strip .tag{ white-space:nowrap }
+
+    /* FAQ com slide */
     .faq-actions{ display:flex; gap:10px; margin-bottom:10px }
     .btn-ghost{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase }
     .btn-ghost:hover{ background:var(--accent-soft) }
@@ -210,52 +233,105 @@
     }
     .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
-    /* =================== LOGIN OVERLAY (TERMINAL) =================== */
-    .login{
-      position:fixed; inset:0; z-index:50;
-      display:none; place-items:center;
-      background: radial-gradient(120vw 120vh at 50% 50%, rgba(0,0,0,.94), rgba(0,0,0,.98));
-      backdrop-filter: blur(2px);
-    }
-    .login[aria-hidden="false"]{ display:grid }
-    .term{
-      width:min(720px, 92%); padding:18px;
-      border:1px solid var(--accent);
-      background: rgba(0,0,0,.35);
-      box-shadow: 0 0 0 1px var(--accent) inset, 0 0 24px color-mix(in oklab, var(--accent) 25%, transparent);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      color:var(--text);
-    }
-    .term pre{ white-space:pre-wrap; line-height:1.35; margin-bottom:10px }
-    .term .prompt{
-      display:flex; gap:8px; align-items:center; margin-top:8px
-    }
-    .term input{
-      flex:1; background:transparent; color:var(--text);
-      border:1px solid var(--accent); padding:8px 10px; outline:none
-    }
-    .term button{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase; cursor:pointer }
-    .term button:hover{ background:var(--accent-soft) }
-    .blink{ animation:blink 1s steps(1,end) infinite }
-    @keyframes blink{ 50%{ opacity:.15 } }
+    /* RODAPÉ */
+    footer{ border-top:1px solid var(--accent); color:var(--muted); padding:18px 0 32px; text-align:center }
 
-    /* =================== RODAPÉ =================== */
-    footer{ border-top:1px solid var(--accent); color:var(--muted); padding:24px 0 36px; text-align:center }
-    .easter{
-      margin-top:8px; font-size:12px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      color: color-mix(in oklab, var(--muted) 70%, transparent);
-      opacity:.75;
+    /* LOGIN / TERMINAL OVERLAY (todo em inglês) */
+    .login-overlay{
+      position:fixed; inset:0; background:rgba(0,0,0,.96);
+      display:flex; align-items:center; justify-content:center;
+      z-index:9999; transition: opacity .25s ease;
     }
+    .login-overlay.hidden{ opacity:0; pointer-events:none }
+    .terminal{
+      width:min(620px, 92vw); background:rgba(0,0,0,.35);
+      border:1px solid var(--accent); padding:14px;
+      color:var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+      box-shadow:0 0 0 1px var(--accent-soft) inset, 0 0 18px var(--accent-soft);
+    }
+    .term-line{ white-space:pre-wrap; line-height:1.4 }
+    .term-input{ display:flex; gap:8px; margin-top:10px; align-items:center }
+    .term-input label{ color:var(--muted) }
+    .term-input input{
+      background:transparent; border:1px solid var(--accent); color:var(--text);
+      padding:8px 10px; flex:1; font-family:inherit
+    }
+    .term-input button{
+      border:1px solid var(--accent); background:transparent; color:var(--text);
+      padding:8px 12px; font-weight:800; text-transform:uppercase; cursor:pointer
+    }
+    .term-input button:hover{ background:var(--accent-soft) }
+
+    .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
   </style>
+
+  <!-- Schema.org / Event -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"FECART — CIBER",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "startDate":"2025-09-27T13:00:00-03:00",
+    "endDate":"2025-09-27T17:00:00-03:00",
+    "description":"A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade.",
+    "location":{
+      "@type":"Place",
+      "name":"Colégio/Faculdade FECAP — Campus Liberdade (Laboratório 200, entrada perto do ginásio)",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Av. da Liberdade, 532",
+        "addressLocality":"São Paulo",
+        "addressRegion":"SP",
+        "postalCode":"01502-001",
+        "addressCountry":"BR"
+      }
+    },
+    "organizer":{
+      "@type":"Organization",
+      "name":"FECAP",
+      "url":"https://www.fecap.br/"
+    }
+  }
+  </script>
+
+  <!-- FAQPage (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Precisa se inscrever?","acceptedAnswer":{"@type":"Answer","text":"Não. A visita é livre e a entrada é gratuita."}},
+      {"@type":"Question","name":"Qual o horário do evento?","acceptedAnswer":{"@type":"Answer","text":"27/09/2025 (sábado), das 13h às 17h."}},
+      {"@type":"Question","name":"Onde acontece dentro do campus?","acceptedAnswer":{"@type":"Answer","text":"No Laboratório 200, com entrada perto do ginásio (3º andar), no Campus Liberdade."}},
+      {"@type":"Question","name":"Quem pode participar?","acceptedAnswer":{"@type":"Answer","text":"Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia."}},
+      {"@type":"Question","name":"O que levar?","acceptedAnswer":{"@type":"Answer","text":"Curiosidade. Opcional: garrafinha de água e documento de identificação, se solicitado."}}
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
 
+  <!-- LOGIN / TERMINAL (English-only) -->
+  <div id="login" class="login-overlay hidden" aria-modal="true" role="dialog">
+    <div class="terminal">
+      <div id="term" class="term">
+        <div class="term-line">> INTRANET ACCESS</div>
+        <div class="term-line">> USERNAME REQUIRED</div>
+      </div>
+      <form id="login-form" class="term-input" autocomplete="off">
+        <label for="user">user:</label>
+        <input id="user" name="user" type="text" inputmode="latin" autocapitalize="none" autocomplete="off" spellcheck="false" aria-label="Login" />
+        <button type="submit">Enter</button>
+      </form>
+    </div>
+  </div>
+
   <header>
     <div class="wrap bar">
       <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
-
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
       <nav id="menu" aria-label="Seções">
         <ul>
@@ -265,17 +341,9 @@
           <li><a href="#local">Local & Data</a></li>
           <li><a href="#importancia">Importância</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><button class="logout" id="logout" type="button" title="Sair da intranet">Logout</button></li>
         </ul>
       </nav>
-
-      <div class="right">
-        <span class="badge-user" id="user-pill">user: merc</span>
-        <button class="btn-small" id="btn-logout" title="Logout">logout</button>
-      </div>
-    </div>
-
-    <div class="statusbar" id="statusbar">
-      [BOOT] FECART Intranet online • <span class="ok">ACCESS GRANTED</span> • Welcome, merc
     </div>
   </header>
 
@@ -283,8 +351,9 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <p class="lead glow" style="margin-bottom:6px">Colégio FECAP</p>
-        <h1 class="glitch" data-text="FECART — CIBER | 27 de setembro de 2025">FECART — CIBER | 27 de setembro de 2025</h1>
+        <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
+        <h1 class="glitch">FECART — CIBER | 27 de setembro de 2025</h1>
+        <p id="welcome">Welcome, Merc</p>
         <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
         <div class="badges" style="margin-top:14px">
@@ -318,7 +387,7 @@
     <!-- SOBRE -->
     <section id="sobre">
       <div class="wrap">
-        <h2 class="glitch" data-text="O que é a FECART">O que é a FECART</h2>
+        <h2 class="glitch">O que é a FECART</h2>
         <div class="grid grid-2">
           <div class="card">
             <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
@@ -338,7 +407,7 @@
     <!-- CIBER -->
     <section id="ciber">
       <div class="wrap">
-        <h2 class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</h2>
+        <h2 class="glitch">Curso de Cibersegurança</h2>
         <div class="grid grid-2">
           <div class="card">
             <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
@@ -363,7 +432,7 @@
     <!-- QUEM SOMOS -->
     <section id="quem-somos">
       <div class="wrap">
-        <h2 class="glitch" data-text="Quem somos">Quem somos</h2>
+        <h2 class="glitch">Quem somos</h2>
         <div class="card">
           <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
         </div>
@@ -373,7 +442,7 @@
     <!-- LOCAL -->
     <section id="local">
       <div class="wrap">
-        <h2 class="glitch" data-text="Local & Data">Local &amp; Data</h2>
+        <h2 class="glitch">Local &amp; Data</h2>
         <div class="grid grid-2">
           <div class="card">
             <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
@@ -400,17 +469,28 @@
     <!-- IMPORTÂNCIA -->
     <section id="importancia">
       <div class="wrap">
-        <h2 class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</h2>
+        <h2 class="glitch">Importância para a sociedade</h2>
         <div class="card">
           <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
         </div>
       </div>
     </section>
 
+    <!-- STRIP CORPORATE + Johnny (sutil) -->
+    <div class="corp-strip" aria-hidden="true">
+      <div class="wrap">
+        <span class="tag">// POWERED BY ZETATECH //</span>
+        <span class="tag">\ PROTECTED BY NETWATCH \</span>
+        <span class="tag">|| MILITECH SECURE LAYER ||</span>
+        <span class="tag">— ARASAKA COMPLIANCE —</span>
+        <span class="tag"> // goodnight, V. today was a good day //</span>
+      </div>
+    </div>
+
     <!-- FAQ -->
     <section id="faq" aria-labelledby="faq-title">
       <div class="wrap">
-        <h2 id="faq-title" class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</h2>
+        <h2 id="faq-title" class="glitch">FAQ — Perguntas frequentes</h2>
 
         <div class="faq-actions">
           <button class="btn-ghost" id="faq-expand">Expandir tudo</button>
@@ -428,10 +508,10 @@
             <p>Dia <strong>27/09/2025 (sábado)</strong>, das <strong>13h às 17h</strong>.</p>
           </details>
 
-        <details>
-          <summary>Onde acontece dentro do campus?</summary>
-          <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja a seção <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
-        </details>
+          <details>
+            <summary>Onde acontece dentro do campus?</summary>
+            <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja a seção <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
+          </details>
 
           <details>
             <summary>Quem pode participar?</summary>
@@ -460,108 +540,42 @@
   <footer>
     <div class="wrap">
       © <span id="ano"></span> @senyurasec. All rights reserved.
-      <div class="easter" id="corp-easter">
-        // FREELANCE NODE //
-      </div>
     </div>
   </footer>
 
-  <!-- LOGIN OVERLAY -->
-  <div class="login" id="login" aria-hidden="true" aria-labelledby="login-title" role="dialog">
-    <div class="term" role="document">
-      <pre id="term-log">
-FECART CORPORATE INTRANET v2.7
-SECURITY PROTOCOL: ACTIVE
------------------------------------------
-Type a username and press ENTER.
-Valid users: merc, arasaka, militech, netwatch, zetatech
-
-&gt; <span class="blink">|</span>
-      </pre>
-      <div class="prompt">
-        <label for="login-user" class="sr-only">Usuário</label>
-        <input id="login-user" name="login-user" placeholder="username ex: militech" autocomplete="off" />
-        <button id="btn-login">login</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    /* =================== UTIL =================== */
-    const $ = (sel) => document.querySelector(sel);
-    const $$ = (sel) => [...document.querySelectorAll(sel)];
-    const byId = (id) => document.getElementById(id);
+    // ===== Estado simples =====
+    const state = { role: 'merc' };
 
-    /* =================== SKINS / USERS =================== */
-    const USERS = {
-      merc:     { accent:'#6bff75', soft:'rgba(107,255,117,.10)', easter:'// FREELANCE NODE //' },
-      arasaka:  { accent:'#6be8ff', soft:'rgba(107,232,255,.12)', easter:'// POWERED BY ARASAKA SECURITY SYSTEMS //' },
-      militech: { accent:'#f0d06b', soft:'rgba(240,208,107,.12)', easter:'// HARDENED BY MILITECH DEFENSE //' },
-      netwatch: { accent:'#ff6b6b', soft:'rgba(255,107,107,.12)', easter:'// PROTECTED BY NETWATCH FIREWALL //' },
-      zetatech: { accent:'#16f2a0', soft:'rgba(22,242,160,.12)',  easter:'// ENGINEERED BY ZETATECH INNOVATIONS //' }
-    };
-
-    function applyTheme(user){
-      const u = USERS[user] || USERS.merc;
-      document.documentElement.style.setProperty('--accent', u.accent);
-      document.documentElement.style.setProperty('--accent-soft', u.soft);
-      byId('corp-easter').textContent = u.easter;
-      byId('user-pill').textContent = 'user: ' + user;
-      localStorage.setItem('fecartUser', user);
-      setStatus(`[AUTH] <span class="ok">ACCESS GRANTED</span> • Welcome, ${user}`);
+    // ===== Role detection =====
+    function detectRole(input){
+      const v = (input||'').trim().toLowerCase();
+      if (v.includes('zeta')) return 'zetatech';
+      if (v.includes('net')) return 'netwatch';
+      if (v.includes('ara')) return 'arasaka';
+      if (v.includes('mili')) return 'militech';
+      if (v === 'merc' || v === 'v' || v === 'valerie' || v === 'vincent') return 'merc';
+      return 'merc';
+    }
+    function roleWelcome(role){
+      switch(role){
+        case 'zetatech': return 'Welcome, Zetatech Agent';
+        case 'netwatch': return 'Welcome, Netwatcher';
+        case 'arasaka' : return 'Welcome, Arasaka Corpo';
+        case 'militech': return 'Welcome, Militech Agent';
+        default: return 'Welcome, Merc';
+      }
+    }
+    function applyTheme(role){
+      const html = document.documentElement;
+      html.classList.remove('theme-merc','theme-zetatech','theme-netwatch','theme-arasaka','theme-militech');
+      html.classList.add('theme-' + role);
+      document.getElementById('welcome').textContent = roleWelcome(role);
     }
 
-    function setStatus(html){
-      byId('statusbar').innerHTML = html;
-    }
-
-    // público no console
-    window.login = (name) => doLogin(name);
-
-    /* =================== LOGIN OVERLAY =================== */
-    const loginOverlay = byId('login');
-    const termLog = byId('term-log');
-    const loginInput = byId('login-user');
-
-    function openLogin(){
-      loginOverlay.setAttribute('aria-hidden','false');
-      setTimeout(()=> loginInput.focus(), 50);
-      termAppend(`\n> logout detected\n> enter username to authenticate`);
-    }
-    function closeLogin(){
-      loginOverlay.setAttribute('aria-hidden','true');
-      loginInput.value = '';
-    }
-    function termAppend(line){
-      termLog.textContent += '\n' + line;
-      termLog.scrollTop = termLog.scrollHeight;
-    }
-
-    function doLogin(name){
-      const user = (name || loginInput.value || '').trim().toLowerCase();
-      if(!user){ termAppend('> username cannot be empty'); return; }
-      termAppend(`> verifying credentials for "${user}"...`);
-      setTimeout(()=>{
-        if(USERS[user]){
-          termAppend('> ACCESS GRANTED');
-          applyTheme(user);
-          closeLogin();
-        }else{
-          termAppend('> ACCESS DENIED');
-        }
-      }, 550);
-    }
-
-    byId('btn-login').addEventListener('click', ()=> doLogin());
-    loginInput.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter') doLogin();
-      if(e.key === 'Escape') closeLogin();
-    });
-    byId('btn-logout').addEventListener('click', openLogin);
-
-    /* =================== MENU MOBILE =================== */
-    const toggle = byId('menu-toggle');
-    const nav = byId('menu');
+    // ===== Menu hambúrguer =====
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('menu');
     toggle.addEventListener('click', ()=>{
       const active = nav.classList.toggle('active');
       toggle.setAttribute('aria-expanded', active ? 'true' : 'false');
@@ -575,7 +589,7 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
       });
     });
 
-    /* =================== COUNTDOWN =================== */
+    // ===== Countdown (27/09/2025 13:00 local) =====
     const EVENT_DATE = new Date('2025-09-27T13:00:00');
     function tick(){
       const now = new Date();
@@ -586,27 +600,23 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
       const h = Math.floor((s%86400)/3600);
       const m = Math.floor((s%3600)/60);
       const ss= s%60;
-      byId('dd').textContent = String(d);
-      byId('hh').textContent = String(h).padStart(2,'0');
-      byId('mm').textContent = String(m).padStart(2,'0');
-      byId('ss').textContent = String(ss).padStart(2,'0');
+      document.getElementById('dd').textContent = String(d);
+      document.getElementById('hh').textContent = String(h).padStart(2,'0');
+      document.getElementById('mm').textContent = String(m).padStart(2,'0');
+      document.getElementById('ss').textContent = String(ss).padStart(2,'0');
     }
     tick(); setInterval(tick, 1000);
 
-    /* =================== ICS / GCal / Share =================== */
+    // ===== ICS (13:00–17:00 BRT = 16:00–20:00Z) =====
     function downloadICS(){
       const title = 'FECART — CIBER';
       const desc  = 'FECART no Colégio FECAP. Mais informações: ' + location.href;
       const loc   = 'Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001';
-      const dtStart = '20250927T160000Z'; // 13:00 BRT
-      const dtEnd   = '20250927T200000Z'; // 17:00 BRT
+      const dtStart = '20250927T160000Z';
+      const dtEnd   = '20250927T200000Z';
       const uid = 'fecart-' + Date.now() + '@fecap';
       const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//FECART//pt-BR',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH',
         'BEGIN:VEVENT',
         'UID:' + uid,
         'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
@@ -615,8 +625,7 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
         'SUMMARY:' + title,
         'DESCRIPTION:' + desc.replace(/\n/g,'\\n'),
         'LOCATION:' + loc,
-        'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VEVENT','END:VCALENDAR'
       ].join('\r\n');
       const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
       const url = URL.createObjectURL(blob);
@@ -625,42 +634,45 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
       document.body.appendChild(a); a.click();
       setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
     }
-    byId('btn-ics').addEventListener('click', downloadICS);
+    document.getElementById('btn-ics').addEventListener('click', downloadICS);
 
+    // ===== Google Calendar (UTC) =====
     const gcal = new URL('https://calendar.google.com/calendar/render');
     gcal.searchParams.set('action','TEMPLATE');
     gcal.searchParams.set('text','FECART — CIBER');
     gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
     gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
     gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
-    byId('btn-gcal').href = gcal.toString();
+    document.getElementById('btn-gcal').href = gcal.toString();
 
+    // ===== Compartilhar =====
     const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    byId('btn-whats').href = 'https://wa.me/?text=' + msg;
+    document.getElementById('btn-whats').href = 'https://wa.me/?text=' + msg;
 
-    byId('btn-copy').addEventListener('click', async () => {
+    // ===== Copiar endereço =====
+    document.getElementById('btn-copy').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
-        const t = byId('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
+        const t = document.getElementById('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
         setTimeout(()=> t.textContent = old, 1200);
       } catch(e){ alert('Não foi possível copiar.'); }
     });
 
-    byId('btn-geo').addEventListener('click', (e) => {
+    // ===== Geo link fallback (desktop) =====
+    document.getElementById('btn-geo').addEventListener('click', (e) => {
       if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
         e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
       }
     });
 
-    /* =================== FAQ SLIDE ANIMADO =================== */
-    const allFaqs = $$('#faq details');
+    // ===== FAQ slide animado =====
+    const allFaqs = [...document.querySelectorAll('#faq details')];
     function slideOpen(el){
       if(el.open) return;
       el.style.overflow='hidden';
       el.open = true;
-      const start = 0;
       const end = el.scrollHeight;
-      el.style.height = start+'px';
+      el.style.height = '0px';
       requestAnimationFrame(()=>{
         el.style.transition = 'height .28s ease';
         el.style.height = end+'px';
@@ -677,7 +689,7 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
       el.style.height = start+'px';
       requestAnimationFrame(()=>{
         el.style.transition = 'height .28s ease';
-        el.style.height = 0;
+        el.style.height = '0px';
       });
       el.addEventListener('transitionend', function done(){
         el.open = false;
@@ -692,22 +704,59 @@ Valid users: merc, arasaka, militech, netwatch, zetatech
         d.open ? slideClose(d) : slideOpen(d);
       });
     });
-    byId('faq-expand').addEventListener('click', ()=> allFaqs.forEach(slideOpen));
-    byId('faq-collapse').addEventListener('click', ()=> allFaqs.forEach(slideClose));
+    document.getElementById('faq-expand').addEventListener('click', ()=> allFaqs.forEach(slideOpen));
+    document.getElementById('faq-collapse').addEventListener('click', ()=> allFaqs.forEach(slideClose));
 
-    /* =================== GLITCH ALEATÓRIO LEVE NO BG =================== */
+    // ===== Glitch aleatório (leve) =====
     setInterval(()=>{
       const x = (Math.random()*18-9)|0;
       const y = (Math.random()*18-9)|0;
       document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
     }, 900);
 
-    /* =================== BOOT =================== */
-    (function boot(){
-      const saved = localStorage.getItem('fecartUser') || 'merc';
-      applyTheme(saved);
-      byId('ano').textContent = new Date().getFullYear();
-    })();
+    // ===== INTRANET: Logout & Login (terminal em inglês, sem logs antigos) =====
+    const $loginOverlay = document.getElementById('login');
+    const $term = document.getElementById('term');
+    const $loginForm = document.getElementById('login-form');
+    const $userInput = document.getElementById('user');
+    const $logout = document.getElementById('logout');
+
+    function showLogin(){
+      $term.innerHTML = '<div class="term-line">> INTRANET ACCESS</div><div class="term-line">> USERNAME REQUIRED</div>';
+      $userInput.value = '';
+      $loginOverlay.classList.remove('hidden');
+      setTimeout(()=> $userInput.focus(), 50);
+    }
+    function hideLogin(){
+      $loginOverlay.classList.add('hidden');
+    }
+    $logout.addEventListener('click', showLogin);
+
+    $loginForm.addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      const role = detectRole($userInput.value);
+      state.role = role;
+
+      // Mensagens curtas e em inglês
+      const ok = document.createElement('div');
+      ok.className = 'term-line';
+      ok.textContent = '> ACCESS GRANTED';
+      $term.appendChild(ok);
+
+      applyTheme(role);
+
+      // limpa terminal e fecha
+      setTimeout(()=>{
+        $term.innerHTML = '';
+        hideLogin();
+      }, 600);
+    });
+
+    // inicial
+    applyTheme(state.role);
+
+    // rodapé
+    document.getElementById('ano').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
