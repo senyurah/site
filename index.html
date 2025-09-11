@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-skin="neon">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -29,38 +29,53 @@
   <meta name="twitter:image" content="https://senyurah.github.io/site/og-image.png?v=3">
   <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
 
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* =================== VARIÁVEIS E TEMAS =================== */
     :root{
       --bg:#050a06;
       --text:#e6ffe8;
       --muted:#a5e5b7;
-      --accent:#6bff75;              /* verde mais suave */
-      --accent-soft: rgba(107,255,117,.10);
-      --max: 1100px;
+      --accent:#6bff75;            /* primária */
+      --accent2:#16f2a0;           /* secundária (para glitch) */
+      --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+      --max:1100px;
+    }
+    /* Tema terminal (Netwatch-like) — ativa quando [data-skin="terminal"] */
+    html[data-skin="terminal"]{
+      --bg:#0b0a0f;
+      --text:#f3f0f4;
+      --muted:#9cd6cf;
+      --accent:#ff2a6d;            /* magenta */
+      --accent2:#19f9d8;           /* ciano */
+      --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
     }
 
     /* Reset básico */
     *{ box-sizing:border-box; margin:0; padding:0 }
     img{ max-width:100%; display:block }
     html{ scroll-behavior:smooth }
+
     body{
       font-family:"Rajdhani",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background-color:var(--bg);
       overflow-x:hidden;
 
-      /* fundo glitch (scanlines + colunas) */
+      /* fundo glitch (usa as variáveis do tema) */
       background-image:
-        repeating-linear-gradient(0deg, transparent 0 2px, rgba(107,255,117,0.05) 2px 3px),
-        repeating-linear-gradient(90deg, transparent 0 50px, rgba(107,255,117,0.03) 50px 51px);
+        repeating-linear-gradient(0deg, transparent 0 2px, color-mix(in srgb, var(--accent) 18%, transparent) 2px 3px),
+        repeating-linear-gradient(90deg, transparent 0 50px, color-mix(in srgb, var(--accent2) 12%, transparent) 50px 51px);
       animation:glitchShift 3s infinite linear;
 
       /* cursor neon retangular */
-      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%236bff75" stroke-width="1" fill="none"/></svg>') 12 12, auto;
+      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%23ffffff" stroke-width="1" fill="none"/></svg>') 12 12, auto;
     }
+    /* troca de fonte no tema terminal */
+    html[data-skin="terminal"] body{ font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing:.02em }
+
     @keyframes glitchShift{
       0%{background-position:0 0,0 0}
       25%{background-position:-5px -10px,5px 0}
@@ -73,9 +88,9 @@
     .fx-noise{
       position:fixed; inset:0; pointer-events:none; z-index:1;
       background:
-        radial-gradient(100% 100% at 0% 0%, rgba(107,255,117,.04), transparent 40%),
-        radial-gradient(100% 100% at 100% 0%, rgba(107,255,117,.04), transparent 40%),
-        radial-gradient(120% 120% at 50% 120%, rgba(107,255,117,.03), transparent 50%),
+        radial-gradient(100% 100% at 0% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 40%),
+        radial-gradient(100% 100% at 100% 0%, color-mix(in srgb, var(--accent2) 10%, transparent), transparent 40%),
+        radial-gradient(120% 120% at 50% 120%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 50%),
         url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
 <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter>\
@@ -86,8 +101,8 @@
     }
     @keyframes noiseFlicker{ 50%{ opacity:.45 } }
 
-    a{ color:var(--accent); text-decoration:none }
-    a:focus-visible, button:focus-visible{ outline:2px solid rgba(107,255,117,.45); outline-offset:2px }
+    a{ color:var(--accent2); text-decoration:none }
+    a:focus-visible, button:focus-visible{ outline:2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset:2px }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; position:relative; z-index:2 }
 
@@ -98,16 +113,23 @@
       border-bottom:1px solid var(--accent);
       backdrop-filter:blur(6px);
     }
-    .bar{ display:flex; align-items:center; justify-content:space-between; min-height:64px }
+    .bar{ display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:10px }
     .logo{ height:36px }
+
+    .right-tools{ display:flex; align-items:center; gap:10px }
+    .theme-toggle{
+      border:1px solid var(--accent); background:transparent; color:var(--text);
+      padding:6px 10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:12px; cursor:pointer;
+    }
+
     nav ul{ list-style:none; display:flex; gap:16px }
     nav a{ font-weight:800; letter-spacing:.06em; text-transform:uppercase }
 
     /* hambúrguer */
     .menu-toggle{
       display:none; border:1px solid var(--accent); padding:6px 10px;
-      background:transparent; font-size:16px; font-weight:800; color:var(--text);
-      text-transform:uppercase; letter-spacing:.06em;
+      background:transparent; font-size:12px; font-weight:800; color:var(--text);
+      text-transform:uppercase; letter-spacing:.06em; cursor:pointer;
     }
     @media(max-width:760px){
       .menu-toggle{ display:block }
@@ -128,23 +150,9 @@
         animation: neonBlink 1.3s infinite alternate;
       }
       @keyframes neonBlink{
-        0%  { color:var(--accent); text-shadow:0 0 4px var(--accent), 0 0 10px var(--accent) }
-        60% { color:#fff;        text-shadow:0 0 2px #fff, 0 0 8px var(--accent) }
-        100%{ color:var(--accent); text-shadow:0 0 6px var(--accent), 0 0 14px var(--accent) }
-      }
-
-      /* underline deslizante */
-      nav.active a{ position:relative }
-      nav.active a::after{
-        content:""; position:absolute; left:12%; right:12%; bottom:6px; height:2px;
-        background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        transform: translateX(-120%); opacity:.9;
-        animation: underlineMove 1.6s ease-in-out infinite;
-      }
-      @keyframes underlineMove{
-        0%{ transform: translateX(-120%) }
-        50%{ transform: translateX(0%) }
-        100%{ transform: translateX(120%) }
+        0%  { color:var(--accent2); text-shadow:0 0 3px var(--accent2), 0 0 9px var(--accent) }
+        60% { color:#fff;          text-shadow:0 0 2px #fff, 0 0 7px var(--accent2) }
+        100%{ color:var(--accent2); text-shadow:0 0 5px var(--accent2), 0 0 12px var(--accent) }
       }
     }
 
@@ -152,60 +160,36 @@
     main{ padding:28px 0 64px }
     .hero{
       text-align:center; padding:54px 0 8px;
-      background:linear-gradient(180deg, rgba(5,10,6,.55), rgba(5,10,6,.90));
+      background:linear-gradient(180deg, color-mix(in srgb, var(--bg) 85%, black), color-mix(in srgb, var(--bg) 95%, black));
     }
 
-    /* TÍTULOS COM GLITCH COMPLETO (legível) */
+    /* TÍTULOS COM GLITCH (controlado por variáveis do tema) */
     .glitch{
-      position:relative; display:inline-block;
-      color:var(--text);
-      text-shadow: 0 0 6px rgba(107,255,117,.45), 0 0 14px rgba(107,255,117,.25);
+      position:relative; display:inline-block; color:var(--text);
+      text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 14px color-mix(in srgb, var(--accent2) 35%, transparent);
       will-change: filter, transform;
     }
     .glitch[data-text]::before,
     .glitch[data-text]::after{
       content: attr(data-text);
-      position:absolute; inset:0; pointer-events:none;
-      mix-blend-mode:screen; opacity:.75;
+      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.75;
     }
-    .glitch[data-text]::before{
-      color:#aaff6b; transform: translate(1.2px,0);
-      clip-path: inset(0 0 65% 0);
-      animation: glBefore 2.2s linear infinite;
-    }
-    .glitch[data-text]::after{
-      color:#48ffd2; transform: translate(-1.2px,0);
-      clip-path: inset(35% 0 0 0);
-      animation: glAfter 2.6s linear infinite;
-    }
-    @keyframes glBefore{
-      0%{ transform: translate(1px,0) }
-      50%{ transform: translate(1px,-0.6px) }
-      100%{ transform: translate(1px,0.4px) }
-    }
-    @keyframes glAfter{
-      0%{ transform: translate(-1px,0) }
-      50%{ transform: translate(-1px,0.6px) }
-      100%{ transform: translate(-1px,-0.4px) }
-    }
+    .glitch[data-text]::before{ color:var(--accent);  transform: translate(1.1px,0);  clip-path: inset(0 0 65% 0); animation: glBefore 2.2s linear infinite; }
+    .glitch[data-text]::after { color:var(--accent2); transform: translate(-1.1px,0); clip-path: inset(35% 0 0 0); animation: glAfter  2.6s linear infinite; }
+    @keyframes glBefore{ 0%{transform:translate(1px,0)} 50%{transform:translate(1px,-.6px)} 100%{transform:translate(1px,.4px)} }
+    @keyframes glAfter { 0%{transform:translate(-1px,0)} 50%{transform:translate(-1px,.6px)} 100%{transform:translate(-1px,-.4px)} }
 
     h1{ font-size:clamp(28px,4vw + .6rem,54px); margin:6px 0 10px }
     .lead{ color:var(--muted); font-size:clamp(16px,1.2vw + .2rem,22px) }
 
     .badges{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px }
-    .badge{
-      border:1px solid var(--accent);
-      padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em
-    }
+    .badge{ border:1px solid var(--accent); padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em }
 
     /* COUNTDOWN */
     .countwrap{ margin:18px 0 10px }
     .countwrap .label{ color:var(--muted); margin-bottom:6px; font-weight:700; letter-spacing:.08em; text-transform:uppercase }
     .countdown{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
-    .tile{
-      border:1px solid var(--accent); background:rgba(0,0,0,.25);
-      padding:10px 14px; min-width:90px; text-align:center
-    }
+    .tile{ border:1px solid var(--accent); background:rgba(0,0,0,.25); padding:10px 14px; min-width:90px; text-align:center }
     .tile b{ display:block; font-size:clamp(20px,2.2vw + .2rem,28px) }
     .tile small{ text-transform:uppercase; font-size:12px; color:var(--muted); letter-spacing:.12em }
 
@@ -214,19 +198,15 @@
     .sweep::after{
       content:""; position:absolute; inset:-1px; padding:1px;
       background: conic-gradient(from var(--a,0deg),
-        transparent 0 12%, rgba(107,255,117,.65) 18%, transparent 24%);
+        transparent 0 12%, color-mix(in srgb, var(--accent) 90%, transparent) 18%, transparent 24%);
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
-      pointer-events:none;
-      animation: sweep 4.5s linear infinite;
+      pointer-events:none; animation: sweep 4.5s linear infinite;
     }
     @keyframes sweep { to{ --a: 360deg; } }
 
     .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
-    .btn{
-      border:1px solid var(--accent); background:transparent; color:var(--text);
-      padding:10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer
-    }
+    .btn{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer }
     .btn:hover{ background:var(--accent-soft) }
 
     /* SEÇÕES */
@@ -234,43 +214,35 @@
     h2{ margin-bottom:14px; font-size:clamp(22px,2.2vw + .2rem,34px) }
     /* sub-linha neon sob h2 */
     h2.glitch{ position:relative; padding-bottom:6px; }
-    h2.glitch::after{
-      content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px;
-      background: linear-gradient(90deg, transparent, rgba(107,255,117,.5), transparent);
-      pointer-events:none;
-    }
+    h2.glitch::after{ content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 50%, transparent), transparent); pointer-events:none; }
 
     .grid{ display:grid; gap:16px }
     @media(min-width:760px){ .grid-2{ grid-template-columns:1fr 1fr } }
     .card{ border:1px solid var(--accent); padding:16px; background:rgba(0,0,0,.22) }
+    /* Cantoneiras estilo terminal quando skin=terminal */
+    html[data-skin="terminal"] .card{ position:relative }
+    html[data-skin="terminal"] .card::before,
+    html[data-skin="terminal"] .card::after{
+      content:""; position:absolute; inset:6px; pointer-events:none; border:1px dashed color-mix(in srgb, var(--accent) 55%, transparent); mask:linear-gradient(#000 0 0) exclude;
+    }
+
     .list{ display:grid; gap:8px; margin:8px 0 0; padding-left:18px }
 
-    /* FAQ com slide */
+    /* FAQ com slide + botões com pulso/ripple */
     .faq-actions{ display:flex; gap:10px; margin-bottom:10px }
-    .btn-ghost{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase; position:relative; overflow:hidden }
+    .btn-ghost{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase; position:relative; overflow:hidden; cursor:pointer }
     .btn-ghost:hover{ background:var(--accent-soft) }
-    /* blink/pulse leve */
     .btn-ghost.neon{ animation: faqPulse 1.8s ease-in-out infinite }
-    @keyframes faqPulse{
-      0%,100%{ box-shadow:0 0 0 0 rgba(107,255,117,.45) }
-      50%{ box-shadow:0 0 12px 0 rgba(107,255,117,.35) }
-    }
-    /* ripple ao clicar */
-    .btn-ghost::after{
-      content:""; position:absolute; width:0; height:0; left:var(--rx,50%); top:var(--ry,50%);
-      transform:translate(-50%,-50%); border-radius:50%;
-      background: radial-gradient(circle, rgba(107,255,117,.35), transparent 60%);
-      opacity:0; pointer-events:none;
-    }
+    @keyframes faqPulse{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent) } 50%{ box-shadow:0 0 12px 0 color-mix(in srgb, var(--accent2) 35%, transparent) } }
+    .btn-ghost::after{ content:""; position:absolute; width:0; height:0; left:var(--rx,50%); top:var(--ry,50%); transform:translate(-50%,-50%); border-radius:50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%); opacity:0; pointer-events:none; }
     .btn-ghost.flash::after{ width:220%; height:220%; opacity:1; animation:ripple .35s ease-out }
     @keyframes ripple{ to{ opacity:0; transform:translate(-50%,-50%) scale(1.05) } }
 
-    .faq-list details{
-      border:1px solid var(--accent); margin-bottom:10px; background:rgba(0,0,0,.22); overflow:hidden
-    }
-    .faq-list summary{
-      list-style:none; cursor:pointer; font-weight:800; padding:12px 14px
-    }
+    .faq-list details{ border:1px solid var(--accent); margin-bottom:10px; background:rgba(0,0,0,.22); overflow:hidden }
+    .faq-list summary{ list-style:none; cursor:pointer; font-weight:800; padding:12px 14px; position:relative }
+    /* prompt '>' no tema terminal */
+    html[data-skin="terminal"] .faq-list summary::before{ content:"> "; color:var(--accent2); margin-right:.25rem }
+
     .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
     /* RODAPÉ */
@@ -329,7 +301,12 @@
   <header>
     <div class="wrap bar">
       <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+
+      <div class="right-tools">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">Tema: Terminal</button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+      </div>
+
       <nav id="menu" aria-label="Seções">
         <ul>
           <li><a href="#sobre">O que é</a></li>
@@ -531,9 +508,11 @@
   </footer>
 
   <script>
+    const $ = (s)=>document.querySelector(s);
+    const $$ = (s)=>document.querySelectorAll(s);
+
     // ===== Contagem regressiva (até 27/09/2025 13:00 local) =====
     const EVENT_DATE = new Date('2025-09-27T13:00:00');
-    const $id = (s)=>document.getElementById(s);
     function tick(){
       const now = new Date();
       let ms = EVENT_DATE - now;
@@ -543,10 +522,10 @@
       const h = Math.floor((s%86400)/3600);
       const m = Math.floor((s%3600)/60);
       const ss= s%60;
-      $id('dd').textContent = String(d);
-      $id('hh').textContent = String(h).padStart(2,'0');
-      $id('mm').textContent = String(m).padStart(2,'0');
-      $id('ss').textContent = String(ss).padStart(2,'0');
+      $('#dd').textContent = String(d);
+      $('#hh').textContent = String(h).padStart(2,'0');
+      $('#mm').textContent = String(m).padStart(2,'0');
+      $('#ss').textContent = String(ss).padStart(2,'0');
     }
     tick(); setInterval(tick, 1000);
 
@@ -559,30 +538,18 @@
       const dtEnd   = '20250927T200000Z';
       const uid = 'fecart-' + Date.now() + '@fecap';
       const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//FECART//pt-BR',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
-        'BEGIN:VEVENT',
-        'UID:' + uid,
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+        'BEGIN:VEVENT','UID:' + uid,
         'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
-        'DTSTART:' + dtStart,
-        'DTEND:' + dtEnd,
-        'SUMMARY:' + title,
-        'DESCRIPTION:' + desc.replace(/\n/g,'\\n'),
-        'LOCATION:' + loc,
-        'END:VEVENT',
-        'END:VCALENDAR'
+        'DTSTART:' + dtStart,'DTEND:' + dtEnd,'SUMMARY:' + title,
+        'DESCRIPTION:' + desc.replace(/\n/g,'\\n'),'LOCATION:' + loc,'END:VEVENT','END:VCALENDAR'
       ].join('\r\n');
       const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'FECART-2025.ics';
-      document.body.appendChild(a); a.click();
-      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+      const a = document.createElement('a'); a.href = url; a.download = 'FECART-2025.ics';
+      document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
     }
-    document.getElementById('btn-ics').addEventListener('click', downloadICS);
+    $('#btn-ics').addEventListener('click', downloadICS);
 
     // ===== Google Calendar (UTC) =====
     const gcal = new URL('https://calendar.google.com/calendar/render');
@@ -591,42 +558,37 @@
     gcal.searchParams.set('details','FECART no Colégio FECAP. Mais informações: ' + location.href);
     gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
     gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
-    document.getElementById('btn-gcal').href = gcal.toString();
+    $('#btn-gcal').href = gcal.toString();
 
     // ===== Compartilhar =====
     const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    document.getElementById('btn-whats').href = 'https://wa.me/?text=' + msg;
+    $('#btn-whats').href = 'https://wa.me/?text=' + msg;
 
     // ===== Copiar endereço =====
-    document.getElementById('btn-copy').addEventListener('click', async () => {
+    $('#btn-copy').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001');
-        const t = document.getElementById('btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
-        setTimeout(()=> t.textContent = old, 1200);
-      } catch(e){ alert('Não foi possível copiar.'); }
+        const t = e.currentTarget; const old = t.textContent; t.textContent = 'Copiado!'; setTimeout(()=> t.textContent = old, 1200);
+      } catch(err){ alert('Não foi possível copiar.'); }
     });
 
     // ===== Geo link fallback (desktop) =====
-    document.getElementById('btn-geo').addEventListener('click', (e) => {
+    $('#btn-geo').addEventListener('click', (e) => {
       if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
         e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
       }
     });
 
     // ===== Menu hambúrguer =====
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('menu');
+    const toggle = $('#menu-toggle'); const nav = $('#menu');
     toggle.addEventListener('click', ()=>{
       const active = nav.classList.toggle('active');
       toggle.setAttribute('aria-expanded', active ? 'true' : 'false');
       document.body.classList.toggle('menu-open', active);
     });
-    // fecha o menu ao clicar num link
     nav.querySelectorAll('a').forEach(a=>{
       a.addEventListener('click', ()=>{
-        nav.classList.remove('active');
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded','false');
+        nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false');
       });
     });
 
@@ -634,66 +596,58 @@
     const allFaqs = [...document.querySelectorAll('#faq details')];
     function slideOpen(el){
       if(el.open) return;
-      el.style.overflow='hidden';
-      el.open = true;
-      const start = 0;
-      const end = el.scrollHeight;
-      el.style.height = start+'px';
-      requestAnimationFrame(()=>{
-        el.style.transition = 'height .28s ease';
-        el.style.height = end+'px';
-      });
-      el.addEventListener('transitionend', function done(){
-        el.style.height=''; el.style.overflow=''; el.style.transition='';
-        el.removeEventListener('transitionend', done);
-      });
+      el.style.overflow='hidden'; el.open = true;
+      const end = el.scrollHeight; el.style.height = '0px';
+      requestAnimationFrame(()=>{ el.style.transition = 'height .28s ease'; el.style.height = end+'px'; });
+      el.addEventListener('transitionend', function done(){ el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); });
     }
     function slideClose(el){
       if(!el.open) return;
-      el.style.overflow='hidden';
-      const start = el.scrollHeight;
-      el.style.height = start+'px';
-      requestAnimationFrame(()=>{
-        el.style.transition = 'height .28s ease';
-        el.style.height = 0;
-      });
-      el.addEventListener('transitionend', function done(){
-        el.open = false;
-        el.style.height=''; el.style.overflow=''; el.style.transition='';
-        el.removeEventListener('transitionend', done);
-      });
+      el.style.overflow='hidden'; const start = el.scrollHeight; el.style.height = start+'px';
+      requestAnimationFrame(()=>{ el.style.transition = 'height .28s ease'; el.style.height = '0px'; });
+      el.addEventListener('transitionend', function done(){ el.open = false; el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); });
     }
-    // intercepta o clique para animar
     allFaqs.forEach(d=>{
       const sum = d.querySelector('summary');
-      sum.addEventListener('click', (ev)=>{
-        ev.preventDefault();
-        d.open ? slideClose(d) : slideOpen(d);
-      });
+      sum.addEventListener('click', (ev)=>{ ev.preventDefault(); d.open ? slideClose(d) : slideOpen(d); });
     });
-    // botões + ripple coordenado
+
+    // Botões FAQ com ripple
     function flashAt(btn, e){
       const r = btn.getBoundingClientRect();
       btn.style.setProperty('--rx', (e.clientX - r.left)+'px');
       btn.style.setProperty('--ry', (e.clientY - r.top)+'px');
-      btn.classList.add('flash');
-      setTimeout(()=>btn.classList.remove('flash'), 360);
+      btn.classList.add('flash'); setTimeout(()=>btn.classList.remove('flash'), 360);
     }
-    document.getElementById('faq-expand').addEventListener('click', (e)=> {
-      document.querySelectorAll('#faq details').forEach(slideOpen);
-      flashAt(e.currentTarget, e);
-    });
-    document.getElementById('faq-collapse').addEventListener('click', (e)=> {
-      document.querySelectorAll('#faq details').forEach(slideClose);
-      flashAt(e.currentTarget, e);
-    });
+    $('#faq-expand').addEventListener('click', (e)=>{ allFaqs.forEach(slideOpen); flashAt(e.currentTarget, e); });
+    $('#faq-collapse').addEventListener('click', (e)=>{ allFaqs.forEach(slideClose); flashAt(e.currentTarget, e); });
 
     // ===== Glitch aleatório (leve) no fundo =====
     setInterval(()=>{
-      const x = (Math.random()*18-9)|0;
-      const y = (Math.random()*18-9)|0;
+      const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
       document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
     }, 900);
+
+    // ===== Troca de tema (Neon <-> Terminal) =====
+    const skinKey = 'fecart-skin';
+    const rootHtml = document.documentElement;
+    const savedSkin = localStorage.getItem(skinKey);
+    if(savedSkin){ rootHtml.setAttribute('data-skin', savedSkin); }
+    updateThemeButton();
+
+    $('#theme-toggle').addEventListener('click', ()=>{
+      const current = rootHtml.getAttribute('data-skin');
+      const next = current === 'terminal' ? 'neon' : 'terminal';
+      rootHtml.setAttribute('data-skin', next);
+      localStorage.setItem(skinKey, next);
+      updateThemeButton();
+    });
+    function updateThemeButton(){
+      const isTerm = rootHtml.getAttribute('data-skin') === 'terminal';
+      const btn = $('#theme-toggle');
+      btn.textContent = 'Tema: ' + (isTerm ? 'Neon' : 'Terminal');
+      btn.setAttribute('aria-pressed', isTerm ? 'true' : 'false');
+    }
 
     // ano no rodapé
     document.getElementById('ano').textContent = new Date().getFullYear();
