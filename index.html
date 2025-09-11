@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR" data-theme="zetatech">
 <head>
@@ -7,72 +8,74 @@
   <meta name="theme-color" content="#061009">
 
   <title>FECART — CIBER | 27/09/2025</title>
-  <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade.">
-  <link rel="canonical" href="https://senyurah.github.io/site/">
+  <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade." />
+  <link rel="canonical" href="https://senyurah.github.io/site/" />
 
-  <!-- OG/Twitter -->
+  <!-- Open Graph -->
   <meta property="og:locale" content="pt_BR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="FECART — CIBER | 27/09/2025">
   <meta property="og:description" content="Participe da FECART — CIBER no Colégio FECAP em 27/09/2025. Cibersegurança, projetos e impacto social.">
   <meta property="og:url" content="https://senyurah.github.io/site/">
   <meta property="og:site_name" content="FECART — CIBER">
-  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png?v=5">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png?v=4">
+  <meta property="og:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-  <!-- HUD font -->
+  <!-- HUD Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== VARS (sobrescritas por tema/JS) =================== */
+    /* =================== VARS (sobrepostas por temas e JS) =================== */
     :root{
-      --bg:#050a06; --text:#e6ffe8; --muted:#a5e5b7;
-      --accent:#6bff75; --accent-rgb:107,255,117;
-      --accent-soft:rgba(107,255,117,.10); --ring:rgba(107,255,117,.45);
-      --max:1100px;
+      --bg:#050a06;
+      --text:#e6ffe8;
+      --muted:#a5e5b7;
+      --accent:#6bff75;
+      --accent-rgb:107,255,117;
+      --accent-soft: rgba(107,255,117,.10);
+      --ring: rgba(107,255,117,.45);
+      --max: 1100px;
     }
-    /* Paletas */
     html[data-theme="zetatech"]{
       --bg:#050a06; --text:#e6ffe8; --muted:#a5e5b7;
-      --accent:#6bff75; --accent-rgb:107,255,117;
-      --accent-soft:rgba(107,255,117,.10); --ring:rgba(107,255,117,.45);
+      --accent:#6bff75; --accent-rgb:107,255,117; --accent-soft:rgba(107,255,117,.10); --ring:rgba(107,255,117,.45);
     }
     html[data-theme="netwatch"]{
       --bg:#0b0506; --text:#ffeaea; --muted:#ffcccc;
-      --accent:#ff4d58; --accent-rgb:255,77,88;
-      --accent-soft:rgba(255,77,88,.10); --ring:rgba(255,77,88,.45);
+      --accent:#ff4d58; --accent-rgb:255,77,88; --accent-soft:rgba(255,77,88,.10); --ring:rgba(255,77,88,.45);
     }
     html[data-theme="arasaka"]{
       --bg:#041014; --text:#e5f9ff; --muted:#bfeeff;
-      --accent:#00d6ff; --accent-rgb:0,214,255;
-      --accent-soft:rgba(0,214,255,.10); --ring:rgba(0,214,255,.45);
+      --accent:#00d6ff; --accent-rgb:0,214,255; --accent-soft:rgba(0,214,255,.10); --ring:rgba(0,214,255,.45);
     }
     html[data-theme="militech"]{
       --bg:#0f0c03; --text:#fff6df; --muted:#f5e3b0;
-      --accent:#ffcc33; --accent-rgb:255,204,51;
-      --accent-soft:rgba(255,204,51,.12); --ring:rgba(255,204,51,.45);
+      --accent:#ffcc33; --accent-rgb:255,204,51; --accent-soft:rgba(255,204,51,.12); --ring:rgba(255,204,51,.45);
     }
     html[data-theme="merc"]{
-      /* magenta puxando ao vermelho */
-      --bg:#0b0406; --text:#ffe8f0; --muted:#ffc9d7;
-      --accent:#ff2b57; --accent-rgb:255,43,87;
-      --accent-soft:rgba(255,43,87,.12); --ring:rgba(255,43,87,.45);
+      /* magenta puxado levemente para o vermelho */
+      --bg:#0b0408; --text:#ffe6f3; --muted:#ffcbe6;
+      --accent:#ff3a85; --accent-rgb:255,58,133; --accent-soft:rgba(255,58,133,.10); --ring:rgba(255,58,133,.45);
     }
 
     /* =================== RESET/BASIC =================== */
     *{ box-sizing:border-box; margin:0; padding:0 }
-    html{ scroll-behavior:smooth }
     img{ max-width:100%; display:block }
+    html{ scroll-behavior:smooth }
+    .sr-only{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
+
     body{
       font-family:"Rajdhani",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background-color:var(--bg); overflow-x:hidden;
-
-      /* fundo tipo terminal (scanlines + colunas) com drift leve */
+      color:var(--text);
+      background-color:var(--bg);
+      overflow-x:hidden;
       background-image:
         repeating-linear-gradient(0deg, transparent 0 2px, rgba(var(--accent-rgb),0.05) 2px 3px),
         repeating-linear-gradient(90deg, transparent 0 50px, rgba(var(--accent-rgb),0.03) 50px 51px);
       animation:glitchShift 3s infinite linear;
-      cursor: crosshair;
+      cursor: default; /* será substituído via JS para refletir o tema */
     }
     @keyframes glitchShift{
       0%{background-position:0 0,0 0}
@@ -81,10 +84,10 @@
       75%{background-position:-3px 5px,15px -5px}
       100%{background-position:0 0,0 0}
     }
+
     a{ color:var(--accent); text-decoration:none }
     a:focus-visible, button:focus-visible{ outline:2px solid var(--ring); outline-offset:2px }
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px }
-    .sr-only{ position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0 }
 
     /* =================== HEADER =================== */
     header{
@@ -126,19 +129,14 @@
       nav ul{ flex-direction:column; gap:0; padding:14px 16px }
       nav li+li{ border-top:1px solid rgba(255,255,255,.08) }
       nav a{ display:block; padding:12px; text-align:center }
-      /* neon blink quando aberto */
       nav.active a{ animation: neonBlink 1.2s infinite alternate }
-      @keyframes neonBlink{
-        0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) }
-        50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) }
-      }
+      @keyframes neonBlink{ 0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) } 50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) } }
       body.menu-open{ overflow:hidden }
-      /* intranet some no mobile */
-      .session{ display:none }
-      .intranet-only{ display:none !important }
+      .session{ display:none }                 /* intranet oculta no mobile */
+      .intranet-only{ display:none !important }/* esconde a intranet */
     }
 
-    /* =================== HERO (FECART em PT) =================== */
+    /* =================== HERO (FECART) =================== */
     main{ padding:28px 0 64px }
     .hero{
       text-align:center; padding:54px 0 8px;
@@ -151,10 +149,11 @@
     .badge{
       border:1px solid var(--accent);
       padding:8px 12px; background:rgba(0,0,0,.25); font-weight:700; letter-spacing:.02em;
-      color:var(--text); text-shadow:0 0 6px rgba(var(--accent-rgb),.18);
+      text-shadow:0 0 6px rgba(var(--accent-rgb),.18);
+      color:var(--text);
     }
 
-    /* glitch suave nos títulos */
+    /* glitch suave */
     .glitch{ position:relative; display:inline-block; color:var(--text); text-shadow:0 0 6px rgba(var(--accent-rgb),.20) }
     .glitch::before,.glitch::after{ content:attr(data-text); position:absolute; left:0; top:0; width:100%; overflow:hidden; pointer-events:none; color: rgba(var(--accent-rgb), .25) }
     .glitch::before{ transform:translateX(1px); clip-path:inset(0 0 55% 0) }
@@ -193,41 +192,45 @@
     .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
     /* =================== INTRANET (DESKTOP ONLY) =================== */
-    /* Wrapper geral da intranet: aparece apenas quando tema != zetatech e em desktop */
-    .intranet-only{ display:block }
-    @media(max-width:760px){ .intranet-only{ display:none !important } }
-
-    .intra-app{ border:1px solid var(--accent); background:rgba(0,0,0,.18); display:grid; gap:0; grid-template-columns: 240px 1fr; min-height:420px }
-    .intra-sidebar{ border-right:1px solid var(--accent); padding:12px }
-    .intra-sidebar h3{ font-size:16px; margin-bottom:10px; color:var(--text); text-shadow:0 0 6px rgba(var(--accent-rgb),.18) }
-    .tabbtn{ display:block; width:100%; text-align:left; border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 10px; font-weight:800; letter-spacing:.04em; margin-bottom:8px; cursor:pointer }
-    .tabbtn.active, .tabbtn:hover{ background:var(--accent-soft) }
-
-    .intra-main{ padding:14px }
-    .terminal{ border:1px solid var(--accent); background:rgba(0,0,0,.18); padding:12px; color:var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:14px }
+    .intranet-only .subnav{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px }
+    .tag{ border:1px solid var(--accent); padding:4px 8px; background:rgba(0,0,0,.18); font-weight:800; letter-spacing:.06em }
+    .terminal{ border:1px solid var(--accent); background:rgba(0,0,0,.18); padding:16px; color:var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
     .terminal .line{ white-space:pre-wrap }
     .terminal .ok{ color:rgba(var(--accent-rgb),.9) }
     .terminal .warn{ color:#ffc857 }
     .terminal .err{ color:#ff6b6b }
+    .densegrid{ display:grid; gap:16px }
+    @media(min-width:980px){ .densegrid{ grid-template-columns: 2fr 1fr } }
 
-    .datatable{ border:1px solid var(--accent); width:100%; border-collapse:collapse; font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; background:rgba(0,0,0,.18) }
+    .datatable{ border:1px solid var(--accent); width:100%; border-collapse:collapse; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:rgba(0,0,0,.18) }
     .datatable th,.datatable td{ border:1px solid var(--accent); padding:8px 10px; text-align:left; font-size:14px; color:var(--text) }
     .datatable thead th{ background:rgba(var(--accent-rgb),.08) }
     .datatable tbody tr:hover{ background:rgba(var(--accent-rgb),.06) }
 
-    .kpi{ display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-bottom:10px }
-    .kpi .card{ background:rgba(0,0,0,.18) }
-
-    /* Term-strip / easter eggs */
-    .term-strip{ border-top:1px solid var(--accent); font-family: ui-monospace, Menlo, Consolas; color:rgba(var(--accent-rgb),.55); background:rgba(0,0,0,.35); font-size:12px; line-height:1.4 }
+    /* Terminal strip (easter eggs) */
+    .term-strip{ border-top:1px solid var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas; color:rgba(var(--accent-rgb),.55); background:rgba(0,0,0,.35); font-size:12px; line-height:1.4 }
     .term-strip .wrap{ display:flex; gap:16px; padding:8px 20px; align-items:center; justify-content:space-between; flex-wrap:wrap }
     .ticker{ opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
     .ticker .dot{ color:var(--accent) }
-    .stealth{ border:1px solid var(--accent); padding:4px 8px; background:transparent; color:var(--text); text-transform:uppercase; font-weight:800; letter-spacing:.06em; cursor:pointer }
-    .stealth:hover{ background:var(--accent-soft) }
 
+    /* FOOTER */
     footer{ border-top:1px solid var(--accent); color:var(--muted); padding:18px 0 28px; text-align:center }
+
+    /* ====== BOOT / LOGIN (DESKTOP) ====== */
+    #boot{ position:fixed; inset:0; background:#000; z-index:9999; display:none }
+    #boot.active{ display:block }
+    .boot-wrap{ max-width:900px; margin:0 auto; padding:24px; color:#9be3a6; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:14px }
+    .boot-screen{ border:1px solid #1aff64; background:#020402; padding:16px; box-shadow:0 0 24px rgba(0,255,128,.12), inset 0 0 0 1px rgba(0,255,128,.08); min-height:50vh; overflow:auto }
+    .boot-line{ color:#9be3a6 }
+    .boot-warn{ color:#ffc857 }
+    .boot-err{ color:#ff6b6b }
+    .prompt{ display:flex; gap:8px; align-items:center; margin-top:10px }
+    .prompt label{ color:#7aff90 }
+    .prompt input{ flex:1; background:#000; color:#bdf6c6; border:1px solid #1aff64; padding:6px 8px; font-family:inherit; outline:none }
+    .prompt button{ border:1px solid #1aff64; background:transparent; color:#bdf6c6; padding:6px 10px; font-weight:800; text-transform:uppercase; cursor:pointer }
+    .prompt button:disabled{ opacity:.6; cursor:wait }
+
+    *{ -webkit-tap-highlight-color: rgba(var(--accent-rgb),.2) }
   </style>
 
   <!-- Schema.org / Event (PT) -->
@@ -277,7 +280,7 @@
           <li><a href="#local">Local & Data</a></li>
           <li><a href="#importancia">Importância</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <!-- Intranet só aparece no desktop com CSS; e só tem conteúdo quando tema != zetatech -->
+          <!-- Link de intranet só exibe no desktop com CSS -->
           <li class="intranet-only"><a href="#intranet">Intranet</a></li>
         </ul>
       </nav>
@@ -304,7 +307,6 @@
           <span class="badge">Laboratório 200 — entrada perto do ginásio</span>
         </div>
 
-        <!-- COUNTDOWN -->
         <div class="countwrap">
           <div class="label">faltam</div>
           <div class="countdown" role="status" aria-live="polite">
@@ -315,7 +317,6 @@
           </div>
         </div>
 
-        <!-- CTAs -->
         <div class="cta">
           <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">Adicionar .ics</button>
           <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
@@ -462,254 +463,25 @@
       </div>
     </section>
 
-    <!-- =================== INTRANET (Desktop) =================== -->
+    <!-- =================== INTRANET (DESKTOP ONLY) =================== -->
     <section id="intranet" class="intranet-only" aria-labelledby="intr-title">
       <div class="wrap">
         <h2 id="intr-title"><span class="glitch" data-text="Corporate Intranet">Corporate Intranet</span></h2>
 
-        <!-- wrapper: só mostra se tema != zetatech -->
-        <div id="corp-apps" style="display:none">
-
-          <!-- Subinfo de sessão -->
-          <div class="subnav" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px">
-            <span class="tag" style="border:1px solid var(--accent); padding:4px 8px; background:rgba(0,0,0,.18)">Mode: <strong id="mode-tag">Zetatech</strong></span>
-            <span class="tag" style="border:1px solid var(--accent); padding:4px 8px; background:rgba(0,0,0,.18)">Role: <strong id="role-tag">Zetatech Agent</strong></span>
-            <span class="tag" style="border:1px solid var(--accent); padding:4px 8px; background:rgba(0,0,0,.18)">Uptime: <strong id="uptime">00:00:00</strong></span>
-          </div>
-
-          <!-- ================= NETWATCH ================= -->
-          <div id="app-netwatch" class="intra-app" hidden>
-            <aside class="intra-sidebar">
-              <h3>NETWATCH GRID</h3>
-              <button class="tabbtn" data-tab="nw-traffic">Traffic Monitor</button>
-              <button class="tabbtn" data-tab="nw-ids">IDS / IPS</button>
-              <button class="tabbtn" data-tab="nw-dns">DNS / SNI</button>
-              <button class="tabbtn" data-tab="nw-geo">Geo Clusters</button>
-              <button class="tabbtn" data-tab="nw-attacks">Attack Log</button>
-            </aside>
-            <main class="intra-main">
-              <div id="nw-traffic" class="tabpane">
-                <div class="kpi">
-                  <div class="card"><strong>Throughput</strong><br> 9.4 Gbps (avg)</div>
-                  <div class="card"><strong>Packets/s</strong><br> 2.1 Mpps</div>
-                  <div class="card"><strong>Drop Rate</strong><br> 0.12%</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Time</th><th>Src → Dst</th><th>Proto</th><th>Bytes</th><th>Notes</th></tr></thead>
-                  <tbody id="nw-traffic-body"></tbody>
-                </table>
-              </div>
-
-              <div id="nw-ids" class="tabpane" hidden>
-                <div class="terminal" id="nw-ids-log"></div>
-              </div>
-
-              <div id="nw-dns" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Time</th><th>Host</th><th>Type</th><th>Result</th><th>Flag</th></tr></thead>
-                  <tbody id="nw-dns-body"></tbody>
-                </table>
-              </div>
-
-              <div id="nw-geo" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Cluster</th><th>Region</th><th>Latency</th><th>Flows</th><th>Status</th></tr></thead>
-                  <tbody>
-                    <tr><td>#01</td><td>Santo Domingo</td><td>18 ms</td><td>14,203</td><td>NORMAL</td></tr>
-                    <tr><td>#02</td><td>Japantown</td><td>11 ms</td><td>21,778</td><td>OBSERVE</td></tr>
-                    <tr><td>#03</td><td>Corpo Plaza</td><td>9 ms</td><td>27,111</td><td>NORMAL</td></tr>
-                    <tr><td>#04</td><td>Pacifica</td><td>27 ms</td><td>8,944</td><td>WATCH</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div id="nw-attacks" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Time</th><th>Vector</th><th>Signature</th><th>Result</th><th>Action</th></tr></thead>
-                  <tbody>
-                    <tr><td>13:01:22</td><td>L7 SQLi</td><td>0x9f4e</td><td>FAILED</td><td>DROP</td></tr>
-                    <tr><td>13:04:03</td><td>Bot swarm</td><td>0x22aa</td><td>FAILED</td><td>BLACKHOLE</td></tr>
-                    <tr><td>13:07:49</td><td>DNS tunnel</td><td>0x77c1</td><td>FAILED</td><td>SINKHOLE</td></tr>
-                    <tr><td>13:09:05</td><td>WAF evasion</td><td>0x4db2</td><td>FAILED</td><td>BLOCK</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </main>
-          </div>
-
-          <!-- ================= MILITECH ================= -->
-          <div id="app-militech" class="intra-app" hidden>
-            <aside class="intra-sidebar">
-              <h3>MILITECH OPS</h3>
-              <button class="tabbtn" data-tab="mi-overwatch">Overwatch (Sniper)</button>
-              <button class="tabbtn" data-tab="mi-flatline">Flatline Drone</button>
-              <button class="tabbtn" data-tab="mi-briefs">Operational Briefs</button>
-            </aside>
-            <main class="intra-main">
-              <div id="mi-overwatch" class="tabpane">
-                <div class="terminal" style="margin-bottom:10px">
-                  <div class="line ok">[ARMORY] Overwatch Mk.IV — firmware verified</div>
-                  <div class="line">[BALLISTICS] Calib. 7.62mm | Muzzle 820 m/s | Effective 1400 m</div>
-                  <div class="line">[OPTICS] 10x smart-scope | thermal/low-light</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Spec</th><th>Value</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td>Weight</td><td>6.5 kg</td><td>Loaded</td></tr>
-                    <tr><td>Rate</td><td>Semi-auto</td><td>Controlled fire</td></tr>
-                    <tr><td>Ammo</td><td>7.62 AP</td><td>Anti-armor</td></tr>
-                    <tr><td>Stability</td><td>High</td><td>Recoil dampeners</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="mi-flatline" class="tabpane" hidden>
-                <div class="terminal" style="margin-bottom:10px">
-                  <div class="line ok">[DRONE] Flatline — tactical recon</div>
-                  <div class="line">[POWER] 45 min flight | stealth rotors</div>
-                  <div class="line">[SENSORS] Lidar, IR, acoustic</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Module</th><th>Status</th><th>Detail</th></tr></thead>
-                  <tbody>
-                    <tr><td>Navigation</td><td>READY</td><td>Waypoints + SLAM</td></tr>
-                    <tr><td>Comms</td><td>ENC</td><td>AES-GCM</td></tr>
-                    <tr><td>Payload</td><td>RECON</td><td>Micro-cam + mic</td></tr>
-                    <tr><td>Hull</td><td>CARBON</td><td>Low RCS</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="mi-briefs" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Time</th><th>Unit</th><th>ROE</th><th>Sitrep</th></tr></thead>
-                  <tbody id="mi-briefs-body"></tbody>
-                </table>
-              </div>
-            </main>
-          </div>
-
-          <!-- ================= ARASAKA ================= -->
-          <div id="app-arasaka" class="intra-app" hidden>
-            <aside class="intra-sidebar">
-              <h3>ARASAKA HQ</h3>
-              <button class="tabbtn" data-tab="ak-stocks">NC Stocks</button>
-              <button class="tabbtn" data-tab="ak-risk">Risk Dashboard</button>
-              <button class="tabbtn" data-tab="ak-compliance">Compliance</button>
-            </aside>
-            <main class="intra-main">
-              <div id="ak-stocks" class="tabpane">
-                <div class="kpi">
-                  <div class="card"><strong>NCX Index</strong><br><span id="ncx">3,204.5</span> (+0.14%)</div>
-                  <div class="card"><strong>Liquidity</strong><br> High</div>
-                  <div class="card"><strong>Volatility</strong><br> Low</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Ticker</th><th>Price</th><th>Δ</th><th>Notes</th></tr></thead>
-                  <tbody id="ak-stocks-body"></tbody>
-                </table>
-              </div>
-              <div id="ak-risk" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Division</th><th>Exposure</th><th>Trend</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td>Security Ops</td><td>Low</td><td>↘</td><td>Window 300ms</td></tr>
-                    <tr><td>Vault</td><td>Low</td><td>→</td><td>Seal OK</td></tr>
-                    <tr><td>SIEM</td><td>Low</td><td>↘</td><td>0 crit / 3 low</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="ak-compliance" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Policy</th><th>Status</th><th>Owner</th><th>Update</th></tr></thead>
-                  <tbody>
-                    <tr><td>GRC-A</td><td>OK</td><td>Risk</td><td>T+3d</td></tr>
-                    <tr><td>KMS</td><td>OK</td><td>Sec</td><td>Queued</td></tr>
-                    <tr><td>Data</td><td>OK</td><td>Ops</td><td>Rolling</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </main>
-          </div>
-
-          <!-- ================= MERC (V) ================= -->
-          <div id="app-merc" class="intra-app" hidden>
-            <aside class="intra-sidebar">
-              <h3>CONTRACTS</h3>
-              <button class="tabbtn" data-tab="mc-wakako">Wakako</button>
-              <button class="tabbtn" data-tab="mc-hands">Mr. Hands</button>
-              <button class="tabbtn" data-tab="mc-muamar">Muamar "El Capitán"</button>
-              <button class="tabbtn" data-tab="mc-board">Job Board</button>
-            </aside>
-            <main class="intra-main">
-              <div id="mc-wakako" class="tabpane">
-                <div class="terminal" style="margin-bottom:10px">
-                  <div class="line ok">[WAKAKO] Got a discreet gig. No questions.</div>
-                  <div class="line">[PAY] €$ 7,500 | Stealth preferred</div>
-                  <div class="line">[TARGET] Tyger Claws cache, Japantown</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Task</th><th>When</th><th>Where</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td>Infiltrate garage</td><td>Tonight</td><td>Japantown</td><td>Low heat</td></tr>
-                    <tr><td>Secure data shard</td><td>Tonight</td><td>Locker #14</td><td>No civilian harm</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="mc-hands" class="tabpane" hidden>
-                <div class="terminal" style="margin-bottom:10px">
-                  <div class="line ok">[HANDS] Pacifica needs a cleaner pair of hands.</div>
-                  <div class="line">[PAY] €$ 12,000 | Noise acceptable</div>
-                  <div class="line">[TARGET] Scav hub, Grand Imperial</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Task</th><th>When</th><th>Where</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td>Breach front</td><td>Tomorrow</td><td>Pacifica</td><td>Disrupt comms</td></tr>
-                    <tr><td>Extract asset</td><td>Tomorrow</td><td>Suite B-22</td><td>Timebox 6 min</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="mc-muamar" class="tabpane" hidden>
-                <div class="terminal" style="margin-bottom:10px">
-                  <div class="line ok">[EL CAPITÁN] Quick hit, easy cred—don’t get cocky.</div>
-                  <div class="line">[PAY] €$ 5,000 | Wheels provided</div>
-                  <div class="line">[TARGET] Drop convoy, Santo Domingo</div>
-                </div>
-                <table class="datatable">
-                  <thead><tr><th>Task</th><th>When</th><th>Where</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td>Hijack convoy</td><td>Weekend</td><td>SD-02</td><td>EMP on lead</td></tr>
-                    <tr><td>Deliver goods</td><td>Weekend</td><td>Fixer lot</td><td>No scratches</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="mc-board" class="tabpane" hidden>
-                <table class="datatable">
-                  <thead><tr><th>Contract</th><th>Fixer</th><th>Reward</th><th>Status</th></tr></thead>
-                  <tbody id="mc-board-body"></tbody>
-                </table>
-              </div>
-            </main>
-          </div>
-
-        </div><!-- /corp-apps -->
-
-        <!-- Placeholder visível somente quando tema == zetatech -->
-        <div id="corp-placeholder" class="card" style="margin-top:8px">
-          <strong>System:</strong> Corporate modules unavailable in Zetatech mode. Use <em>Logout</em> to switch systems.
+        <div id="intranet-content">
+          <!-- Conteúdo será injetado por renderIntranet(theme) -->
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Terminal-strip / easter eggs -->
+  <!-- Terminal-style strip + Easter eggs -->
   <div class="term-strip" aria-hidden="true">
     <div class="wrap">
       <div class="ticker" id="ticker">
         [SYS] <span class="dot">•</span> POWERED BY ZETATECH <span class="dot">•</span> PROTECTED BY NETWATCH <span class="dot">•</span> MILITECH SECURITY COMPLIANCE <span class="dot">•</span> ARA<span style="letter-spacing:.02em">SA</span>KA RISK OVERSIGHT
       </div>
-      <div>
-        <button class="stealth" id="stealth">Stealth Mode</button>
-      </div>
+      <div></div>
     </div>
   </div>
 
@@ -719,368 +491,426 @@
     </div>
   </footer>
 
-  <!-- ===== BOOT / LOGIN ===== -->
-  <div id="boot" role="dialog" aria-modal="true" aria-label="System Boot & Login" style="display:none; position:fixed; inset:0; background:#000; z-index:9999">
-    <div class="boot-wrap" style="max-width:900px; margin:0 auto; padding:24px; color:#9be3a6; font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', monospace; font-size:14px">
-      <div class="boot-screen" id="boot-screen" style="border:1px solid #1aff64; background:#020402; padding:16px; box-shadow:0 0 24px rgba(0,255,128,.12), inset 0 0 0 1px rgba(0,255,128,.08); min-height:50vh; overflow:auto">
+  <!-- ===== BOOT / LOGIN (apenas desktop) ===== -->
+  <div id="boot" role="dialog" aria-modal="true" aria-label="System Boot & Login">
+    <div class="boot-wrap">
+      <div class="boot-screen" id="boot-screen">
         <div class="boot-line">[POWER] Shutting down...</div>
       </div>
-      <form class="prompt" id="login-form" autocomplete="off" spellcheck="false" style="display:none; gap:8px; align-items:center; margin-top:10px">
-        <label for="login-user" style="color:#7aff90">Username:</label>
-        <input id="login-user" name="login-user" type="text" inputmode="latin" autofocus placeholder="" style="flex:1; background:#000; color:#bdf6c6; border:1px solid #1aff64; padding:6px 8px; outline:none">
-        <button id="login-btn" type="submit" style="border:1px solid #1aff64; background:transparent; color:#bdf6c6; padding:6px 10px; font-weight:800; text-transform:uppercase; cursor:pointer">Log in</button>
+      <form class="prompt" id="login-form" autocomplete="off" spellcheck="false">
+        <label for="login-user">Username:</label>
+        <input id="login-user" name="login-user" type="text" inputmode="latin" autofocus placeholder="">
+        <button id="login-btn" type="submit">Log in</button>
       </form>
     </div>
   </div>
 
   <script>
-    /* ========= Helpers ========= */
-    const $ = (s,scope=document)=>scope.querySelector(s);
-    const $$ = (s,scope=document)=>[...scope.querySelectorAll(s)];
-    const root = document.documentElement;
-    const isMobile = matchMedia('(max-width: 760px)').matches;
+    window.addEventListener('DOMContentLoaded', () => {
+      /* ========= Helpers ========= */
+      const $ = (s,scope=document)=>scope.querySelector(s);
+      const $$ = (s,scope=document)=>[...scope.querySelectorAll(s)];
+      const root = document.documentElement;
+      const isMobile = matchMedia('(max-width: 760px)').matches;
 
-    /* ========= Themes / Roles ========= */
-    const THEMES = {
-      zetatech:{bg:'#050a06',text:'#e6ffe8',muted:'#a5e5b7',accent:'#6bff75',rgb:'107,255,117',soft:'rgba(107,255,117,.10)',ring:'rgba(107,255,117,.45)'},
-      netwatch:{bg:'#0b0506',text:'#ffeaea',muted:'#ffcccc',accent:'#ff4d58',rgb:'255,77,88',soft:'rgba(255,77,88,.10)',ring:'rgba(255,77,88,.45)'},
-      arasaka: {bg:'#041014',text:'#e5f9ff',muted:'#bfeeff',accent:'#00d6ff',rgb:'0,214,255',soft:'rgba(0,214,255,.10)',ring:'rgba(0,214,255,.45)'},
-      militech:{bg:'#0f0c03',text:'#fff6df',muted:'#f5e3b0',accent:'#ffcc33',rgb:'255,204,51',soft:'rgba(255,204,51,.12)',ring:'rgba(255,204,51,.45)'},
-      merc:    {bg:'#0b0406',text:'#ffe8f0',muted:'#ffc9d7',accent:'#ff2b57',rgb:'255,43,87',soft:'rgba(255,43,87,.12)',ring:'rgba(255,43,87,.45)'}
-    };
-    const ROLES = { zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'V' };
+      /* ========= Themes map ========= */
+      const THEMES = {
+        zetatech: { bg:'#050a06', text:'#e6ffe8', muted:'#a5e5b7', accent:'#6bff75', rgb:'107,255,117', soft:'rgba(107,255,117,.10)', ring:'rgba(107,255,117,.45)' },
+        netwatch: { bg:'#0b0506', text:'#ffeaea', muted:'#ffcccc', accent:'#ff4d58', rgb:'255,77,88', soft:'rgba(255,77,88,.10)', ring:'rgba(255,77,88,.45)' },
+        arasaka:  { bg:'#041014', text:'#e5f9ff', muted:'#bfeeff', accent:'#00d6ff', rgb:'0,214,255', soft:'rgba(0,214,255,.10)', ring:'rgba(0,214,255,.45)' },
+        militech: { bg:'#0f0c03', text:'#fff6df', muted:'#f5e3b0', accent:'#ffcc33', rgb:'255,204,51', soft:'rgba(255,204,51,.12)', ring:'rgba(255,204,51,.45)' },
+        merc:     { bg:'#0b0408', text:'#ffe6f3', muted:'#ffcbe6', accent:'#ff3a85', rgb:'255,58,133', soft:'rgba(255,58,133,.10)', ring:'rgba(255,58,133,.45)' },
+      };
+      const ROLES = { zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'Merc' };
 
-    function refreshBackground(){
-      const rgb = getComputedStyle(root).getPropertyValue('--accent-rgb').trim();
-      document.body.style.backgroundImage =
-        `repeating-linear-gradient(0deg, transparent 0 2px, rgba(${rgb},0.05) 2px 3px),
-         repeating-linear-gradient(90deg, transparent 0 50px, rgba(${rgb},0.03) 50px 51px)`;
-    }
-    function setThemeVars(t){
-      root.style.setProperty('--bg', t.bg);
-      root.style.setProperty('--text', t.text);
-      root.style.setProperty('--muted', t.muted);
-      root.style.setProperty('--accent', t.accent);
-      root.style.setProperty('--accent-rgb', t.rgb);
-      root.style.setProperty('--accent-soft', t.soft);
-      root.style.setProperty('--ring', t.ring);
+      function setCursor(hex){
+        const hh = (hex||'#6bff75').replace('#','');
+        const svg = encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="#${hh}" stroke-width="1" fill="none"/></svg>`);
+        document.body.style.cursor = `url('data:image/svg+xml;utf8,${svg}') 12 12, auto`;
+      }
+      function refreshBackground(){
+        const rgb = getComputedStyle(root).getPropertyValue('--accent-rgb').trim();
+        document.body.style.backgroundImage =
+          `repeating-linear-gradient(0deg, transparent 0 2px, rgba(${rgb},0.05) 2px 3px),
+           repeating-linear-gradient(90deg, transparent 0 50px, rgba(${rgb},0.03) 50px 51px)`;
+      }
+      function setThemeVars(t){
+        root.style.setProperty('--bg', t.bg);
+        root.style.setProperty('--text', t.text);
+        root.style.setProperty('--muted', t.muted);
+        root.style.setProperty('--accent', t.accent);
+        root.style.setProperty('--accent-rgb', t.rgb);
+        root.style.setProperty('--accent-soft', t.soft);
+        root.style.setProperty('--ring', t.ring);
+        refreshBackground();
+        document.body.style.color = t.text;
+        setCursor(t.accent);
+      }
+      function setTheme(name){
+        const t = THEMES[name] || THEMES.zetatech;
+        document.documentElement.setAttribute('data-theme', name);
+        setThemeVars(t);
+        $('#mode-tag') && ($('#mode-tag').textContent = name.charAt(0).toUpperCase()+name.slice(1));
+        $('#role').textContent = ROLES[name] || 'Merc';
+        $('#role-tag') && ($('#role-tag').textContent = ROLES[name] || 'Merc');
+        renderIntranet(name);
+      }
+
+      /* ========= Countdown (São Paulo -03:00) ========= */
+      const EVENT_DATE = new Date('2025-09-27T13:00:00-03:00');
+      function tick(){
+        const dd = $('#dd'), hh = $('#hh'), mm = $('#mm'), ss = $('#ss');
+        if(!dd||!hh||!mm||!ss) return;
+        const now = new Date();
+        let ms = EVENT_DATE - now; if(ms < 0) ms = 0;
+        const s = Math.floor(ms/1000);
+        const d = Math.floor(s/86400);
+        const h = Math.floor((s%86400)/3600);
+        const m = Math.floor((s%3600)/60);
+        const sec= s%60;
+        dd.textContent = String(d);
+        hh.textContent = String(h).padStart(2,'0');
+        mm.textContent = String(m).padStart(2,'0');
+        ss.textContent = String(sec).padStart(2,'0');
+      }
+      tick(); setInterval(tick, 1000);
+
+      /* ========= ICS ========= */
+      $('#btn-ics')?.addEventListener('click', ()=>{
+        const ics = [
+          'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
+          'UID:fecart-'+Date.now()+'@fecap','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',
+          'DTSTART:20250927T160000Z','DTEND:20250927T200000Z',
+          'SUMMARY:FECART — CIBER','DESCRIPTION:FECART no Colégio FECAP. Info: '+location.href,
+          'LOCATION:Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001','END:VEVENT','END:VCALENDAR'
+        ].join('\r\n');
+        const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'FECART-2025.ics';
+        document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+      });
+
+      /* ========= Google Calendar ========= */
+      const gcal = new URL('https://calendar.google.com/calendar/render');
+      gcal.searchParams.set('action','TEMPLATE');
+      gcal.searchParams.set('text','FECART — CIBER');
+      gcal.searchParams.set('details','FECART no Colégio FECAP. Info: ' + location.href);
+      gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
+      gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
+      $('#btn-gcal') && ($('#btn-gcal').href = gcal.toString());
+
+      /* ========= Compartilhar (WhatsApp) ========= */
+      const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
+      $('#btn-whats') && ($('#btn-whats').href = 'https://wa.me/?text=' + msg);
+
+      /* ========= Copiar endereço ========= */
+      $('#btn-copy')?.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — 01502-001');
+          const t = $('#btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
+          setTimeout(()=> t.textContent = old, 1200);
+        } catch(e){ alert('Não foi possível copiar.'); }
+      });
+
+      /* ========= Geo fallback (desktop) ========= */
+      $('#btn-geo')?.addEventListener('click', (e) => {
+        if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+          e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
+        }
+      });
+
+      /* ========= Mobile menu (Android fix: só click) ========= */
+      const toggle = $('#menu-toggle'); const nav = $('#menu');
+      function toggleMenu(){
+        const active = nav.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', active ? 'true' : 'false');
+        document.body.classList.toggle('menu-open', active);
+      }
+      toggle?.addEventListener('click', toggleMenu);
+      nav?.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false');
+        });
+      });
+      document.addEventListener('click', (e)=>{
+        if(!nav) return;
+        if(nav.classList.contains('active') && !nav.contains(e.target) && e.target !== toggle){
+          nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false');
+        }
+      });
+
+      /* ========= FAQ slide ========= */
+      const allFaqs = $$('#faq details');
+      function slideOpen(el){ if(el.open) return; el.style.overflow='hidden'; el.open = true; const end = el.scrollHeight; el.style.height = 0; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = end+'px'; }); el.addEventListener('transitionend', function done(){ el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
+      function slideClose(el){ if(!el.open) return; el.style.overflow='hidden'; const start = el.scrollHeight; el.style.height = start+'px'; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = 0; }); el.addEventListener('transitionend', function done(){ el.open = false; el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
+      allFaqs.forEach(d=>{ const sum = $('summary', d); sum.addEventListener('click', (ev)=>{ ev.preventDefault(); d.open ? slideClose(d) : slideOpen(d); }); });
+      $('#faq-expand')?.addEventListener('click', ()=> allFaqs.forEach(slideOpen));
+      $('#faq-collapse')?.addEventListener('click', ()=> allFaqs.forEach(slideClose));
+
+      /* ========= Glitch background leve drift ========= */
+      setInterval(()=>{
+        const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
+        document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
+      }, 900);
+
+      /* ========= Intranet: Render por tema ========= */
+      function renderIntranet(theme){
+        const wrap = $('#intranet-content');
+        if(!wrap) return;
+
+        // Zetatech: apenas logout (sem conteúdo denso)
+        if(theme === 'zetatech'){
+          wrap.innerHTML = `
+            <div class="subnav">
+              <span class="tag">Mode: <strong id="mode-tag">Zetatech</strong></span>
+              <span class="tag">Role: <strong id="role-tag">Zetatech Agent</strong></span>
+              <span class="tag">Build: <strong>2.7.9</strong></span>
+            </div>
+            <div class="card">
+              <p>Access limited on public landing. Use <strong>Logout</strong> to switch systems.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Outros temas: logs + tabelas densas (placeholder genérico até especializarmos)
+        wrap.innerHTML = `
+          <div class="subnav">
+            <span class="tag">Mode: <strong id="mode-tag">${theme.charAt(0).toUpperCase()+theme.slice(1)}</strong></span>
+            <span class="tag">Role: <strong id="role-tag">${ROLES[theme]||'User'}</strong></span>
+            <span class="tag">Build: <strong>2.7.9</strong></span>
+            <span class="tag">Uptime: <strong id="uptime">00:00:00</strong></span>
+          </div>
+
+          <div class="densegrid">
+            <div class="terminal" id="log"></div>
+
+            <div class="card">
+              <h3 style="margin-bottom:8px">Operational Intel</h3>
+              <table class="datatable" id="intel-table">
+                <thead><tr><th>Division</th><th>Status</th><th>Risk</th><th>Notes</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <h3 style="margin-bottom:8px">Active Alerts</h3>
+            <table class="datatable" id="alerts-table">
+              <thead><tr><th>Time</th><th>Source</th><th>Severity</th><th>Message</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        `;
+
+        // Datasets enxutos (placeholder até entrarmos no conteúdo final por corp)
+        const LOG_SETS = {
+          netwatch: [
+            '[GRID][INTEL] Darkfiber probe synced',
+            '[TRACE] Node 10.44.9.2 flagged: anomalous DNS',
+            '[ACL] Policy NW-RED/7 enforced',
+            '[IDP] L7 signature hit: 0x9f4e',
+            '[AUDIT] 3 credentials rotated',
+            '[OPS] Sweep complete — surface clean'
+          ],
+          arasaka: [
+            '[RISK] Exposure index: 0.14 (low)',
+            '[SOC] Alert window reduced to 300ms',
+            '[VAULT] Seal integrity OK',
+            '[SIEM] 0 critical / 3 low',
+            '[GRC] Compliance A- updated',
+            '[KMS] Rotation schedule in sync'
+          ],
+          militech: [
+            '[TACTICAL] Perimeter online',
+            '[DRONE] Recon path set, ETA 03:00',
+            '[ARMORY] Mk.IV firmware verified',
+            '[OPS] SITREP: green across 5 sectors',
+            '[SIGINT] Burst comms decoded',
+            '[BRIEF] Rules of engagement loaded'
+          ],
+          merc: [
+            '[WIRE] Handshake on shadownet',
+            '[FENCE] Package escrow confirmed',
+            '[BBS] New contract: 0x7f-NEON',
+            '[FIXER] Drop point moved — ping later',
+            '[GHOST] Heat: low, tail: zero',
+            '[PATCH] Custom ICE armed'
+          ]
+        };
+        const TABLES = {
+          netwatch: [
+            ['Firewall L7','ENFORCED','MED','Ruleset NW-RED/7'],
+            ['Probe DF-03','ACTIVE','LOW','Darkfiber path ok'],
+            ['DNS Sinkhole','ARMED','LOW','NXDOMAIN trap'],
+            ['IDP Grid','HOT','MED','6 signatures watch'],
+            ['Audit Trail','WRITE','LOW','Immutable ledger'],
+            ['Threat Map','LIVE','MED','4 geo clusters']
+          ],
+          arasaka: [
+            ['Risk Engine','LOW','LOW','Index 0.14'],
+            ['Vault A','SEALED','LOW','Tamper 0'],
+            ['SIEM','QUIET','LOW','0 critical / 3 low'],
+            ['KMS','SYNCED','LOW','Rotation T+3d'],
+            ['SOC Window','NARROW','LOW','300ms triage'],
+            ['GRC','A-','LOW','Policy updated']
+          ],
+          militech: [
+            ['Perimeter','GREEN','LOW','All gates locked'],
+            ['Recon Drones','AIR','MED','ETA 03:00'],
+            ['Armory','CHECK','LOW','Mk.IV verified'],
+            ['SITREP','GREEN','LOW','5 sectors nominal'],
+            ['SIGINT','LIVE','MED','Burst decoded'],
+            ['Briefing','READY','LOW','ROE loaded']
+          ],
+          merc: [
+            ['Shadownet','UP','LOW','Handshake ok'],
+            ['Escrow','HELD','LOW','Funds clean'],
+            ['Contract 0x7f','OPEN','MED','NEON — 48h'],
+            ['Tail Heat','COLD','LOW','Zero eyes'],
+            ['Fixer','ONCALL','LOW','Ping @ 22:00'],
+            ['ICE','CUSTOM','MED','Traceback bite']
+          ]
+        };
+        const ALERTS = {
+          netwatch: [
+            ['13:00:03','TRACE','MED','Unusual SNI observed'],
+            ['13:01:20','GRID','LOW','Peer latency +12ms'],
+            ['13:05:54','ACL','LOW','Rule NW-RED/7 applied']
+          ],
+          arasaka: [
+            ['13:00:30','RISK','LOW','Index drift -0.01'],
+            ['13:03:17','SIEM','LOW','Suppressed noise'],
+            ['13:06:45','KMS','LOW','Key rotation queued']
+          ],
+          militech: [
+            ['13:01:10','OPS','LOW','SITREP updated'],
+            ['13:02:44','DRONE','MED','Crosswind alert'],
+            ['13:05:29','ARMORY','LOW','Checksum valid']
+          ],
+          merc: [
+            ['13:00:12','WIRE','LOW','Hop relayed'],
+            ['13:04:09','FIXER','LOW','New note posted'],
+            ['13:06:20','GHOST','MED','Scramble window']
+          ]
+        };
+
+        // Logs
+        const log = $('#log'); (LOG_SETS[theme]||[]).forEach(ln=>{
+          const div = document.createElement('div'); div.className='line'; div.textContent=ln; log.appendChild(div);
+        });
+
+        // Tabela principal
+        const tbody = $('#intel-table tbody'); (TABLES[theme]||[]).forEach(row=>{
+          const tr = document.createElement('tr');
+          row.forEach(cell=>{ const td=document.createElement('td'); td.textContent=cell; tr.appendChild(td); });
+          tbody.appendChild(tr);
+        });
+
+        // Alerts
+        const abody = $('#alerts-table tbody'); (ALERTS[theme]||[]).forEach(row=>{
+          const tr = document.createElement('tr');
+          row.forEach(cell=>{ const td=document.createElement('td'); td.textContent=cell; tr.appendChild(td); });
+          abody.appendChild(tr);
+        });
+
+        // Uptime (somente quando intranet “cheia” está visível)
+        const uptimeEl = $('#uptime');
+        if(uptimeEl){
+          let startTs = Date.now();
+          setInterval(()=>{
+            const t = Date.now()-startTs; const s = Math.floor(t/1000);
+            const h = String(Math.floor(s/3600)).padStart(2,'0');
+            const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
+            const ss= String(s%60).padStart(2,'0');
+            uptimeEl.textContent = `${h}:${m}:${ss}`;
+          },1000);
+        }
+      }
+
+      /* ========= Greeting ========= */
+      function greet(theme){
+        const role = {zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'V'}[theme] || 'User';
+        const el = document.createElement('div');
+        el.textContent = `Welcome, ${role}`;
+        el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
+        const hero = document.querySelector('.hero .wrap');
+        hero && hero.insertBefore(el, hero.children[2]);
+        setTimeout(()=> el.remove(), 2200);
+      }
+
+      /* ========= Session/Theme init ========= */
+      function applySession(theme){
+        setTheme(theme);
+        greet(theme);
+      }
+      // inicia como Zetatech
+      applySession('zetatech');
+
+      /* ========= Boot/Login (desktop only) ========= */
+      const boot = $('#boot');
+      const bootScreen = $('#boot-screen');
+      const loginForm = $('#login-form');
+      const loginUser = $('#login-user');
+      const loginBtn  = $('#login-btn');
+
+      function clearBootLog(){
+        bootScreen.innerHTML = '<div class="boot-line">[POWER] Shutting down...</div>';
+      }
+      function printLine(text, cls='boot-line', delay=0){
+        return new Promise(res=>{
+          setTimeout(()=>{
+            const div = document.createElement('div');
+            div.className = cls; div.textContent = text;
+            bootScreen.appendChild(div);
+            bootScreen.scrollTop = bootScreen.scrollHeight;
+            res();
+          }, delay);
+        });
+      }
+      async function showBoot(){
+        if(isMobile){ alert('Intranet disponível apenas no computador.'); return; }
+        clearBootLog();
+        boot.classList.add('active');
+        loginForm.style.display = 'none';
+        await printLine('[KERNEL] Halting userland...');
+        await printLine('[POWER] System off.', 'boot-warn', 250);
+        await printLine(''); await printLine('[POWER] Booting...');
+        await printLine('[POST] Memory OK | Storage OK | Network OK', 'boot-line', 180);
+        await printLine('[INIT] Loading drivers: video, net, hid', 'boot-line', 180);
+        await printLine('[DAEMON] Security services: up', 'boot-line', 180);
+        await printLine('[LOGIN] Ready.', 'boot-line', 150);
+        loginForm.style.display = 'flex';
+        loginUser.value = '';
+        loginUser.focus();
+      }
+      async function verifyAndLogin(userRaw){
+        const user = String(userRaw || '').trim().toLowerCase();
+        const theme = (['zetatech','netwatch','arasaka','militech','merc'].includes(user)) ? user :
+                      (user === 'v' ? 'merc' : 'merc');
+        clearBootLog();
+        await printLine(`[AUTH] Verifying credentials for "${user || 'unknown'}"...`);
+        loginBtn.disabled = true; loginUser.disabled = true;
+        await new Promise(r=>setTimeout(r, 3000)); // 3s fixo
+        await printLine('> ACCESS GRANTED', 'boot-line');
+        // fecha e limpa (não persiste o log)
+        boot.classList.remove('active');
+        loginBtn.disabled = false; loginUser.disabled = false;
+        applySession(theme);
+      }
+
+      $('#logout')?.addEventListener('click', showBoot);
+      loginForm?.addEventListener('submit', (e)=>{ e.preventDefault(); verifyAndLogin(loginUser.value); });
+
+      // Drift sutil do background
+      setInterval(()=>{
+        const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
+        document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
+      }, 900);
+
+      // recolor inicial (alguns webviews)
       refreshBackground();
-      document.body.style.color = t.text;
-    }
-    function setTheme(name){
-      const t = THEMES[name] || THEMES.zetatech;
-      document.documentElement.setAttribute('data-theme', name);
-      setThemeVars(t);
-
-      // session display
-      $('#role').textContent = ROLES[name] || 'V';
-      $('#mode-tag')?.textContent = name.charAt(0).toUpperCase()+name.slice(1);
-      $('#role-tag')?.textContent = ROLES[name] || 'V';
-
-      // intranet visibility: só mostra apps quando não for zetatech
-      const apps = $('#corp-apps'), ph = $('#corp-placeholder');
-      if(apps && ph){
-        const showApps = name !== 'zetatech';
-        apps.style.display = showApps ? '' : 'none';
-        ph.style.display = showApps ? 'none' : '';
-      }
-
-      // re-render conteúdos da corp
-      renderCorp(name);
-    }
-
-    /* ========= Countdown (São Paulo -03:00) ========= */
-    const EVENT_DATE = new Date('2025-09-27T13:00:00-03:00');
-    function tick(){
-      const dd = $('#dd'), hh = $('#hh'), mm = $('#mm'), ss = $('#ss');
-      if(!dd||!hh||!mm||!ss) return;
-      const now = new Date();
-      let ms = EVENT_DATE - now; if(ms < 0) ms = 0;
-      const s = Math.floor(ms/1000);
-      const d = Math.floor(s/86400);
-      const h = Math.floor((s%86400)/3600);
-      const m = Math.floor((s%3600)/60);
-      const sec= s%60;
-      dd.textContent = String(d);
-      hh.textContent = String(h).padStart(2,'0');
-      mm.textContent = String(m).padStart(2,'0');
-      ss.textContent = String(sec).padStart(2,'0');
-    }
-    tick(); setInterval(tick, 1000);
-
-    /* ========= ICS ========= */
-    $('#btn-ics').addEventListener('click', ()=>{
-      const ics = [
-        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
-        'UID:fecart-'+Date.now()+'@fecap','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',
-        'DTSTART:20250927T160000Z','DTEND:20250927T200000Z',
-        'SUMMARY:FECART — CIBER','DESCRIPTION:FECART no Colégio FECAP. Info: '+location.href,
-        'LOCATION:Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001','END:VEVENT','END:VCALENDAR'
-      ].join('\r\n');
-      const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'FECART-2025.ics';
-      document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+      setCursor(getComputedStyle(root).getPropertyValue('--accent').trim());
     });
-
-    /* ========= Google Calendar ========= */
-    const gcal = new URL('https://calendar.google.com/calendar/render');
-    gcal.searchParams.set('action','TEMPLATE');
-    gcal.searchParams.set('text','FECART — CIBER');
-    gcal.searchParams.set('details','FECART no Colégio FECAP. Info: ' + location.href);
-    gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
-    gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
-    $('#btn-gcal').href = gcal.toString();
-
-    /* ========= Compartilhar (WhatsApp) ========= */
-    const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    $('#btn-whats').href = 'https://wa.me/?text=' + msg;
-
-    /* ========= Copiar endereço ========= */
-    $('#btn-copy')?.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — 01502-001');
-        const t = $('#btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
-        setTimeout(()=> t.textContent = old, 1200);
-      } catch(e){ alert('Não foi possível copiar.'); }
-    });
-
-    /* ========= Geo fallback (desktop) ========= */
-    $('#btn-geo')?.addEventListener('click', (e) => {
-      if (!/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-        e.currentTarget.href = 'https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001';
-      }
-    });
-
-    /* ========= Mobile menu ========= */
-    const toggleBtn = $('#menu-toggle'); const nav = $('#menu');
-    function toggleMenu(){
-      const active = nav.classList.toggle('active');
-      toggleBtn.setAttribute('aria-expanded', active ? 'true' : 'false');
-      document.body.classList.toggle('menu-open', active);
-    }
-    toggleBtn.addEventListener('click', toggleMenu);
-    toggleBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); toggleMenu(); });
-    nav.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggleBtn.setAttribute('aria-expanded','false');
-      });
-    });
-    document.addEventListener('click', (e)=>{
-      if(nav.classList.contains('active') && !nav.contains(e.target) && e.target !== toggleBtn){
-        nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggleBtn.setAttribute('aria-expanded','false');
-      }
-    });
-
-    /* ========= FAQ slide ========= */
-    const allFaqs = $$('#faq details');
-    function slideOpen(el){ if(el.open) return; el.style.overflow='hidden'; el.open = true; const end = el.scrollHeight; el.style.height = 0; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = end+'px'; }); el.addEventListener('transitionend', function done(){ el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
-    function slideClose(el){ if(!el.open) return; el.style.overflow='hidden'; const start = el.scrollHeight; el.style.height = start+'px'; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = 0; }); el.addEventListener('transitionend', function done(){ el.open = false; el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
-    allFaqs.forEach(d=>{ const sum = $('summary', d); sum.addEventListener('click', (ev)=>{ ev.preventDefault(); d.open ? slideClose(d) : slideOpen(d); }); });
-    $('#faq-expand').addEventListener('click', ()=> allFaqs.forEach(slideOpen));
-    $('#faq-collapse').addEventListener('click', ()=> allFaqs.forEach(slideClose));
-
-    /* ========= Stealth mode (cosmético) ========= */
-    let stealthOn = false;
-    $('#stealth').addEventListener('click', ()=>{
-      stealthOn = !stealthOn;
-      document.body.style.animation = stealthOn ? 'none' : '';
-      document.querySelectorAll('.glitch').forEach(el=>{
-        el.style.setProperty('text-shadow', stealthOn ? 'none' : '0 0 6px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.20)');
-      });
-    });
-
-    /* ========= Intranet Apps (dados densos) ========= */
-    // Netwatch: preenchimento de tráfego/DNS/IDS
-    const nwTrafficRows = [
-      ['13:00:01','10.44.9.2 → 172.16.0.8','TLS','98,223','OK'],
-      ['13:00:07','10.44.9.2 → 1.1.1.1','DNS','2,144','NX trap'],
-      ['13:01:15','172.16.3.7 → 172.16.0.8','HTTP/2','44,902','Cache HIT'],
-      ['13:02:40','172.16.22.4 → 10.44.9.2','QUIC','76,001','OK'],
-      ['13:03:10','10.44.7.5 → 172.16.1.2','SSH','8,334','Policy OK'],
-      ['13:03:55','172.16.2.11 → 172.16.0.8','gRPC','51,220','OK'],
-      ['13:04:22','10.44.5.3 → 172.16.0.8','HTTP/3','61,702','Prefetch'],
-      ['13:05:03','172.16.9.1 → 172.16.0.8','TLS','70,441','OK']
-    ];
-    const nwDnsRows = [
-      ['13:00:07','badexfil.netrun','A','NXDOMAIN','SINKHOLE'],
-      ['13:02:11','api.kiroshi.nc','A','172.16.0.8','ALLOW'],
-      ['13:03:21','cdn.santo.nc','AAAA','2001:db8::8','ALLOW'],
-      ['13:05:47','obfusc8.tld','TXT','—','FLAG']
-    ];
-    const nwIdsLines = [
-      '[IDS] Rule NW-RED/7 applied',
-      '[IDS] Sig 0x9f4e: SQLi attempt — blocked',
-      '[IPS] Burst from 10.44.5.3 — rate limited',
-      '[IDS] DNS tunneling pattern — sinkholed',
-      '[AUDIT] Credentials rotated (3)'
-    ];
-
-    function renderNetwatch(){
-      const tb = $('#nw-traffic-body'); if(tb){ tb.innerHTML = ''; nwTrafficRows.forEach(r=>{ const tr=document.createElement('tr'); r.forEach(c=>{ const td=document.createElement('td'); td.textContent=c; tr.appendChild(td); }); tb.appendChild(tr); }); }
-      const db = $('#nw-dns-body'); if(db){ db.innerHTML = ''; nwDnsRows.forEach(r=>{ const tr=document.createElement('tr'); r.forEach(c=>{ const td=document.createElement('td'); td.textContent=c; tr.appendChild(td); }); db.appendChild(tr); }); }
-      const ids = $('#nw-ids-log'); if(ids){ ids.innerHTML = ''; nwIdsLines.forEach(l=>{ const div=document.createElement('div'); div.className='line'; div.textContent=l; ids.appendChild(div); }); }
-      // selecionar aba padrão
-      selectTab('#app-netwatch','nw-traffic');
-    }
-
-    // Militech briefs
-    const briefs = [
-      ['13:00','Unit A','L1','Green perimeter'],
-      ['13:10','Unit B','L2','Crosswind alert'],
-      ['13:20','Unit C','L1','Recon path set'],
-      ['13:40','Unit D','L3','SITREP update']
-    ];
-    function renderMilitech(){
-      const b = $('#mi-briefs-body'); if(b){ b.innerHTML=''; briefs.forEach(r=>{ const tr=document.createElement('tr'); r.forEach(c=>{ const td=document.createElement('td'); td.textContent=c; tr.appendChild(td); }); b.appendChild(tr); }); }
-      selectTab('#app-militech','mi-overwatch');
-    }
-
-    // Arasaka stocks
-    const stocks = [
-      ['ARA','142.25','+0.3%','Core banking'],
-      ['KRS','88.40','-0.1%','Kiroshi Optics'],
-      ['MTL','72.12','+0.6%','Militech Arms'],
-      ['NWC','51.09','+0.2%','Netwatch Grid']
-    ];
-    function renderArasaka(){
-      const sb = $('#ak-stocks-body'); if(sb){ sb.innerHTML=''; stocks.forEach(r=>{ const tr=document.createElement('tr'); r.forEach(c=>{ const td=document.createElement('td'); td.textContent=c; tr.appendChild(td); }); sb.appendChild(tr); }); }
-      // micro drift no índice
-      const idx = $('#ncx'); if(idx){ let base=3204.5; setInterval(()=>{ base += (Math.random()-.5)*0.5; idx.textContent = base.toFixed(1); }, 1800); }
-      selectTab('#app-arasaka','ak-stocks');
-    }
-
-    // Merc contracts board
-    const jobs = [
-      ['NEON-48','Wakako','€$ 7,500','OPEN'],
-      ['SAND-22','Mr. Hands','€$ 12,000','PENDING'],
-      ['RIP-09','El Capitán','€$ 5,000','OPEN']
-    ];
-    function renderMerc(){
-      const jb = $('#mc-board-body'); if(jb){ jb.innerHTML=''; jobs.forEach(r=>{ const tr=document.createElement('tr'); r.forEach(c=>{ const td=document.createElement('td'); td.textContent=c; tr.appendChild(td); }); jb.appendChild(tr); }); }
-      selectTab('#app-merc','mc-wakako');
-    }
-
-    function hideAllApps(){
-      ['#app-netwatch','#app-militech','#app-arasaka','#app-merc'].forEach(sel=>{
-        const el = $(sel); if(el) el.hidden = true;
-      });
-    }
-    function renderCorp(theme){
-      hideAllApps();
-      if(theme==='netwatch'){ $('#app-netwatch').hidden=false; renderNetwatch(); }
-      if(theme==='militech'){ $('#app-militech').hidden=false; renderMilitech(); }
-      if(theme==='arasaka'){ $('#app-arasaka').hidden=false; renderArasaka(); }
-      if(theme==='merc'){ $('#app-merc').hidden=false; renderMerc(); }
-      // zetatech não mostra app; placeholder aparece (controlado em setTheme)
-    }
-
-    /* ========= Tabs (genérico) ========= */
-    function selectTab(appSel, tabId){
-      const app = $(appSel); if(!app) return;
-      const panes = $$('.tabpane', app); panes.forEach(p=>p.hidden=true);
-      const btns = $$('.tabbtn', app); btns.forEach(b=>b.classList.remove('active'));
-      const target = $('#'+tabId, app); if(target) target.hidden = false;
-      const btn = btns.find(b=>b.dataset.tab===tabId); if(btn) btn.classList.add('active');
-    }
-    // delegação de clique para todos os apps
-    document.addEventListener('click', (e)=>{
-      const b = e.target.closest('.tabbtn'); if(!b) return;
-      const app = e.target.closest('.intra-app'); if(!app) return;
-      selectTab('#'+app.id, b.dataset.tab);
-    });
-
-    /* ========= Uptime (desktop) ========= */
-    let startTs = Date.now();
-    setInterval(()=>{
-      const t = Date.now()-startTs; const s = Math.floor(t/1000);
-      const h = String(Math.floor(s/3600)).padStart(2,'0');
-      const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
-      const ss= String(s%60).padStart(2,'0');
-      $('#uptime')?.textContent = `${h}:${m}:${ss}`;
-    },1000);
-
-    /* ========= Session init ========= */
-    function greet(theme){
-      // "Welcome, V" para merc; demais usam role
-      const who = theme==='merc' ? 'V' : (ROLES[theme] || 'User');
-      const el = document.createElement('div');
-      el.textContent = `Welcome, ${who}`;
-      el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
-      const hero = document.querySelector('.hero .wrap');
-      hero.insertBefore(el, hero.children[2]);
-      setTimeout(()=> el.remove(), 2200);
-    }
-    function applySession(theme){
-      setTheme(theme);
-      greet(theme);
-    }
-    // inicia Zetatech
-    applySession('zetatech');
-
-    /* ========= Boot/Login (desktop only) ========= */
-    const boot = $('#boot');
-    const bootScreen = $('#boot-screen');
-    const loginForm = $('#login-form');
-    const loginUser = $('#login-user');
-    const loginBtn  = $('#login-btn');
-
-    function clearBootLog(){
-      bootScreen.innerHTML = '<div class="boot-line">[POWER] Shutting down...</div>';
-    }
-    function printLine(text, cls='boot-line', delay=0){
-      return new Promise(res=>{
-        setTimeout(()=>{
-          const div = document.createElement('div');
-          div.className = cls; div.textContent = text;
-          bootScreen.appendChild(div);
-          bootScreen.scrollTop = bootScreen.scrollHeight;
-          res();
-        }, delay);
-      });
-    }
-    async function showBoot(){
-      if(isMobile){ alert('Intranet disponível apenas no computador.'); return; }
-      clearBootLog();
-      boot.style.display = 'block';
-      loginForm.style.display = 'none';
-      await printLine('[KERNEL] Halting userland...');
-      await printLine('[POWER] System off.','boot-warn',250);
-      await printLine('');
-      await printLine('[POWER] Booting...');
-      await printLine('[POST] Memory OK | Storage OK | Network OK','boot-line',180);
-      await printLine('[INIT] Loading drivers: video, net, hid','boot-line',180);
-      await printLine('[DAEMON] Security services: up','boot-line',180);
-      await printLine('[LOGIN] Ready.','boot-line',150);
-      loginForm.style.display = 'flex';
-      loginUser.value = '';
-      loginUser.focus();
-    }
-    async function verifyAndLogin(userRaw){
-      const user = String(userRaw||'').trim().toLowerCase();
-      const theme = (['zetatech','netwatch','arasaka','militech','merc','v'].includes(user))
-        ? (user==='v' ? 'merc' : user)
-        : 'merc';
-      clearBootLog();
-      await printLine(`[AUTH] Verifying credentials for "${user || 'unknown'}"...`);
-      loginBtn.disabled = true; loginUser.disabled = true;
-      await new Promise(r=>setTimeout(r, 3000)); // 3s fixo
-      await printLine('> ACCESS GRANTED','boot-line');
-      // fechar overlay e resetar log (não persiste histórico)
-      boot.style.display = 'none';
-      loginBtn.disabled = false; loginUser.disabled = false;
-      applySession(theme);
-    }
-    $('#logout').addEventListener('click', showBoot);
-    loginForm.addEventListener('submit', (e)=>{ e.preventDefault(); verifyAndLogin(loginUser.value); });
-
-    /* ========= Glitch background drift ========= */
-    setInterval(()=>{
-      const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
-      document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
-    }, 900);
-
-    // recolor inicial (alguns webviews)
-    refreshBackground();
   </script>
 </body>
 </html>
