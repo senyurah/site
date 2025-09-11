@@ -1,39 +1,32 @@
 <!doctype html>
-<html lang="en" data-theme="zetatech">
+<html lang="pt-BR" data-theme="zetatech">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#061009">
 
-  <title>FECART — CIBER | 2025-09-27</title>
-  <meta name="description" content="FECART at Colégio FECAP — 27/09/2025. Learn about the event, Cybersecurity course, who we are, location, and why it matters." />
+  <title>FECART — CIBER | 27/09/2025</title>
+  <meta name="description" content="FECART no Colégio FECAP — 27/09/2025. Conheça o evento, o curso de Cibersegurança, quem somos, local e a importância para a sociedade." />
   <link rel="canonical" href="https://senyurah.github.io/site/" />
 
   <!-- Open Graph -->
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="pt_BR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="FECART — CIBER | 27/09/2025">
-  <meta property="og:description" content="Join FECART — CIBER at Colégio FECAP on 27/09/2025. Cybersecurity, projects, social impact.">
+  <meta property="og:description" content="Participe da FECART — CIBER no Colégio FECAP em 27/09/2025. Cibersegurança, projetos e impacto social.">
   <meta property="og:url" content="https://senyurah.github.io/site/">
   <meta property="og:site_name" content="FECART — CIBER">
-  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png?v=3">
-  <meta property="og:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Lab 200 (entrance near the gym)">
+  <meta property="og:image" content="https://senyurah.github.io/site/og-image.png?v=4">
+  <meta property="og:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Laboratório 200 (entrada perto do ginásio)">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FECART — CIBER | 27/09/2025">
-  <meta name="twitter:description" content="FECART — CIBER | Colégio FECAP | 27/09/2025. Innovation, technology & society.">
-  <meta name="twitter:image" content="https://senyurah.github.io/site/og-image.png?v=3">
-  <meta name="twitter:image:alt" content="FECART — CIBER 2025 • 27/09/2025 • Lab 200 (entrance near the gym)">
 
   <!-- HUD Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =================== BASE VARIABLES (overridden by themes) =================== */
+    /* =================== VARS (sobrepostas por temas e JS) =================== */
     :root{
       --bg:#050a06;
       --text:#e6ffe8;
@@ -44,35 +37,28 @@
       --ring: rgba(107,255,117,.45);
       --max: 1100px;
     }
-
-    /* =================== THEMES (CSS fallback; JS reescreve as vars também) =================== */
     html[data-theme="zetatech"]{
       --bg:#050a06; --text:#e6ffe8; --muted:#a5e5b7;
-      --accent:#6bff75; --accent-rgb:107,255,117; --accent-soft:rgba(107,255,117,.10);
-      --ring:rgba(107,255,117,.45);
+      --accent:#6bff75; --accent-rgb:107,255,117; --accent-soft:rgba(107,255,117,.10); --ring:rgba(107,255,117,.45);
     }
     html[data-theme="netwatch"]{
       --bg:#0b0506; --text:#ffeaea; --muted:#ffcccc;
-      --accent:#ff4d58; --accent-rgb:255,77,88; --accent-soft:rgba(255,77,88,.10);
-      --ring:rgba(255,77,88,.45);
+      --accent:#ff4d58; --accent-rgb:255,77,88; --accent-soft:rgba(255,77,88,.10); --ring:rgba(255,77,88,.45);
     }
     html[data-theme="arasaka"]{
       --bg:#041014; --text:#e5f9ff; --muted:#bfeeff;
-      --accent:#00d6ff; --accent-rgb:0,214,255; --accent-soft:rgba(0,214,255,.10);
-      --ring:rgba(0,214,255,.45);
+      --accent:#00d6ff; --accent-rgb:0,214,255; --accent-soft:rgba(0,214,255,.10); --ring:rgba(0,214,255,.45);
     }
     html[data-theme="militech"]{
       --bg:#0f0c03; --text:#fff6df; --muted:#f5e3b0;
-      --accent:#ffcc33; --accent-rgb:255,204,51; --accent-soft:rgba(255,204,51,.12);
-      --ring:rgba(255,204,51,.45);
+      --accent:#ffcc33; --accent-rgb:255,204,51; --accent-soft:rgba(255,204,51,.12); --ring:rgba(255,204,51,.45);
     }
     html[data-theme="merc"]{
       --bg:#0b0410; --text:#ffe6ff; --muted:#f8c8ff;
-      --accent:#ff4de3; --accent-rgb:255,77,227; --accent-soft:rgba(255,77,227,.10);
-      --ring:rgba(255,77,227,.45);
+      --accent:#ff4de3; --accent-rgb:255,77,227; --accent-soft:rgba(255,77,227,.10); --ring:rgba(255,77,227,.45);
     }
 
-    /* =================== RESET & BASICS =================== */
+    /* =================== RESET/BASIC =================== */
     *{ box-sizing:border-box; margin:0; padding:0 }
     img{ max-width:100%; display:block }
     html{ scroll-behavior:smooth }
@@ -81,11 +67,11 @@
       color:var(--text);
       background-color:var(--bg);
       overflow-x:hidden;
-      /* o fundo glitch é recalculado também por JS ao trocar tema (para Android/Safari antigos) */
       background-image:
         repeating-linear-gradient(0deg, transparent 0 2px, rgba(var(--accent-rgb),0.05) 2px 3px),
         repeating-linear-gradient(90deg, transparent 0 50px, rgba(var(--accent-rgb),0.03) 50px 51px);
       animation:glitchShift 3s infinite linear;
+      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect x="2" y="2" width="20" height="20" stroke="%23'+(function(){return '6bff75';})()+'" stroke-width="1" fill="none"/></svg>') 12 12, auto;
     }
     @keyframes glitchShift{
       0%{background-position:0 0,0 0}
@@ -94,7 +80,6 @@
       75%{background-position:-3px 5px,15px -5px}
       100%{background-position:0 0,0 0}
     }
-
     a{ color:var(--accent); text-decoration:none }
     a:focus-visible, button:focus-visible{ outline:2px solid var(--ring); outline-offset:2px }
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px }
@@ -114,15 +99,13 @@
 
     .session{
       display:flex; align-items:center; gap:10px; white-space:nowrap;
-      font-weight:800; text-transform:uppercase; letter-spacing:.08em;
-      color:var(--muted);
+      font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted);
     }
     .session .role{ color:var(--accent) }
     .linklike{ border:1px solid var(--accent); background:transparent; color:var(--text);
       padding:6px 10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer }
     .linklike:hover{ background:var(--accent-soft) }
 
-    /* hamburger */
     .menu-toggle{
       display:none; border:1px solid var(--accent); padding:6px 10px;
       background:transparent; font-size:16px; font-weight:800; color:var(--text);
@@ -142,15 +125,13 @@
       nav li+li{ border-top:1px solid rgba(255,255,255,.08) }
       nav a{ display:block; padding:12px; text-align:center }
       nav.active a{ animation: neonBlink 1.2s infinite alternate }
-      @keyframes neonBlink{
-        0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) }
-        50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) }
-      }
+      @keyframes neonBlink{ 0%,100%{ color: var(--accent); text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent) } 50%{ color:#fff; text-shadow: 0 0 2px #fff, 0 0 6px var(--accent) } }
       body.menu-open{ overflow:hidden }
-      .session{ display:none }
+      .session{ display:none }                 /* intranet oculta no mobile */
+      .intranet-only{ display:none !important }/* esconde a intranet */
     }
 
-    /* =================== HERO =================== */
+    /* =================== HERO (FECART) =================== */
     main{ padding:28px 0 64px }
     .hero{
       text-align:center; padding:54px 0 8px;
@@ -167,16 +148,9 @@
       color:var(--text);
     }
 
-    /* glitch (suave, usa a cor do tema) */
-    .glitch{
-      position:relative; display:inline-block; color:var(--text);
-      text-shadow:0 0 6px rgba(var(--accent-rgb),.20);
-    }
-    .glitch::before, .glitch::after{
-      content:attr(data-text);
-      position:absolute; left:0; top:0; width:100%; overflow:hidden; pointer-events:none;
-      color: rgba(var(--accent-rgb), .25);
-    }
+    /* glitch suave */
+    .glitch{ position:relative; display:inline-block; color:var(--text); text-shadow:0 0 6px rgba(var(--accent-rgb),.20) }
+    .glitch::before,.glitch::after{ content:attr(data-text); position:absolute; left:0; top:0; width:100%; overflow:hidden; pointer-events:none; color: rgba(var(--accent-rgb), .25) }
     .glitch::before{ transform:translateX(1px); clip-path:inset(0 0 55% 0) }
     .glitch::after { transform:translateX(-1px); clip-path:inset(45% 0 0 0) }
     @media (prefers-reduced-motion: no-preference){
@@ -188,22 +162,15 @@
     .countwrap{ margin:18px 0 10px }
     .countwrap .label{ color:var(--muted); margin-bottom:6px; font-weight:700; letter-spacing:.08em; text-transform:uppercase }
     .countdown{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
-    .tile{
-      border:1px solid var(--accent); background:rgba(0,0,0,.25);
-      padding:10px 14px; min-width:90px; text-align:center;
-      color:var(--text);
-    }
+    .tile{ border:1px solid var(--accent); background:rgba(0,0,0,.25); padding:10px 14px; min-width:90px; text-align:center; color:var(--text) }
     .tile b{ display:block; font-size:clamp(20px,2.2vw + .2rem,28px) }
     .tile small{ text-transform:uppercase; font-size:12px; color:var(--muted); letter-spacing:.12em }
 
     .cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
-    .btn{
-      border:1px solid var(--accent); background:transparent; color:var(--text);
-      padding:10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer
-    }
+    .btn{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:10px 14px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; cursor:pointer }
     .btn:hover{ background:var(--accent-soft) }
 
-    /* SECTIONS */
+    /* SEÇÕES FECART */
     section{ padding:40px 0 }
     h2{ margin-bottom:14px; font-size:clamp(22px,2.2vw + .2rem,34px) }
     .grid{ display:grid; gap:16px }
@@ -211,68 +178,59 @@
     .card{ border:1px solid var(--accent); padding:16px; background:rgba(0,0,0,.22); color:var(--text); }
     .list{ display:grid; gap:8px; margin:8px 0 0; padding-left:18px }
 
-    /* FAQ with slide */
+    /* FAQ com slide */
     .faq-actions{ display:flex; gap:10px; margin-bottom:10px }
     .btn-ghost{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:8px 12px; font-weight:800; text-transform:uppercase }
     .btn-ghost:hover{ background:var(--accent-soft) }
-    .faq-list details{
-      border:1px solid var(--accent); margin-bottom:10px; background:rgba(0,0,0,.22); overflow:hidden; color:var(--text);
-    }
+    .faq-list details{ border:1px solid var(--accent); margin-bottom:10px; background:rgba(0,0,0,.22); overflow:hidden; color:var(--text) }
     .faq-list summary{ list-style:none; cursor:pointer; font-weight:800; padding:12px 14px }
     .faq-list p{ padding:0 14px 14px; color:var(--muted) }
 
+    /* =================== INTRANET (DESKTOP ONLY) =================== */
+    .intranet-only .subnav{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px }
+    .tag{ border:1px solid var(--accent); padding:4px 8px; background:rgba(0,0,0,.18); font-weight:800; letter-spacing:.06em }
+    .terminal{ border:1px solid var(--accent); background:rgba(0,0,0,.18); padding:16px; color:var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .terminal .line{ white-space:pre-wrap }
+    .terminal .ok{ color:rgba(var(--accent-rgb),.9) }
+    .terminal .warn{ color:#ffc857 }
+    .terminal .err{ color:#ff6b6b }
+    .densegrid{ display:grid; gap:16px }
+    @media(min-width:980px){ .densegrid{ grid-template-columns: 2fr 1fr } }
+
+    .datatable{ border:1px solid var(--accent); width:100%; border-collapse:collapse; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:rgba(0,0,0,.18) }
+    .datatable th,.datatable td{ border:1px solid var(--accent); padding:8px 10px; text-align:left; font-size:14px; color:var(--text) }
+    .datatable thead th{ background:rgba(var(--accent-rgb),.08) }
+    .datatable tbody tr:hover{ background:rgba(var(--accent-rgb),.06) }
+
     /* Terminal strip (easter eggs) */
-    .term-strip{
-      border-top:1px solid var(--accent);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      color:rgba(var(--accent-rgb),.55);
-      background:rgba(0,0,0,.35);
-      font-size:12px; line-height:1.4;
-    }
+    .term-strip{ border-top:1px solid var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas; color:rgba(var(--accent-rgb),.55); background:rgba(0,0,0,.35); font-size:12px; line-height:1.4 }
     .term-strip .wrap{ display:flex; gap:16px; padding:8px 20px; align-items:center; justify-content:space-between; flex-wrap:wrap }
-    .ticker{ opacity:.8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+    .ticker{ opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
     .ticker .dot{ color:var(--accent) }
-    .stealth{
-      border:1px solid var(--accent); padding:4px 8px; background:transparent; color:var(--text);
-      text-transform:uppercase; font-weight:800; letter-spacing:.06em; cursor:pointer
-    }
+    .stealth{ border:1px solid var(--accent); padding:4px 8px; background:transparent; color:var(--text); text-transform:uppercase; font-weight:800; letter-spacing:.06em; cursor:pointer }
     .stealth:hover{ background:var(--accent-soft) }
 
     /* FOOTER */
     footer{ border-top:1px solid var(--accent); color:var(--muted); padding:18px 0 28px; text-align:center }
 
-    /* ====== BOOT / LOGIN OVERLAY ====== */
+    /* ====== BOOT / LOGIN (DESKTOP) ====== */
     #boot{ position:fixed; inset:0; background:#000; z-index:9999; display:none }
     #boot.active{ display:block }
-    .boot-wrap{
-      max-width:900px; margin:0 auto; padding:24px; color:#9be3a6;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      font-size:14px;
-    }
-    .boot-screen{
-      border:1px solid #1aff64; background:#020402; padding:16px;
-      box-shadow:0 0 24px rgba(0,255,128,.12), inset 0 0 0 1px rgba(0,255,128,.08);
-      min-height:50vh; overflow:auto;
-    }
-    .boot-line{ color:#9be3a6; }
+    .boot-wrap{ max-width:900px; margin:0 auto; padding:24px; color:#9be3a6; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:14px }
+    .boot-screen{ border:1px solid #1aff64; background:#020402; padding:16px; box-shadow:0 0 24px rgba(0,255,128,.12), inset 0 0 0 1px rgba(0,255,128,.08); min-height:50vh; overflow:auto }
+    .boot-line{ color:#9be3a6 }
     .boot-warn{ color:#ffc857 }
     .boot-err{ color:#ff6b6b }
     .prompt{ display:flex; gap:8px; align-items:center; margin-top:10px }
     .prompt label{ color:#7aff90 }
-    .prompt input{
-      flex:1; background:#000; color:#bdf6c6; border:1px solid #1aff64; padding:6px 8px;
-      font-family:inherit; outline:none;
-    }
-    .prompt button{
-      border:1px solid #1aff64; background:transparent; color:#bdf6c6; padding:6px 10px; font-weight:800; text-transform:uppercase; cursor:pointer
-    }
+    .prompt input{ flex:1; background:#000; color:#bdf6c6; border:1px solid #1aff64; padding:6px 8px; font-family:inherit; outline:none }
+    .prompt button{ border:1px solid #1aff64; background:transparent; color:#bdf6c6; padding:6px 10px; font-weight:800; text-transform:uppercase; cursor:pointer }
     .prompt button:disabled{ opacity:.6; cursor:wait }
 
-    /* tap highlight */
     *{ -webkit-tap-highlight-color: rgba(var(--accent-rgb),.2) }
   </style>
 
-  <!-- Event + FAQ SEO (en) -->
+  <!-- Schema.org / Event (PT) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -282,10 +240,10 @@
     "eventStatus":"https://schema.org/EventScheduled",
     "startDate":"2025-09-27T13:00:00-03:00",
     "endDate":"2025-09-27T17:00:00-03:00",
-    "description":"FECART is a student event at Colégio FECAP to present projects and initiatives in arts, science, technology and society.",
+    "description":"A FECART é um evento estudantil no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade.",
     "location":{
       "@type":"Place",
-      "name":"Colégio/Faculdade FECAP — Campus Liberdade (Lab 200, entrance near the gym)",
+      "name":"Colégio/Faculdade FECAP — Campus Liberdade (Laboratório 200, entrada perto do ginásio)",
       "address":{
         "@type":"PostalAddress",
         "streetAddress":"Av. da Liberdade, 532",
@@ -303,36 +261,25 @@
   }
   </script>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Do I need to register?","acceptedAnswer":{"@type":"Answer","text":"No. Walk-in. Free entrance."}},
-      {"@type":"Question","name":"What time does it run?","acceptedAnswer":{"@type":"Answer","text":"27/09/2025 (Saturday), from 13:00 to 17:00."}},
-      {"@type":"Question","name":"Where inside the campus?","acceptedAnswer":{"@type":"Answer","text":"Lab 200, entrance near the gym (3rd floor), Campus Liberdade."}},
-      {"@type":"Question","name":"Who can attend?","acceptedAnswer":{"@type":"Answer","text":"Open to the community: students, families, friends and tech-curious."}},
-      {"@type":"Question","name":"What should I bring?","acceptedAnswer":{"@type":"Answer","text":"Curiosity. Optional: a water bottle and an ID if requested at the gate."}}
-    ]
-  }
-  </script>
 </head>
 <body>
-  <a class="sr-only" href="#content">Skip to content</a>
+  <a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
     <div class="wrap bar">
       <img src="logo.png" class="logo" alt="FECART — CIBER 2025">
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">Menu</button>
-      <nav id="menu" aria-label="Sections">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+      <nav id="menu" aria-label="Seções">
         <ul>
-          <li><a href="#about">What it is</a></li>
-          <li><a href="#cyber">Cybersecurity</a></li>
-          <li><a href="#who">Who we are</a></li>
-          <li><a href="#venue">Venue & Date</a></li>
-          <li><a href="#impact">Why it matters</a></li>
+          <li><a href="#sobre">O que é</a></li>
+          <li><a href="#ciber">Cibersegurança</a></li>
+          <li><a href="#quem-somos">Quem somos</a></li>
+          <li><a href="#local">Local & Data</a></li>
+          <li><a href="#importancia">Importância</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <!-- Link de intranet só exibe no desktop com CSS -->
+          <li class="intranet-only"><a href="#intranet">Intranet</a></li>
         </ul>
       </nav>
 
@@ -344,178 +291,222 @@
     </div>
   </header>
 
-  <main id="content">
-    <!-- HERO -->
+  <main id="conteudo">
+    <!-- HERO (PT) -->
     <section class="hero">
       <div class="wrap">
         <p class="lead" style="margin-bottom:6px">Colégio FECAP</p>
-        <h1><span class="glitch" data-text="FECART — CIBER | September 27, 2025">FECART — CIBER | September 27, 2025</span></h1>
-        <p class="lead">A showcase of creativity, technology and knowledge. Come see our <strong>Cybersecurity</strong> course project.</p>
+        <h1><span class="glitch" data-text="FECART — CIBER | 27 de setembro de 2025">FECART — CIBER | 27 de setembro de 2025</span></h1>
+        <p class="lead">Uma vitrine de criatividade, tecnologia e conhecimento. Conheça o nosso projeto do curso de <strong>Cibersegurança</strong>.</p>
 
         <div class="badges" style="margin-top:14px">
-          <span class="badge">27/09/2025 (Saturday) — 13:00–17:00</span>
+          <span class="badge">27/09/2025 (sábado) — 13h–17h</span>
           <span class="badge">Av. da Liberdade, 532 — São Paulo/SP</span>
-          <span class="badge">Lab 200 — entrance near the gym</span>
+          <span class="badge">Laboratório 200 — entrada perto do ginásio</span>
         </div>
 
         <div class="countwrap">
-          <div class="label">Time left</div>
+          <div class="label">faltam</div>
           <div class="countdown" role="status" aria-live="polite">
-            <div class="tile"><b id="dd">--</b><small>Days</small></div>
-            <div class="tile"><b id="hh">--</b><small>Hours</small></div>
-            <div class="tile"><b id="mm">--</b><small>Minutes</small></div>
-            <div class="tile"><b id="ss">--</b><small>Seconds</small></div>
+            <div class="tile"><b id="dd">--</b><small>Dias</small></div>
+            <div class="tile"><b id="hh">--</b><small>Horas</small></div>
+            <div class="tile"><b id="mm">--</b><small>Minutos</small></div>
+            <div class="tile"><b id="ss">--</b><small>Segundos</small></div>
           </div>
         </div>
 
         <div class="cta">
-          <button class="btn" id="btn-ics" type="button" title="Download .ics">Add .ics</button>
+          <button class="btn" id="btn-ics" type="button" title="Baixar .ics para seu calendário">Adicionar .ics</button>
           <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
-          <a class="btn" id="btn-map" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Directions</a>
-          <a class="btn" id="btn-share" target="_blank" rel="noopener" href="#">Share</a>
+          <a class="btn" id="btn-mapa" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
+          <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about">
+    <!-- SOBRE (PT) -->
+    <section id="sobre">
       <div class="wrap">
-        <h2><span class="glitch" data-text="What is FECART">What is FECART</span></h2>
+        <h2><span class="glitch" data-text="O que é a FECART">O que é a FECART</span></h2>
         <div class="grid grid-2">
           <div class="card">
-            <p>FECART is a student event at Colégio FECAP to present projects, prototypes and initiatives across arts, science, technology and society. It connects students, families and the community.</p>
+            <p>A FECART é um evento estudantil realizado no Colégio FECAP para apresentar projetos, protótipos e iniciativas nas áreas de arte, ciência, tecnologia e sociedade. É um espaço de integração entre estudantes, famílias e comunidade.</p>
           </div>
           <div class="card">
             <ul class="list">
-              <li>Project expo & live demos</li>
-              <li>Thematic tracks & hands-on experiences</li>
-              <li>Career connections & guidance</li>
-              <li>Open to the public — Free entry</li>
+              <li>Exposição de projetos e demonstrações</li>
+              <li>Trilhas temáticas e vivências</li>
+              <li>Conexão com cursos e carreira</li>
+              <li>Aberto à comunidade — Entrada gratuita</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CYBER -->
-    <section id="cyber">
+    <!-- CIBER (PT) -->
+    <section id="ciber">
       <div class="wrap">
-        <h2><span class="glitch" data-text="Cybersecurity Course">Cybersecurity Course</span></h2>
+        <h2><span class="glitch" data-text="Curso de Cibersegurança">Curso de Cibersegurança</span></h2>
         <div class="grid grid-2">
           <div class="card">
-            <p>Learn the fundamentals of information security, networking and cyber defense with practice, ethics and digital citizenship.</p>
+            <p>Conheça fundamentos de segurança da informação, redes e defesa cibernética, com foco em práticas, ética e cidadania digital.</p>
             <ul class="list">
-              <li>Topics: InfoSec, Networks, Governance & Legal.</li>
-              <li>Skills: risk analysis, hardening, vulnerability management.</li>
-              <li>Profile: curiosity, critical thinking, teamwork.</li>
+              <li>Temas: Segurança da Informação, Redes, Governança e Legalidade.</li>
+              <li>Competências: análise de risco, hardening, gestão de vulnerabilidades.</li>
+              <li>Perfil: curiosidade, pensamento crítico, trabalho em equipe.</li>
             </ul>
           </div>
           <div class="card">
-            <p><strong>Careers & Next Steps</strong></p>
+            <p><strong>Carreiras & continuidade</strong></p>
             <ul class="list">
-              <li>Information/Cybersecurity Analyst.</li>
-              <li>Entry cert: Technician in Cybersecurity.</li>
-              <li>Academic path at FECAP: Data Science.</li>
+              <li>Analista de Segurança da Informação/Cibernética.</li>
+              <li>Certificações iniciais: Técnico em Cibersegurança.</li>
+              <li>Continuidade acadêmica na FECAP: Ciência de Dados.</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHO -->
-    <section id="who">
+    <!-- QUEM SOMOS (PT) -->
+    <section id="quem-somos">
       <div class="wrap">
-        <h2><span class="glitch" data-text="Who we are">Who we are</span></h2>
+        <h2><span class="glitch" data-text="Quem somos">Quem somos</span></h2>
         <div class="card">
-          <p>The first cybersecurity course integrated into Brazilian high school.</p>
+          <p>O primeiro curso de cibersegurança incorporado ao ensino médio no Brasil.</p>
         </div>
       </div>
     </section>
 
-    <!-- VENUE -->
-    <section id="venue">
+    <!-- LOCAL (PT) -->
+    <section id="local">
       <div class="wrap">
-        <h2><span class="glitch" data-text="Venue & Date">Venue &amp; Date</span></h2>
+        <h2><span class="glitch" data-text="Local & Data">Local &amp; Data</span></h2>
         <div class="grid grid-2">
           <div class="card">
-            <p><strong>Date:</strong> 27/09/2025 (Saturday) — 13:00–17:00</p>
-            <p><strong>Place:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
-            <p><strong>Area:</strong> Lab 200 (entrance near the gym)</p>
-            <p><strong>Address:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — 01502-001</p>
+            <p><strong>Data:</strong> 27/09/2025 (sábado) — 13:00 - 17:00</p>
+            <p><strong>Local:</strong> Colégio/Faculdade FECAP — Campus Liberdade</p>
+            <p><strong>Ambiente:</strong> Laboratório 200 (entrada perto do ginásio)</p>
+            <p><strong>Endereço:</strong> Av. da Liberdade, 532 — Liberdade, São Paulo/SP — CEP 01502-001</p>
             <div class="cta" style="justify-content:flex-start">
-              <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Open in Maps app</a>
-              <button class="btn" id="btn-copy" type="button">Copy address</button>
+              <a class="btn" href="geo:0,0?q=Av. da Liberdade, 532 - São Paulo SP" id="btn-geo">Abrir no app de mapas</a>
+              <button class="btn" id="btn-copy" type="button">Copiar endereço</button>
             </div>
           </div>
           <div class="card">
-            <p><strong>How to get there</strong></p>
+            <p><strong>Como chegar</strong></p>
             <ul class="list">
-              <li>Metro: Liberdade Station (Blue line 1), a short walk.</li>
-              <li>Bus/Car: use “Directions” above for up-to-date routes.</li>
-              <li>Accessibility: check campus guidance on FECAP website.</li>
+              <li>Metrô: Estação Liberdade (linha 1-Azul), a poucos minutos a pé.</li>
+              <li>Ônibus/Carro: use o link “Como chegar” acima para rotas atualizadas.</li>
+              <li>Acessibilidade: verifique as orientações do campus no site da FECAP.</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- IMPACT -->
-    <section id="impact">
+    <!-- IMPORTÂNCIA (PT) -->
+    <section id="importancia">
       <div class="wrap">
-        <h2><span class="glitch" data-text="Why it matters">Why it matters</span></h2>
+        <h2><span class="glitch" data-text="Importância para a sociedade">Importância para a sociedade</span></h2>
         <div class="card">
-          <p>FECART encourages student protagonism, research culture and solving real problems. By bringing school, families and community together, it broadens horizons, fosters collaboration, and sparks technology careers with social responsibility.</p>
+          <p>A FECART estimula protagonismo estudantil, cultura de pesquisa e resolução de problemas reais. Ao aproximar escola, famílias e comunidade, o evento amplia repertório, gera redes de colaboração e incentiva carreiras em ciência e tecnologia com responsabilidade social.</p>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- FAQ (PT) -->
     <section id="faq" aria-labelledby="faq-title">
       <div class="wrap">
-        <h2 id="faq-title"><span class="glitch" data-text="FAQ — Frequently Asked Questions">FAQ — Frequently Asked Questions</span></h2>
+        <h2 id="faq-title"><span class="glitch" data-text="FAQ — Perguntas frequentes">FAQ — Perguntas frequentes</span></h2>
 
         <div class="faq-actions">
-          <button class="btn-ghost" id="faq-expand">Expand all</button>
-          <button class="btn-ghost" id="faq-collapse">Collapse all</button>
+          <button class="btn-ghost" id="faq-expand">Expandir tudo</button>
+          <button class="btn-ghost" id="faq-collapse">Recolher tudo</button>
         </div>
 
         <div class="faq-list">
           <details>
-            <summary>Do I need to register?</summary>
-            <p><strong>No.</strong> Walk-in and free entrance. If anything changes close to the date, we’ll update it here.</p>
+            <summary>Precisa se inscrever?</summary>
+            <p><strong>Não.</strong> A visita é livre e a <em>entrada é gratuita</em>. Se houver orientação diferente perto da data, atualizamos aqui.</p>
           </details>
 
           <details>
-            <summary>Event time?</summary>
-            <p><strong>27/09/2025 (Saturday)</strong>, from <strong>13:00 to 17:00</strong>. Arrive 10–15 minutes earlier to catch all demos in Lab 200.</p>
+            <summary>Qual o horário do evento?</summary>
+            <p>Dia <strong>27/09/2025 (sábado)</strong>, das <strong>13h às 17h</strong>. Chegue com 10–15 minutos de antecedência para aproveitar as demonstrações no Laboratório 200.</p>
           </details>
 
           <details>
-            <summary>Where exactly on campus?</summary>
-            <p>At <strong>Lab 200</strong>, <strong>entrance near the gym</strong> (3rd floor). See <a href="#venue">Venue &amp; Date</a> or tap <a href="#btn-map">Directions</a>.</p>
+            <summary>Onde acontece dentro do campus?</summary>
+            <p>No <strong>Laboratório 200</strong>, com <strong>entrada perto do ginásio</strong> (3º andar). Veja <a href="#local">Local &amp; Data</a> ou toque em <a href="#btn-mapa">Como chegar</a>.</p>
           </details>
 
           <details>
-            <summary>Who can attend?</summary>
-            <p>Open to the community: students, families, friends and tech-curious. <strong>Minors</strong> should be accompanied by guardians.</p>
+            <summary>Quem pode participar?</summary>
+            <p>Aberto à comunidade: estudantes, famílias, amigos e interessados em tecnologia. Recomendamos <strong>acompanhamento de responsáveis para menores</strong>.</p>
           </details>
 
           <details>
-            <summary>Photos & videos allowed?</summary>
-            <p>Yes, please respect people in frames (ask permission when needed). If you post, tag <strong>@fecapciber_</strong> and <strong>@fecap</strong> with <code>#FECART</code> and <code>#FECAP</code>.</p>
+            <summary>Posso fotografar e gravar?</summary>
+            <p>Sim, desde que respeite as pessoas nas imagens (peça autorização quando necessário). Se postar, marque <strong>@fecapciber_</strong> e <strong>@fecap</strong> e use <code>#FECART</code> e <code>#FECAP</code>.</p>
           </details>
 
           <details>
-            <summary>Parking & best way to arrive?</summary>
-            <p>We recommend <strong>Metro Liberdade (Blue line 1)</strong>, minutes away on foot. Private parking lots are nearby; check availability and prices on the day.</p>
+            <summary>Tem estacionamento? Melhor forma de chegar?</summary>
+            <p>Recomendamos <strong>Metrô Liberdade (Linha 1–Azul)</strong>, a poucos minutos a pé. Há estacionamentos particulares na região; verifique disponibilidade e tarifas no dia.</p>
           </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== INTRANET (DESKTOP ONLY) =================== -->
+    <section id="intranet" class="intranet-only" aria-labelledby="intr-title">
+      <div class="wrap">
+        <h2 id="intr-title"><span class="glitch" data-text="Corporate Intranet">Corporate Intranet</span></h2>
+        <div class="subnav">
+          <span class="tag">Mode: <strong id="mode-tag">Zetatech</strong></span>
+          <span class="tag">Role: <strong id="role-tag">Zetatech Agent</strong></span>
+          <span class="tag">Build: <strong>2.7.9</strong></span>
+          <span class="tag">Uptime: <strong id="uptime">00:00:00</strong></span>
+        </div>
+
+        <div class="densegrid">
+          <div class="terminal" id="log">
+            <div class="line ok">[BOOT] Services online. Monitoring started.</div>
+            <div class="line">[INIT] Loading corporate modules...</div>
+            <div class="line">[NET] Link established to DC-SP-01</div>
+            <div class="line">[AUTH] User token cached.</div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom:8px">Operational Intel</h3>
+            <table class="datatable" id="intel-table">
+              <thead>
+                <tr><th>Division</th><th>Status</th><th>Risk</th><th>Notes</th></tr>
+              </thead>
+              <tbody>
+                <!-- preenchido via JS por corp -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 style="margin-bottom:8px">Active Alerts</h3>
+          <table class="datatable" id="alerts-table">
+            <thead>
+              <tr><th>Time</th><th>Source</th><th>Severity</th><th>Message</th></tr>
+            </thead>
+            <tbody><!-- via JS --></tbody>
+          </table>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Terminal-style status & easter eggs -->
+  <!-- Terminal-style strip + Easter eggs -->
   <div class="term-strip" aria-hidden="true">
     <div class="wrap">
       <div class="ticker" id="ticker">
@@ -533,7 +524,7 @@
     </div>
   </footer>
 
-  <!-- ===== BOOT / LOGIN OVERLAY ===== -->
+  <!-- ===== BOOT / LOGIN (apenas desktop) ===== -->
   <div id="boot" role="dialog" aria-modal="true" aria-label="System Boot & Login">
     <div class="boot-wrap">
       <div class="boot-screen" id="boot-screen">
@@ -552,8 +543,9 @@
     const $ = (s,scope=document)=>scope.querySelector(s);
     const $$ = (s,scope=document)=>[...scope.querySelectorAll(s)];
     const root = document.documentElement;
+    const isMobile = matchMedia('(max-width: 760px)').matches;
 
-    /* ========= Themes map (JS força reescrita das vars para evitar bug de Android/Safari) ========= */
+    /* ========= Themes map ========= */
     const THEMES = {
       zetatech: { bg:'#050a06', text:'#e6ffe8', muted:'#a5e5b7', accent:'#6bff75', rgb:'107,255,117', soft:'rgba(107,255,117,.10)', ring:'rgba(107,255,117,.45)' },
       netwatch: { bg:'#0b0506', text:'#ffeaea', muted:'#ffcccc', accent:'#ff4d58', rgb:'255,77,88', soft:'rgba(255,77,88,.10)', ring:'rgba(255,77,88,.45)' },
@@ -561,7 +553,14 @@
       militech: { bg:'#0f0c03', text:'#fff6df', muted:'#f5e3b0', accent:'#ffcc33', rgb:'255,204,51', soft:'rgba(255,204,51,.12)', ring:'rgba(255,204,51,.45)' },
       merc:     { bg:'#0b0410', text:'#ffe6ff', muted:'#f8c8ff', accent:'#ff4de3', rgb:'255,77,227', soft:'rgba(255,77,227,.10)', ring:'rgba(255,77,227,.45)' },
     };
+    const ROLES = { zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'Merc' };
 
+    function refreshBackground(){
+      const rgb = getComputedStyle(root).getPropertyValue('--accent-rgb').trim();
+      document.body.style.backgroundImage =
+        `repeating-linear-gradient(0deg, transparent 0 2px, rgba(${rgb},0.05) 2px 3px),
+         repeating-linear-gradient(90deg, transparent 0 50px, rgba(${rgb},0.03) 50px 51px)`;
+    }
     function setThemeVars(t){
       root.style.setProperty('--bg', t.bg);
       root.style.setProperty('--text', t.text);
@@ -570,37 +569,20 @@
       root.style.setProperty('--accent-rgb', t.rgb);
       root.style.setProperty('--accent-soft', t.soft);
       root.style.setProperty('--ring', t.ring);
-      // Reconstroi o background glitch para garantir recolor immediate em Android
       refreshBackground();
-      // Reforça legibilidade (texto herda var(--text))
       document.body.style.color = t.text;
-      document.querySelectorAll('.card,.badge,.btn,.faq-list,nav a,.tile,footer,.term-strip').forEach(el=>{
-        el.style.removeProperty('color'); // usa CSS var atual
-      });
     }
-
-    function refreshBackground(){
-      const rgb = getComputedStyle(root).getPropertyValue('--accent-rgb').trim();
-      document.body.style.backgroundImage =
-        `repeating-linear-gradient(0deg, transparent 0 2px, rgba(${rgb},0.05) 2px 3px),
-         repeating-linear-gradient(90deg, transparent 0 50px, rgba(${rgb},0.03) 50px 51px)`;
-    }
-
     function setTheme(name){
       const t = THEMES[name] || THEMES.zetatech;
       document.documentElement.setAttribute('data-theme', name);
       setThemeVars(t);
+      $('#mode-tag').textContent = name.charAt(0).toUpperCase()+name.slice(1);
+      $('#role').textContent = ROLES[name] || 'Merc';
+      $('#role-tag').textContent = ROLES[name] || 'Merc';
+      renderIntranet(name);
     }
 
-    const ROLES = {
-      zetatech: 'Zetatech Agent',
-      netwatch: 'Netwatcher',
-      arasaka: 'Arasaka Corpo',
-      militech: 'Militech Agent',
-      merc: 'Merc'
-    };
-
-    /* ========= Countdown (fixo para São Paulo -03:00) ========= */
+    /* ========= Countdown (São Paulo -03:00) ========= */
     const EVENT_DATE = new Date('2025-09-27T13:00:00-03:00');
     function tick(){
       const dd = $('#dd'), hh = $('#hh'), mm = $('#mm'), ss = $('#ss');
@@ -622,14 +604,11 @@
     /* ========= ICS ========= */
     $('#btn-ics').addEventListener('click', ()=>{
       const ics = [
-        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//en',
-        'CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
-        'UID:fecart-'+Date.now()+'@fecap',
-        'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
+        'UID:fecart-'+Date.now()+'@fecap','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',
         'DTSTART:20250927T160000Z','DTEND:20250927T200000Z',
-        'SUMMARY:FECART — CIBER','DESCRIPTION:FECART at Colégio FECAP. Info: '+location.href,
-        'LOCATION:Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001',
-        'END:VEVENT','END:VCALENDAR'
+        'SUMMARY:FECART — CIBER','DESCRIPTION:FECART no Colégio FECAP. Info: '+location.href,
+        'LOCATION:Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001','END:VEVENT','END:VCALENDAR'
       ].join('\r\n');
       const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
       const url = URL.createObjectURL(blob);
@@ -641,22 +620,21 @@
     const gcal = new URL('https://calendar.google.com/calendar/render');
     gcal.searchParams.set('action','TEMPLATE');
     gcal.searchParams.set('text','FECART — CIBER');
-    gcal.searchParams.set('details','FECART at Colégio FECAP. Info: ' + location.href);
+    gcal.searchParams.set('details','FECART no Colégio FECAP. Info: ' + location.href);
     gcal.searchParams.set('location','Av. da Liberdade, 532 - Liberdade, São Paulo - SP, 01502-001');
     gcal.searchParams.set('dates','20250927T160000Z/20250927T200000Z');
     $('#btn-gcal').href = gcal.toString();
 
-    /* ========= Share (WhatsApp) ========= */
-    const shareMsg = encodeURIComponent('FECART — CIBER at Colégio FECAP. 27/09/2025, 13:00–17:00. Lab 200 (entrance near the gym). Address: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
-    $('#btn-share').href = 'https://wa.me/?text=' + shareMsg;
+    /* ========= Compartilhar (WhatsApp) ========= */
+    const msg = encodeURIComponent('FECART — CIBER no Colégio FECAP. 27/09/2025, 13h–17h. Laboratório 200 (entrada perto do ginásio). Endereço: Av. da Liberdade, 532 — São Paulo/SP. Info: ' + location.href);
+    $('#btn-whats').href = 'https://wa.me/?text=' + msg;
 
-    /* ========= Copy address ========= */
+    /* ========= Copiar endereço ========= */
     $('#btn-copy')?.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — 01502-001');
-        const t = $('#btn-copy'); const old = t.textContent; t.textContent = 'Copied!';
+      try { await navigator.clipboard.writeText('Av. da Liberdade, 532 — Liberdade, São Paulo/SP — 01502-001');
+        const t = $('#btn-copy'); const old = t.textContent; t.textContent = 'Copiado!';
         setTimeout(()=> t.textContent = old, 1200);
-      } catch(e){ alert('Could not copy.'); }
+      } catch(e){ alert('Não foi possível copiar.'); }
     });
 
     /* ========= Geo fallback (desktop) ========= */
@@ -666,7 +644,7 @@
       }
     });
 
-    /* ========= Mobile menu (Android fix: touchstart + z-index) ========= */
+    /* ========= Mobile menu ========= */
     const toggle = $('#menu-toggle'); const nav = $('#menu');
     function toggleMenu(){
       const active = nav.classList.toggle('active');
@@ -675,46 +653,14 @@
     }
     toggle.addEventListener('click', toggleMenu);
     toggle.addEventListener('touchstart', (e)=>{ e.preventDefault(); toggleMenu(); });
-
-    // fechar ao clicar em link ou fora
-    nav.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        nav.classList.remove('active'); document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded','false');
-      });
-    });
-    document.addEventListener('click', (e)=>{
-      if(nav.classList.contains('active') && !nav.contains(e.target) && e.target !== toggle){
-        nav.classList.remove('active'); document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded','false');
-      }
-    });
+    nav.querySelectorAll('a').forEach(a=>{ a.addEventListener('click', ()=>{ nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false'); }); });
+    document.addEventListener('click', (e)=>{ if(nav.classList.contains('active') && !nav.contains(e.target) && e.target !== toggle){ nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false'); } });
 
     /* ========= FAQ slide ========= */
     const allFaqs = $$('#faq details');
-    function slideOpen(el){
-      if(el.open) return;
-      el.style.overflow='hidden'; el.open = true;
-      const end = el.scrollHeight; el.style.height = 0;
-      requestAnimationFrame(()=>{
-        el.style.transition='height .28s ease'; el.style.height = end+'px';
-      });
-      el.addEventListener('transitionend', function done(){
-        el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done);
-      });
-    }
-    function slideClose(el){
-      if(!el.open) return;
-      el.style.overflow='hidden'; const start = el.scrollHeight; el.style.height = start+'px';
-      requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = 0; });
-      el.addEventListener('transitionend', function done(){
-        el.open = false; el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done);
-      });
-    }
-    allFaqs.forEach(d=>{
-      const sum = $('summary', d);
-      sum.addEventListener('click', (ev)=>{ ev.preventDefault(); d.open ? slideClose(d) : slideOpen(d); });
-    });
+    function slideOpen(el){ if(el.open) return; el.style.overflow='hidden'; el.open = true; const end = el.scrollHeight; el.style.height = 0; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = end+'px'; }); el.addEventListener('transitionend', function done(){ el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
+    function slideClose(el){ if(!el.open) return; el.style.overflow='hidden'; const start = el.scrollHeight; el.style.height = start+'px'; requestAnimationFrame(()=>{ el.style.transition='height .28s ease'; el.style.height = 0; }); el.addEventListener('transitionend', function done(){ el.open = false; el.style.height=''; el.style.overflow=''; el.style.transition=''; el.removeEventListener('transitionend', done); }); }
+    allFaqs.forEach(d=>{ const sum = $('summary', d); sum.addEventListener('click', (ev)=>{ ev.preventDefault(); d.open ? slideClose(d) : slideOpen(d); }); });
     $('#faq-expand').addEventListener('click', ()=> allFaqs.forEach(slideOpen));
     $('#faq-collapse').addEventListener('click', ()=> allFaqs.forEach(slideClose));
 
@@ -728,16 +674,178 @@
       });
     });
 
-    /* ========= Session / Theme ========= */
-    const ROLE_EL = $('#role');
+    /* ========= Intranet: Logs & Tabelas densas por tema ========= */
+    const LOG_SETS = {
+      zetatech: [
+        '[2025-09-27 12:58:01] Link established to DC-SP-01',
+        '[2025-09-27 12:58:02] TLS 1.3 handshake complete',
+        '[2025-09-27 12:58:03] User authenticated: Zetatech Agent',
+        '[2025-09-27 12:58:05] Loading event data...',
+        '[2025-09-27 12:58:06] Telemetry: 56 metrics streaming',
+        '[2025-09-27 12:58:10] Notice: FECART microsite serving 200 OK'
+      ],
+      netwatch: [
+        '[GRID][INTEL] Darkfiber probe synced',
+        '[TRACE] Node 10.44.9.2 flagged: anomalous DNS',
+        '[ACL] Policy NW-RED/7 enforced',
+        '[IDP] L7 signature hit: 0x9f4e',
+        '[AUDIT] 3 credentials rotated',
+        '[OPS] Sweep complete — surface clean'
+      ],
+      arasaka: [
+        '[RISK] Exposure index: 0.14 (low)',
+        '[SOC] Alert window reduced to 300ms',
+        '[VAULT] Seal integrity OK',
+        '[SIEM] 0 critical / 3 low',
+        '[GRC] Compliance A- updated',
+        '[KMS] Rotation schedule in sync'
+      ],
+      militech: [
+        '[TACTICAL] Perimeter online',
+        '[DRONE] Recon path set, ETA 03:00',
+        '[ARMORY] Mk.IV firmware verified',
+        '[OPS] SITREP: green across 5 sectors',
+        '[SIGINT] Burst comms decoded',
+        '[BRIEF] Rules of engagement loaded'
+      ],
+      merc: [
+        '[WIRE] Handshake on shadownet',
+        '[FENCE] Package escrow confirmed',
+        '[BBS] New contract: 0x7f-NEON',
+        '[FIXER] Drop point moved — ping later',
+        '[GHOST] Heat: low, tail: zero',
+        '[PATCH] Custom ICE armed'
+      ]
+    };
+
+    const TABLES = {
+      zetatech: [
+        ['Security Ops','ACTIVE','LOW','Monitoring AI'],
+        ['R&D Labs','RESTRICTED','MED','Clearance L4'],
+        ['Data Center','STABLE','LOW','Redundant links'],
+        ['Microsite','ONLINE','LOW','200 OK / 98 ms'],
+        ['Telemetry','STREAM','LOW','56 metrics/s'],
+        ['Helpdesk','READY','LOW','SLA 99.9%']
+      ],
+      netwatch: [
+        ['Firewall L7','ENFORCED','MED','Ruleset NW-RED/7'],
+        ['Probe DF-03','ACTIVE','LOW','Darkfiber path ok'],
+        ['DNS Sinkhole','ARMED','LOW','NXDOMAIN trap'],
+        ['IDP Grid','HOT','MED','6 signatures watch'],
+        ['Audit Trail','WRITE','LOW','Immutable ledger'],
+        ['Threat Map','LIVE','MED','4 geo clusters']
+      ],
+      arasaka: [
+        ['Risk Engine','LOW','LOW','Index 0.14'],
+        ['Vault A','SEALED','LOW','Tamper 0'],
+        ['SIEM','QUIET','LOW','0 critical / 3 low'],
+        ['KMS','SYNCED','LOW','Rotation T+3d'],
+        ['SOC Window','NARROW','LOW','300ms triage'],
+        ['GRC','A-','LOW','Policy updated']
+      ],
+      militech: [
+        ['Perimeter','GREEN','LOW','All gates locked'],
+        ['Recon Drones','AIR','MED','ETA 03:00'],
+        ['Armory','CHECK','LOW','Mk.IV verified'],
+        ['SITREP','GREEN','LOW','5 sectors nominal'],
+        ['SIGINT','LIVE','MED','Burst decoded'],
+        ['Briefing','READY','LOW','ROE loaded']
+      ],
+      merc: [
+        ['Shadownet','UP','LOW','Handshake ok'],
+        ['Escrow','HELD','LOW','Funds clean'],
+        ['Contract 0x7f','OPEN','MED','NEON — 48h'],
+        ['Tail Heat','COLD','LOW','Zero eyes'],
+        ['Fixer','ONCALL','LOW','Ping @ 22:00'],
+        ['ICE','CUSTOM','MED','Traceback bite']
+      ]
+    };
+
+    const ALERTS = {
+      zetatech: [
+        ['13:02:11','WAF','LOW','Spike mitigated (Rule ZT-29)'],
+        ['13:04:42','CDN','LOW','Cache warmed SP/BR'],
+        ['13:07:01','Auth','LOW','Token refresh OK']
+      ],
+      netwatch: [
+        ['13:00:03','TRACE','MED','Unusual SNI observed'],
+        ['13:01:20','GRID','LOW','Peer latency +12ms'],
+        ['13:05:54','ACL','LOW','Rule NW-RED/7 applied']
+      ],
+      arasaka: [
+        ['13:00:30','RISK','LOW','Index drift -0.01'],
+        ['13:03:17','SIEM','LOW','Suppressed noise'],
+        ['13:06:45','KMS','LOW','Key rotation queued']
+      ],
+      militech: [
+        ['13:01:10','OPS','LOW','SITREP updated'],
+        ['13:02:44','DRONE','MED','Crosswind alert'],
+        ['13:05:29','ARMORY','LOW','Checksum valid']
+      ],
+      merc: [
+        ['13:00:12','WIRE','LOW','Hop relayed'],
+        ['13:04:09','FIXER','LOW','New note posted'],
+        ['13:06:20','GHOST','MED','Scramble window']
+      ]
+    };
+
+    function renderIntranet(theme){
+      // Logs densos
+      const log = $('#log');
+      log.innerHTML = '';
+      (LOG_SETS[theme] || LOG_SETS.zetatech).forEach((ln,i)=>{
+        const div = document.createElement('div');
+        div.className = 'line'; div.textContent = ln;
+        log.appendChild(div);
+      });
+
+      // Tabela principal
+      const tbody = $('#intel-table tbody');
+      tbody.innerHTML = '';
+      (TABLES[theme] || TABLES.zetatech).forEach(row=>{
+        const tr = document.createElement('tr');
+        row.forEach(cell=>{ const td = document.createElement('td'); td.textContent = cell; tr.appendChild(td); });
+        tbody.appendChild(tr);
+      });
+
+      // Alerts
+      const abody = $('#alerts-table tbody'); abody.innerHTML='';
+      (ALERTS[theme] || ALERTS.zetatech).forEach(row=>{
+        const tr = document.createElement('tr');
+        row.forEach(cell=>{ const td = document.createElement('td'); td.textContent = cell; tr.appendChild(td); });
+        abody.appendChild(tr);
+      });
+    }
+
+    // Uptime (desktop)
+    let startTs = Date.now();
+    setInterval(()=>{
+      const t = Date.now()-startTs; const s = Math.floor(t/1000);
+      const h = String(Math.floor(s/3600)).padStart(2,'0');
+      const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
+      const ss= String(s%60).padStart(2,'0');
+      $('#uptime').textContent = `${h}:${m}:${ss}`;
+    },1000);
+
+    /* ========= Session/Theme init ========= */
     function applySession(theme){
       setTheme(theme);
-      ROLE_EL.textContent = ROLES[theme] || 'Merc';
+      greet(theme);
     }
-    // default
+    function greet(theme){
+      const role = {zetatech:'Zetatech Agent', netwatch:'Netwatcher', arasaka:'Arasaka Corpo', militech:'Militech Agent', merc:'Merc'}[theme] || 'Merc';
+      const el = document.createElement('div');
+      el.textContent = `Welcome, ${role}`;
+      el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
+      const hero = document.querySelector('.hero .wrap');
+      hero.insertBefore(el, hero.children[2]);
+      setTimeout(()=> el.remove(), 2200);
+    }
+
+    // inicia como Zetatech
     applySession('zetatech');
 
-    /* ========= Boot/Login flow ========= */
+    /* ========= Boot/Login (desktop only) ========= */
     const boot = $('#boot');
     const bootScreen = $('#boot-screen');
     const loginForm = $('#login-form');
@@ -758,8 +866,8 @@
         }, delay);
       });
     }
-
     async function showBoot(){
+      if(isMobile){ alert('Intranet disponível apenas no computador.'); return; }
       clearBootLog();
       boot.classList.add('active');
       loginForm.style.display = 'none';
@@ -774,49 +882,29 @@
       loginUser.value = '';
       loginUser.focus();
     }
-
     async function verifyAndLogin(userRaw){
       const user = String(userRaw || '').trim().toLowerCase();
       const theme = (['zetatech','netwatch','arasaka','militech','merc'].includes(user)) ? user :
                     (user === 'v' ? 'merc' : 'merc');
-
-      // reset terminal log and verify (3s)
       clearBootLog();
       await printLine(`[AUTH] Verifying credentials for "${user || 'unknown'}"...`);
       loginBtn.disabled = true; loginUser.disabled = true;
-
-      await new Promise(r=>setTimeout(r, 3000)); // 3s
-
+      await new Promise(r=>setTimeout(r, 3000)); // 3s fixo
       await printLine('> ACCESS GRANTED', 'boot-line');
-      // fecha overlay sem persistir log
-      boot.classList.remove('active');
+      boot.classList.remove('active'); // fecha sem persistir logs
       loginBtn.disabled = false; loginUser.disabled = false;
-
-      // aplica tema + saudação
       applySession(theme);
-      greet(theme);
     }
-
-    function greet(theme){
-      const role = ROLES[theme] || 'Merc';
-      const el = document.createElement('div');
-      el.textContent = `Welcome, ${role}`;
-      el.style.cssText = 'text-align:center;color:var(--accent);margin:10px 0 0 0; text-shadow:0 0 8px rgba('+getComputedStyle(root).getPropertyValue('--accent-rgb').trim()+',.35); font-weight:800; letter-spacing:.06em;';
-      const hero = document.querySelector('.hero .wrap');
-      hero.insertBefore(el, hero.children[2]);
-      setTimeout(()=> el.remove(), 2200);
-    }
-
     $('#logout').addEventListener('click', showBoot);
     loginForm.addEventListener('submit', (e)=>{ e.preventDefault(); verifyAndLogin(loginUser.value); });
 
-    /* ========= Glitch background slight drift ========= */
+    /* ========= Glitch background leve drift ========= */
     setInterval(()=>{
       const x = (Math.random()*18-9)|0, y = (Math.random()*18-9)|0;
       document.body.style.backgroundPosition = `${x}px ${y}px, ${-x}px ${-y}px`;
     }, 900);
 
-    // Recolor inicial (caso mobile não aplique CSS vars de imediato)
+    // recolor inicial (alguns webviews)
     refreshBackground();
   </script>
 </body>
