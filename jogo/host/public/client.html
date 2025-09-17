@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Game Client</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    :root { --attack: #9b1c1c; --defense: #1e3a8a; }
+    body {font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 20px; max-width: 900px; margin: auto;}
+    fieldset {border: 1px solid #ddd; border-radius: 10px; padding: 12px; margin-bottom: 12px;}
+    legend {font-weight: 600;}
+    label {margin-right: 8px}
+    button {margin: 6px 6px 0 0; padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; background: #fafafa; cursor: pointer}
+    button.primary {background: #111; color: #fff;}
+    button[disabled] {opacity: .5; cursor: not-allowed}
+    #players .row {display: grid; grid-template-columns: 1.2fr .8fr .6fr .5fr .5fr; gap: 8px; padding: 6px 0; border-bottom: 1px dashed #eee}
+    .team-attack {color: var(--attack)}
+    .team-defense {color: var(--defense)}
+    .badge {display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; background: #eee}
+    .ok {color: #059669}
+    .err {color: #b91c1c}
+    .muted {color: #6b7280}
+    #status {margin-left: 8px}
+    #teamscore {font-weight: 600; margin-top: 8px}
+    #log {height: 150px; overflow: auto; background: #fafafa; border-radius: 8px; padding: 8px; border: 1px solid #eee;}
+  </style>
+</head>
+<body>
+  <h1>Game Client <span id="status" class="badge muted">desconectado</span></h1>
+
+  <fieldset>
+    <legend>Conexão</legend>
+    <label>Nome: <input id="name" value="Jogador"/></label>
+    <label>Time:
+      <select id="team"><option value="attack">Ataque</option><option value="defense">Defesa</option></select>
+    </label>
+    <label>Função:
+      <select id="role"><option value="player">Jogador</option><option value="host">Host</option></select>
+    </label>
+    <button id="connect" class="primary">Conectar</button>
+    <button id="disconnect">Desconectar</button>
+    <small class="muted">Host WS: detecta a partir do origin; troque para IP se abrir o arquivo local.</small>
+  </fieldset>
+
+  <fieldset id="controls" style="display:none">
+    <legend>Controles</legend>
+    <div style="margin-bottom:6px">
+      <span>Você: <strong id="meName">-</strong> (<span id="meId">-</span>) — Time: <span id="meTeam">-</span></span>
+      <span id="hostBadge" class="badge" style="margin-left:8px">—</span>
+    </div>
+
+    <div style="margin:6px 0">
+      <button id="readyBtn">Pronto ✅</button>
+      <button id="scorePlus">+10</button>
+      <button id="scoreMinus">-5</button>
+    </div>
+
+    <div style="margin:6px 0">
+      <button id="startBtn" class="primary">(HOST) Iniciar partida</button>
+      <button id="endBtn">(HOST) Encerrar sessão</button>
+      <button id="claimHostBtn">Assumir Host</button>
+      <label>Transferir host para:
+        <select id="transferSelect"></select>
+      </label>
+      <button id="transferBtn">Transferir</button>
+    </div>
+
+    <h3>Placar</h3>
+    <div id="teamscore">—</div>
+    <div id="players"></div>
+
+    <h3>Log</h3>
+    <div id="log"></div>
+  </fieldset>
+
+<script>
+const LOCAL_KEY = 'game.playerId';
+const HOST = (location.origin.startsWith('http') ? (location.origin.replace(/^http/, 'ws')) : 'ws://localhost:3000');
+let ws = null;
+let playerId = localStorage.getItem(LOCAL_KEY) || null;
+let currentHostId = null;
+let reconnectTimer = null;
+let manualDisconnect = false;
+
+function $(id){return document.getElementById(id)}
+function log(msg){ const d = $('log'); d.innerHTML += `<div>${new Date().toLocaleTimeString()} — ${msg}</div>`; d.scrollTop = d.scrollHeight; }
+function setStatus(txt, cls='muted'){ const s=$('status'); s.textContent=txt; s.className = 'badge ' + cls; }
+
+function renderPlayers(players) {
+  const el = $('players');
+  el.innerHTML = '';
+  const header = document.createElement('div');
+  header.className = 'row';
+  header.innerHTML = `<strong>Nome</strong><strong>Time</strong><strong>Score</strong><strong>Ready</strong><strong>Online</strong>`;
+  el.appendChild(header);
+  const entries = Object.entries(players);
+  entries.forEach(([pid, p]) => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `
+      <div>${p.name} <small class="muted">[${pid.slice(0,6)}]</small></div>
+      <div class="${p.team==='attack'?'team-attack':'team-defense'}">${p.team}</div>
+      <div>${p.score||0}</div>
+      <div>${p.ready ? '✅' : '❌'}</div>
+      <div>${p.connected ? '🟢' : '🔴'}</div>
+    `;
+    el.appendChild(row);
+  });
+
+  // popular select de transferência de host (apenas conectados)
+  const sel = $('transferSelect');
+  sel.innerHTML = '';
+  entries.filter(([,p])=>p.connected).forEach(([pid,p])=>{
+    const opt = document.createElement('option');
+    opt.value = pid; opt.textContent = `${p.name} [${pid.slice(0,6)}]`;
+    sel.appendChild(opt);
+  });
+}
+
+function renderTeamScore(teamScores) {
+  $('teamscore').textContent = `Equipe Ataque: ${teamScores.attack}  |  Equipe Defesa: ${teamScores.defense}`;
+}
+
+function updateHostBadge() {
+  if (!currentHostId) {
+    $('hostBadge').textContent = 'sem host';
+    $('hostBadge').className = 'badge';
+  } else if (playerId && currentHostId === playerId) {
+    $('hostBadge').textContent = 'VOCÊ é o HOST';
+    $('hostBadge').className = 'badge';
+  } else {
+    $('hostBadge').textContent = `Host: ${String(currentHostId).slice(0,6)}`;
+    $('hostBadge').className = 'badge';
+  }
+  const isHost = (playerId && currentHostId === playerId);
+  $('startBtn').disabled = !isHost;
+  $('endBtn').disabled = !isHost;
+  $('transferBtn').disabled = !isHost;
+}
+
+function connectWS(){
+  if (ws && ws.readyState === WebSocket.OPEN) return;
+  manualDisconnect = false;
+  ws = new WebSocket(HOST);
+
+  ws.onopen = () => {
+    setStatus('conectado', 'ok');
+    const name = $('name').value || 'Jogador';
+    const team = $('team').value;
+    const role = $('role').value;
+    ws.send(JSON.stringify({ type: 'join', payload: { playerId, name, team, role } }));
+    $('controls').style.display = 'block';
+    log('conectado ao host');
+  };
+
+  ws.onmessage = (ev) => {
+    const msg = JSON.parse(ev.data);
+    if (msg.type === 'joined' || msg.type === 'resumed') {
+      playerId = msg.payload.playerId;
+      localStorage.setItem(LOCAL_KEY, playerId);
+      $('meId').textContent = playerId;
+      $('meName').textContent = $('name').value;
+      $('meTeam').textContent = $('team').value;
+      log((msg.type==='resumed'?'resumido como ':'joined como ') + playerId);
+    }
+    if (msg.type === 'full_state') {
+      currentHostId = msg.payload.hostId || null;
+      renderPlayers(msg.payload.players);
+      renderTeamScore(msg.payload.teamScores);
+      updateHostBadge();
+    }
+    if (msg.type === 'players_update') {
+      renderPlayers(msg.payload.players);
+    }
+    if (msg.type === 'score_broadcast') {
+      renderPlayers(msg.payload.players);
+      renderTeamScore(msg.payload.teamScores);
+    }
+    if (msg.type === 'host_update') {
+      currentHostId = msg.payload.hostId || null;
+      updateHostBadge();
+      log('host atualizado');
+    }
+    if (msg.type === 'start') {
+      log('Partida iniciada!');
+    }
+    if (msg.type === 'end_session') {
+      log('Sessão encerrada pelo host. Placar resetado.');
+    }
+    if (msg.type === 'error') {
+      log('ERRO: ' + msg.payload.message);
+    }
+    if (msg.type === 'info') {
+      log('INFO: ' + msg.payload.message);
+    }
+  };
+
+  ws.onclose = () => {
+    setStatus('desconectado', 'err');
+    log('conexão fechada');
+    if (!manualDisconnect) scheduleReconnect();
+  };
+
+  ws.onerror = () => {
+    setStatus('erro', 'err');
+  };
+}
+
+function scheduleReconnect(){
+  if (reconnectTimer) return;
+  reconnectTimer = setTimeout(() => {
+    reconnectTimer = null;
+    log('tentando reconectar...');
+    connectWS();
+  }, 2000);
+}
+
+$('connect').onclick = connectWS;
+$('disconnect').onclick = () => {
+  manualDisconnect = true;
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    try { ws.send(JSON.stringify({ type: 'leave', payload: {} })); } catch {}
+    ws.close();
+  }
+  setStatus('desconectado', 'err');
+};
+
+$('readyBtn').onclick = () => {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return alert('não conectado');
+  ws.send(JSON.stringify({ type: 'ready', payload: { ready: true } }));
+  log('enviei ready');
+};
+$('scorePlus').onclick = () => sendScore(10);
+$('scoreMinus').onclick = () => sendScore(-5);
+$('startBtn').onclick = () => { if (ws) ws.send(JSON.stringify({ type: 'start_request', payload: {} })); };
+$('endBtn').onclick = () => { if (ws) ws.send(JSON.stringify({ type: 'end_session', payload: {} })); };
+$('claimHostBtn').onclick = () => { if (ws) ws.send(JSON.stringify({ type: 'claim_host', payload: {} })); };
+$('transferBtn').onclick = () => {
+  if (!ws) return;
+  const target = $('transferSelect').value;
+  if (!target) return alert('selecione o jogador');
+  ws.send(JSON.stringify({ type: 'host_transfer', payload: { targetPlayerId: target } }));
+};
+
+function sendScore(delta) {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return alert('não conectado');
+  ws.send(JSON.stringify({ type: 'score_update', payload: { scoreDelta: delta } }));
+  log('enviei scoreDelta=' + delta);
+}
+</script>
+</body>
+</html>
