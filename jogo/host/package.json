@@ -1,8 +1,8 @@
 {
-  "name": "jogo-host",
+  "name": "jogo-host-autoconnect",
   "version": "1.0.0",
   "private": true,
-  "description": "Host central do jogo (LAN) com autoridade e reconexão",
+  "description": "Host central do jogo (LAN) com dashboard do host e SDK do jogador",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

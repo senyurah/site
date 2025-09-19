@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Host Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    body {font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 20px; max-width: 980px; margin: auto;}
+    .row {display: grid; grid-template-columns: 1.2fr .8fr .6fr .5fr .5fr; gap: 8px; padding: 6px 0; border-bottom: 1px dashed #eee}
+    .badge {display:inline-block; padding:2px 8px; border-radius:999px; background:#eee; font-size:12px}
+    .ok{color:#059669} .err{color:#b91c1c} .muted{color:#6b7280}
+    button {margin: 6px 6px 0 0; padding: 8px 12px; border-radius: 8px; border:1px solid #ccc; background:#fafafa; cursor:pointer}
+    button.primary {background:#111; color:#fff}
+    #log {height: 160px; overflow:auto; background:#fafafa; border:1px solid #eee; border-radius:8px; padding:8px}
+  </style>
+</head>
+<body>
+  <h1>Dashboard do Host <span id="status" class="badge muted">desconectado</span></h1>
+
+  <fieldset>
+    <legend>Conexão</legend>
+    <label>Nome do host: <input id="name" value="Host"/></label>
+    <label>WS do servidor: <input id="wsurl" value="ws://localhost:3000"/></label>
+    <button id="connect" class="primary">Conectar como HOST</button>
+    <button id="disconnect">Desconectar</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Controles do jogo</legend>
+    <button id="startBtn" class="primary">Iniciar partida</button>
+    <button id="endBtn">Encerrar sessão</button>
+  </fieldset>
+
+  <h3>Placar</h3>
+  <div id="teamscore" class="badge">—</div>
+  <div id="players"></div>
+
+  <h3>Log</h3>
+  <div id="log"></div>
+
+<script type="module">
+import { GameClient } from '/sdk.js';
+
+const $ = (id)=>document.getElementById(id);
+function log(m){ const d=$('log'); d.innerHTML += `<div>${new Date().toLocaleTimeString()} — ${m}</div>`; d.scrollTop=d.scrollHeight; }
+function setStatus(t, cls='muted'){ const s=$('status'); s.textContent=t; s.className='badge '+cls; }
+
+let gc = null;
+
+function renderPlayers(players){
+  const el = $('players');
+  el.innerHTML = '';
+  const header = document.createElement('div'); header.className='row';
+  header.innerHTML = `<strong>Nome</strong><strong>Time</strong><strong>Score</strong><strong>Ready</strong><strong>Online</strong>`;
+  el.appendChild(header);
+  Object.entries(players).forEach(([pid,p])=>{
+    const row = document.createElement('div'); row.className='row';
+    row.innerHTML = `
+      <div>\${p.name} <small class="muted">[\${pid.slice(0,6)}]</small></div>
+      <div>\${p.team}</div>
+      <div>\${p.score||0}</div>
+      <div>\${p.ready?'✅':'❌'}</div>
+      <div>\${p.connected?'🟢':'🔴'}</div>
+    `;
+    el.appendChild(row);
+  });
+}
+
+$('connect').onclick = () => {
+  const name = $('name').value || 'Host';
+  const wsurl = $('wsurl').value || 'ws://localhost:3000';
+  gc = new GameClient({ serverUrl: wsurl, name, role: 'host' });
+  setStatus('conectando...', 'muted');
+  gc.on('open', ()=> setStatus('conectado', 'ok'));
+  gc.on('state', (st) => {
+    renderPlayers(st.players);
+    $('teamscore').textContent = `Ataque \${st.teamScores.attack} | Defesa \${st.teamScores.defense}`;
+  });
+  gc.on('update', (p)=>{
+    if (p.players) renderPlayers(p.players);
+    if (p.teamScores) $('teamscore').textContent = `Ataque \${p.teamScores.attack} | Defesa \${p.teamScores.defense}`;
+  });
+  gc.on('message', (m)=> log(JSON.stringify(m)));
+  gc.on('start', ()=> log('Partida iniciada'));
+  gc.on('end', ()=> log('Sessão encerrada'));
+  gc.on('host', ()=> {});
+  gc.on('close', ()=> setStatus('desconectado', 'err'));
+};
+
+$('disconnect').onclick = () => { if (gc) gc.leave(); setStatus('desconectado', 'err'); };
+$('startBtn').onclick = ()=> { if (gc) gc.start(); };
+$('endBtn').onclick = ()=> { if (gc) gc.end(); };
+</script>
+</body>
+</html>
