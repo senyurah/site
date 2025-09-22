@@ -7,7 +7,7 @@
 
 ## Como rodar (host)
 ```bash
-cd host
+cd jogo/host
 npm install
 npm start
 ```

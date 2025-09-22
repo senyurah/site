@@ -1,4 +1,4 @@
-// Host central do jogo com dashboard separado do host e SDK para jogadores.
+// Host central do jogo com dashboard do host e SDK para jogadores.
 // Execução: npm install && npm start  (porta padrão 3000)
 const express = require('express');
 const http = require('http');
@@ -6,9 +6,9 @@ const WebSocket = require('ws');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
-// Servir dashboard e arquivos estáticos
 app.use(express.static('public'));
-// Servir o SDK para ser importado pelo jogo (via <script src="/sdk.js">)
+
+// Servir o SDK para ser importado pelo jogo (via <script type="module" src="/sdk.js">)
 app.get('/sdk.js', (req, res) => {
   res.type('application/javascript').send(sdkContent);
 });
@@ -203,8 +203,7 @@ wss.on('connection', (ws) => {
         sendTo(ws, { type: 'error', payload: { message: 'apenas o host pode iniciar' } });
         return;
       }
-      const connectedPlayers = Object.entries(game.players)
-        .filter(([pid, p]) => p.connected && pid !== game.hostId);
+      const connectedPlayers = Object.entries(game.players).filter(([pid,p]) => p.connected && pid !== game.hostId);
       const allReady = connectedPlayers.length >= 4 && connectedPlayers.every(([,p]) => p.ready);
       if (!allReady) {
         sendTo(ws, { type: 'error', payload: { message: 'mínimo 4 jogadores prontos (exclui host)' } });
@@ -326,5 +325,3 @@ export class GameClient {
   _send(type, payload){ if (!this.ws || this.ws.readyState !== WebSocket.OPEN) return; this.ws.send(JSON.stringify({ type, payload })); }
 }
 `;
-
-// ---- Dashboard do Host ----

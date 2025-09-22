@@ -56,11 +56,11 @@ function renderPlayers(players){
   Object.entries(players).forEach(([pid,p])=>{
     const row = document.createElement('div'); row.className='row';
     row.innerHTML = `
-      <div>\${p.name} <small class="muted">[\${pid.slice(0,6)}]</small></div>
-      <div>\${p.team}</div>
-      <div>\${p.score||0}</div>
-      <div>\${p.ready?'✅':'❌'}</div>
-      <div>\${p.connected?'🟢':'🔴'}</div>
+      <div>${p.name} <small class="muted">[${pid.slice(0,6)}]</small></div>
+      <div>${p.team}</div>
+      <div>${p.score||0}</div>
+      <div>${p.ready?'✅':'❌'}</div>
+      <div>${p.connected?'🟢':'🔴'}</div>
     `;
     el.appendChild(row);
   });
@@ -74,11 +74,11 @@ $('connect').onclick = () => {
   gc.on('open', ()=> setStatus('conectado', 'ok'));
   gc.on('state', (st) => {
     renderPlayers(st.players);
-    $('teamscore').textContent = `Ataque \${st.teamScores.attack} | Defesa \${st.teamScores.defense}`;
+    $('teamscore').textContent = `Ataque ${st.teamScores.attack} | Defesa ${st.teamScores.defense}`;
   });
   gc.on('update', (p)=>{
     if (p.players) renderPlayers(p.players);
-    if (p.teamScores) $('teamscore').textContent = `Ataque \${p.teamScores.attack} | Defesa \${p.teamScores.defense}`;
+    if (p.teamScores) $('teamscore').textContent = `Ataque ${p.teamScores.attack} | Defesa ${p.teamScores.defense}`;
   });
   gc.on('message', (m)=> log(JSON.stringify(m)));
   gc.on('start', ()=> log('Partida iniciada'));

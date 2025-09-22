@@ -31,4 +31,4 @@ gc.finish(finalScoreNumber);
 - `end` — host encerrou a sessão.
 
 ### Auto-conexão
-Configure `serverUrl` fixo no build do jogo (ex.: variável de ambiente no build). Em ambiente de navegador **não é viável** fazer descoberta automática de IP por UDP/mDNS. Se o seu app for **nativo (Electron, Unity, etc.)**, podemos implementar descoberta via mDNS/Bonjour.
+Configure `serverUrl` fixo no build do jogo (ex.: variável de ambiente no build). Em ambiente de navegador **não é viável** fazer descoberta automática de IP por UDP/mDNS. Se o seu app for **nativo (Unity/Electron),** dá pra implementar descoberta via mDNS/Bonjour.
