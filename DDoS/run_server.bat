@@ -1,4 +1,4 @@
 @echo off
-cd \server
+cd server
 py dashboard_server.py
 pause
