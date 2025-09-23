@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Console de Carga</title>
+  <style>
+    body { background:#0a0f14; color:#b8f1b8; font-family: Consolas, monospace; }
+    .wrap { max-width: 860px; margin: 40px auto; padding: 20px; background:#0d141b; border:1px solid #16302b; border-radius:10px; }
+    h1 { color:#7CFC00; margin:0 0 16px; }
+    label { display:block; margin:10px 0 6px; color:#80ffaa; }
+    input { width:100%; padding:10px; border-radius:6px; border:1px solid #16302b; background:#0a0f14; color:#b8f1b8; }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .actions { margin-top:16px; display:flex; gap:10px; }
+    button { padding:10px 14px; border:none; border-radius:6px; cursor:pointer; font-weight:700; }
+    .start { background:#13aa52; color:#0a0f14; }
+    .stop { background:#ff4d4f; color:#fff; }
+    .log { background:#05080c; border:1px solid #16302b; margin-top:16px; padding:12px; height:220px; overflow:auto; white-space:pre-wrap; }
+    .muted { color:#7fbf7f; font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>▍Console de Carga (Lab)</h1>
+    <label>URL do servidor (endpoint de upload)</label>
+    <input id="url" value="http://127.0.0.1:8080/upload">
+
+    <div class="row">
+      <div>
+        <label>Número de clientes simultâneos</label>
+        <input id="threads" type="number" value="3" min="1" max="50">
+      </div>
+      <div>
+        <label>Intervalo entre envios (segundos)</label>
+        <input id="delay" type="number" step="0.1" value="0.5" min="0">
+      </div>
+    </div>
+
+    <label>Imagem base (GIF/JPG/PNG). Se não escolher, será gerado um GIF mínimo em memória.</label>
+    <input id="file" type="file" accept=".gif,.jpg,.jpeg,.png">
+
+    <div class="actions">
+      <button class="start" id="startBtn">Iniciar carga</button>
+      <button class="stop" id="stopBtn" disabled>Parar</button>
+    </div>
+
+    <div class="log" id="log"></div>
+  </div>
+
+  <script>
+    let running = false;
+    let timers = [];
+    let payloadBytes = null;
+
+    function appendLog(msg) {
+      const el = document.getElementById('log');
+      el.textContent += msg + "\n";
+      el.scrollTop = el.scrollHeight;
+    }
+
+    async function loadPayload() {
+      const fileInput = document.getElementById('file');
+      if (fileInput.files && fileInput.files[0]) {
+        payloadBytes = await fileInput.files[0].arrayBuffer();
+        return { name: fileInput.files[0].name, type: fileInput.files[0].type || 'application/octet-stream' };
+      } else {
+        // GIF mínimo (header de um GIF 1x1 transparente) para gerar um payload “válido”
+        const hex = "47494638396101000100f00000ffffff00000021f90401000001002c00000000010001000002024401003b";
+        const bytes = new Uint8Array(hex.match(/.{1,2}/g).map(h => parseInt(h, 16)));
+        payloadBytes = bytes.buffer;
+        return { name: "pixel.gif", type: "image/gif" };
+      }
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      document.getElementById('startBtn').disabled = true;
+      document.getElementById('stopBtn').disabled = false;
+
+      const url = document.getElementById('url').value.trim();
+      const threads = Math.max(1, parseInt(document.getElementById('threads').value || "1", 10));
+      const delay = Math.max(0, parseFloat(document.getElementById('delay').value || "0"));
+
+      appendLog(`Iniciando carga em ${url} com ${threads} clientes; delay=${delay}s`);
+
+      loadPayload().then(meta => {
+        for (let t = 0; t < threads; t++) {
+          let counter = 0;
+          const timer = setInterval(async () => {
+            if (!running) return;
+            counter += 1;
+            const filename = `${Date.now()}_${t+1}.gif`; // nome virtual
+            const form = new FormData();
+            const blob = new Blob([payloadBytes], { type: meta.type || 'image/gif' });
+            form.append('file', blob, filename);
+            try {
+              const resp = await fetch(url, { method: 'POST', body: form, mode: 'cors' });
+              appendLog(`[${t+1}] #${counter}: ${resp.status}`);
+            } catch (e) {
+              appendLog(`[${t+1}] erro: ${e}`);
+            }
+          }, Math.max(1, delay * 1000));
+          timers.push(timer);
+        }
+      });
+    }
+
+    function stop() {
+      running = false;
+      timers.forEach(id => clearInterval(id));
+      timers = [];
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('stopBtn').disabled = true;
+      appendLog('Parado.');
+    }
+
+    document.getElementById('startBtn').addEventListener('click', start);
+    document.getElementById('stopBtn').addEventListener('click', stop);
+  </script>
+</body>
+</html>

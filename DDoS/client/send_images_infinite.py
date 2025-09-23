@@ -4,7 +4,7 @@ import time
 
 URL = "http://127.0.0.1:8080/upload"
 FILE_PATH = "minha_imagem.gif"
-NUM_THREADS = 100
+NUM_THREADS = 10
 DELAY = 0.1
 
 contador_global = 0
