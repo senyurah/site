@@ -1,4 +1,5 @@
 import os, threading, time
+from collections import deque
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from PIL import Image
@@ -15,22 +16,45 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 lock = threading.Lock()
 total_uploads = 0
-logs = []
+total_bytes = 0
+logs = []                # [{filename, status, time, size_bytes}]
+byte_events = deque()    # deque de (timestamp, bytes) para cálculo de taxa
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def bytes_to_human(n):
+    for unit in ['B','KB','MB','GB','TB']:
+        if n < 1024.0:
+            return f"{n:.2f} {unit}"
+        n /= 1024.0
+    return f"{n:.2f} PB"
+
+def calc_rate_mbps(window_secs=5):
+    now = time.time()
+    # remove eventos antigos
+    while byte_events and (now - byte_events[0][0]) > window_secs:
+        byte_events.popleft()
+    # soma bytes na janela
+    window_bytes = sum(b for _, b in byte_events)
+    # taxa média em Mbps (bytes/s * 8 / 1e6)
+    return (window_bytes / max(window_secs, 1)) * 8 / 1_000_000
+
 @app.route('/')
 def dashboard():
     last_logs = list(reversed(logs[-10:]))
-    last20 = logs[-20:]
-    times = [x['time'] for x in last20]
-    counts = [i + 1 for i in range(len(last20))]
-    return render_template("dashboard.html", total=total_uploads, logs=last_logs, times=times, counts=counts)
+    rate_mbps = calc_rate_mbps(window_secs=5)
+    return render_template(
+        "dashboard.html",
+        total=total_uploads,
+        total_bytes_human=bytes_to_human(total_bytes),
+        rate_mbps=f"{rate_mbps:.2f}",
+        logs=last_logs
+    )
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    global total_uploads, logs
+    global total_uploads, total_bytes
     if 'file' not in request.files:
         return jsonify({"error": "Nenhum arquivo enviado"}), 400
     file = request.files['file']
@@ -42,19 +66,23 @@ def upload_file():
         file.save(filepath)
         try:
             Image.open(filepath).verify()
+            size_bytes = os.path.getsize(filepath)
+            now = time.strftime("%H:%M:%S")
             with lock:
                 total_uploads += 1
-                logs.append({"filename": filename, "status": "OK", "time": time.strftime("%H:%M:%S")})
+                total_bytes += size_bytes
+                logs.append({"filename": filename, "status": "OK", "time": now, "size_bytes": size_bytes})
+                byte_events.append((time.time(), size_bytes))
         except Exception:
             if os.path.exists(filepath):
                 os.remove(filepath)
             with lock:
-                logs.append({"filename": filename, "status": "Inválido", "time": time.strftime("%H:%M:%S")})
+                logs.append({"filename": filename, "status": "Inválido", "time": time.strftime("%H:%M:%S"), "size_bytes": 0})
             return jsonify({"error": "Arquivo não é imagem válida"}), 400
         return jsonify({"message": "Upload OK", "file": filename}), 200
     else:
         with lock:
-            logs.append({"filename": file.filename, "status": "Extensão inválida", "time": time.strftime("%H:%M:%S")})
+            logs.append({"filename": file.filename, "status": "Extensão inválida", "time": time.strftime("%H:%M:%S"), "size_bytes": 0})
         return jsonify({"error": "Extensão não permitida"}), 400
 
 @app.route('/uploads/<filename>')
@@ -70,4 +98,5 @@ def service_unavailable(e):
     return render_template("error.html"), 503
 
 if __name__ == "__main__":
+    # sem venv: rode com "python dashboard_server.py"
     app.run(host="0.0.0.0", port=8080, debug=True)
