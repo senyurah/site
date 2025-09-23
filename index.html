@@ -203,7 +203,7 @@ footer{border-top:1px solid var(--accent);color:var(--muted);padding:18px 0 28px
       </div>
 
       <div class="cta">
-        <a class="btn" id="btn-site" target="_blank" rel="noopener" href="#">Site</a>
+        <a class="btn" id="btn-site" target="_blank" rel="noopener" href="#">Site oficial da FECART</a>
         <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
         <a class="btn" id="btn-mapa" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
         <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
@@ -421,7 +421,7 @@ function toggleMenu(){
   document.body.classList.toggle('menu-open',active);
 }
 // URL do site que você quer abrir no botão "Site"
-const SITE_URL = 'https://senyurah.github.io/site/'; // mude aqui se quiser
+const SITE_URL = 'https://fecart2025.glide.page/'; // mude aqui se quiser
 $('#btn-site')?.setAttribute('href', SITE_URL);
 
 // (opcional) log no HUD quando clicar
@@ -437,7 +437,7 @@ allFaqs.forEach(d=>{ const s=$('summary',d); s.addEventListener('click',e=>{ e.p
 $('#faq-expand')?.addEventListener('click',()=>allFaqs.forEach(slideOpen));
 $('#faq-collapse')?.addEventListener('click',()=>allFaqs.forEach(slideClose));
 
-/* ===== ICS / GCal / Share / Copy ===== */
+/* ===== Site / GCal / Share / Copy ===== */
 $('#btn-ics')?.addEventListener('click', ()=>{
   const ics=[
     'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FECART//pt-BR','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
