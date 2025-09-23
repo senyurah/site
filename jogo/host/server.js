@@ -1,6 +1,5 @@
-// Host central do jogo: WebSocket server + static para servir o cliente.
-// Execução: npm install && npm start (porta padrão 3000)
-
+// Host central do jogo com dashboard do host e SDK para jogadores.
+// Execução: npm install && npm start  (porta padrão 3000)
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
@@ -9,29 +8,23 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 app.use(express.static('public'));
 
+// Servir o SDK para ser importado pelo jogo (via <script type="module" src="/sdk.js">)
+app.get('/sdk.js', (req, res) => {
+  res.type('application/javascript').send(sdkContent);
+});
+
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// Estado em memória por jogo
-// games: {
-//   [gameId]: {
-//     clients: Map<WebSocket, { playerId }>,
-//     players: {
-//       [playerId]: { name, team, ready, score, connected, lastSeen }
-//     },
-//     hostId: string|null,
-//     started: boolean,
-//     createdAt: number
-//   }
-// }
+// ---- Estado de jogo em memória ----
 const games = {};
 const DEFAULT_GAME = 'main';
 
 function ensureGame(gameId = DEFAULT_GAME) {
   if (!games[gameId]) {
     games[gameId] = {
-      clients: new Map(),
-      players: {},
+      clients: new Map(), // ws -> { playerId, role }
+      players: {},        // playerId -> { name, team, ready, score, connected, lastSeen }
       hostId: null,
       started: false,
       createdAt: Date.now(),
@@ -57,6 +50,10 @@ function broadcastToGame(gameId, obj) {
   for (const ws of game.clients.keys()) {
     if (ws.readyState === WebSocket.OPEN) ws.send(raw);
   }
+}
+
+function sendTo(ws, obj) {
+  if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj));
 }
 
 function fullStatePayload(gameId) {
@@ -88,13 +85,15 @@ function chooseNewHost(gameId) {
   return game.hostId;
 }
 
+// ---- WebSocket ----
 wss.on('connection', (ws) => {
   let currentGameId = DEFAULT_GAME;
   ensureGame(currentGameId);
-  let boundPlayerId = null; // quem este socket representa
+  let boundPlayerId = null;
+  let role = 'player'; // 'player' | 'host'
 
-  function bindToPlayer(game, playerId) {
-    // remove ws antigo se houver
+  function bindToPlayer(game, playerId, newRole) {
+    // fecha conexões antigas desse player
     for (const [sock, meta] of game.clients.entries()) {
       if (meta.playerId === playerId && sock !== ws) {
         try { sock.close(); } catch {}
@@ -102,73 +101,76 @@ wss.on('connection', (ws) => {
       }
     }
     boundPlayerId = playerId;
-    game.clients.set(ws, { playerId });
+    role = newRole || role;
+    game.clients.set(ws, { playerId, role });
   }
 
   ws.on('message', (raw) => {
     let data;
     try { data = JSON.parse(raw.toString()); } catch (e) {
-      ws.send(JSON.stringify({ type: 'error', payload: { message: 'invalid json' } }));
+      sendTo(ws, { type: 'error', payload: { message: 'invalid json' } });
       return;
     }
     const { type, payload = {} } = data;
 
     if (type === 'join') {
-      // payload: { playerId?, name, team, role?, gameId? }
+      // payload: { playerId?, name?, team?, role?, gameId? }
       currentGameId = payload.gameId || DEFAULT_GAME;
       const game = ensureGame(currentGameId);
-
       let playerId = payload.playerId;
+      const incomingRole = (payload.role === 'host') ? 'host' : 'player';
       const isResume = playerId && game.players[playerId];
 
+      if (incomingRole === 'host' && !game.hostId) {
+        // host inédito assume
+        if (!playerId) playerId = uuidv4();
+        if (!isResume) {
+          game.players[playerId] = {
+            name: payload.name || 'Host',
+            team: 'attack', ready: false, score: 0, connected: true, lastSeen: Date.now()
+          };
+        } else {
+          game.players[playerId].connected = true;
+          game.players[playerId].lastSeen = Date.now();
+        }
+        game.hostId = playerId;
+        bindToPlayer(game, playerId, 'host');
+        sendTo(ws, { type: (isResume ? 'resumed' : 'joined'), payload: { playerId, gameId: currentGameId } });
+        sendTo(ws, fullStatePayload(currentGameId));
+        broadcastToGame(currentGameId, { type: 'host_update', payload: { hostId: game.hostId } });
+        broadcastToGame(currentGameId, playersUpdatePayload(currentGameId));
+        return;
+      }
+
       if (isResume) {
-        // Reconexão
+        // Reconnect jogador
         const p = game.players[playerId];
-        bindToPlayer(game, playerId);
+        bindToPlayer(game, playerId, 'player');
         p.connected = true;
         p.lastSeen = Date.now();
-        // opcionalmente atualiza nome/time se enviados
         if (payload.name) p.name = payload.name;
         if (payload.team) p.team = payload.team === 'defense' ? 'defense' : 'attack';
-
-        ws.send(JSON.stringify({ type: 'resumed', payload: { playerId, gameId: currentGameId } }));
-        ws.send(JSON.stringify(fullStatePayload(currentGameId)));
+        sendTo(ws, { type: 'resumed', payload: { playerId, gameId: currentGameId } });
+        sendTo(ws, fullStatePayload(currentGameId));
         broadcastToGame(currentGameId, playersUpdatePayload(currentGameId));
         return;
       }
 
       // Novo jogador
       playerId = uuidv4();
-      const name = payload.name || `Player-${playerId.slice(0, 4)}`;
+      const name = payload.name || `Player-${playerId.slice(0,4)}`;
       const team = payload.team === 'defense' ? 'defense' : 'attack';
-
-      bindToPlayer(game, playerId);
-      game.players[playerId] = {
-        name,
-        team,
-        ready: false,
-        score: 0,
-        connected: true,
-        lastSeen: Date.now(),
-      };
-
-      // papel e autoridade de host
-      if (!game.hostId && payload.role === 'host') {
-        game.hostId = playerId;
-        broadcastToGame(currentGameId, { type: 'host_update', payload: { hostId: game.hostId } });
-      } else if (payload.role === 'host' && game.hostId) {
-        ws.send(JSON.stringify({ type: 'info', payload: { message: 'Host já definido nesta sala' } }));
-      }
-
-      ws.send(JSON.stringify({ type: 'joined', payload: { playerId, gameId: currentGameId, name, team } }));
-      ws.send(JSON.stringify(fullStatePayload(currentGameId)));
+      bindToPlayer(game, playerId, 'player');
+      game.players[playerId] = { name, team, ready: false, score: 0, connected: true, lastSeen: Date.now() };
+      sendTo(ws, { type: 'joined', payload: { playerId, gameId: currentGameId } });
+      sendTo(ws, fullStatePayload(currentGameId));
       broadcastToGame(currentGameId, playersUpdatePayload(currentGameId));
       return;
     }
 
     const game = ensureGame(currentGameId);
     if (!boundPlayerId || !game.players[boundPlayerId]) {
-      ws.send(JSON.stringify({ type: 'error', payload: { message: 'not joined' } }));
+      sendTo(ws, { type: 'error', payload: { message: 'not joined' } });
       return;
     }
 
@@ -183,22 +185,28 @@ wss.on('connection', (ws) => {
     if (type === 'score_update') {
       const delta = Number(payload.scoreDelta) || 0;
       me.score = (me.score || 0) + delta;
-      broadcastToGame(currentGameId, {
-        type: 'score_broadcast',
-        payload: { players: game.players, teamScores: computeTeamScores(game) }
-      });
+      broadcastToGame(currentGameId, { type: 'score_broadcast', payload: { players: game.players, teamScores: computeTeamScores(game) } });
+      return;
+    }
+
+    if (type === 'finish') {
+      // jogador finalizou com score final explícito
+      if (typeof payload.finalScore === 'number') me.score = payload.finalScore;
+      me.ready = false;
+      broadcastToGame(currentGameId, { type: 'player_finished', payload: { playerId: boundPlayerId, players: game.players, teamScores: computeTeamScores(game) } });
       return;
     }
 
     if (type === 'start_request') {
+      // apenas host
       if (game.hostId !== boundPlayerId) {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'apenas o host pode iniciar' } }));
+        sendTo(ws, { type: 'error', payload: { message: 'apenas o host pode iniciar' } });
         return;
       }
-      const connectedPlayers = Object.values(game.players).filter(p => p.connected);
-      const allReady = connectedPlayers.length >= 4 && connectedPlayers.every(p => p.ready);
+      const connectedPlayers = Object.entries(game.players).filter(([pid,p]) => p.connected && pid !== game.hostId);
+      const allReady = connectedPlayers.length >= 4 && connectedPlayers.every(([,p]) => p.ready);
       if (!allReady) {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'jogadores conectados precisam estar prontos (mínimo 4)' } }));
+        sendTo(ws, { type: 'error', payload: { message: 'mínimo 4 jogadores prontos (exclui host)' } });
         return;
       }
       game.started = true;
@@ -208,38 +216,25 @@ wss.on('connection', (ws) => {
 
     if (type === 'end_session') {
       if (game.hostId !== boundPlayerId) {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'apenas o host pode encerrar' } }));
+        sendTo(ws, { type: 'error', payload: { message: 'apenas o host pode encerrar' } });
         return;
       }
       broadcastToGame(currentGameId, { type: 'end_session', payload: { message: 'session ending' } });
-      for (const pid in game.players) {
-        game.players[pid].score = 0;
-        game.players[pid].ready = false;
-      }
+      for (const pid in game.players) { game.players[pid].score = 0; game.players[pid].ready = false; }
       game.started = false;
       broadcastToGame(currentGameId, playersUpdatePayload(currentGameId));
-      ws.send(JSON.stringify(fullStatePayload(currentGameId)));
-      return;
-    }
-
-    if (type === 'claim_host') {
-      if (!game.hostId) {
-        game.hostId = boundPlayerId;
-        broadcastToGame(currentGameId, { type: 'host_update', payload: { hostId: game.hostId } });
-      } else {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'host já existe' } }));
-      }
+      sendTo(ws, fullStatePayload(currentGameId));
       return;
     }
 
     if (type === 'host_transfer') {
       if (game.hostId !== boundPlayerId) {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'apenas o host pode transferir' } }));
+        sendTo(ws, { type: 'error', payload: { message: 'apenas o host pode transferir' } });
         return;
       }
       const target = String(payload.targetPlayerId || '');
       if (!target || !game.players[target] || !game.players[target].connected) {
-        ws.send(JSON.stringify({ type: 'error', payload: { message: 'destinatário inválido ou offline' } }));
+        sendTo(ws, { type: 'error', payload: { message: 'destinatário inválido ou offline' } });
         return;
       }
       game.hostId = target;
@@ -247,20 +242,7 @@ wss.on('connection', (ws) => {
       return;
     }
 
-    if (type === 'leave') {
-      const wasHost = (game.hostId === boundPlayerId);
-      delete game.players[boundPlayerId];
-      game.clients.delete(ws);
-      boundPlayerId = null;
-      if (wasHost) {
-        const newHost = chooseNewHost(currentGameId);
-        broadcastToGame(currentGameId, { type: 'host_update', payload: { hostId: newHost } });
-      }
-      broadcastToGame(currentGameId, playersUpdatePayload(currentGameId));
-      return;
-    }
-
-    ws.send(JSON.stringify({ type: 'error', payload: { message: 'unknown message type' } }));
+    sendTo(ws, { type: 'error', payload: { message: 'unknown message type' } });
   });
 
   ws.on('close', () => {
@@ -286,7 +268,60 @@ wss.on('connection', (ws) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Game host listening on port ${PORT}`);
-});
+// ---- Conteúdo do SDK injetado via /sdk.js ----
+const sdkContent = `
+export class GameClient {
+  constructor({ serverUrl, name, team = 'attack', role = 'player', gameId = 'main', autoReconnect = true }) {
+    this.serverUrl = serverUrl;
+    this.name = name;
+    this.team = (team === 'defense' ? 'defense' : 'attack');
+    this.role = role;
+    this.gameId = gameId;
+    this.autoReconnect = autoReconnect;
+    this.playerId = localStorage.getItem('game.playerId') || null;
+    this.ws = null;
+    this.listeners = new Map();
+    this._reconnectTimer = null;
+    this.connect();
+  }
+  on(type, fn){ this.listeners.set(type, fn); return this; }
+  _emit(type, payload){ const fn = this.listeners.get(type); if (fn) fn(payload); }
+  connect(){
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) return;
+    this.ws = new WebSocket(this.serverUrl);
+    this.ws.onopen = () => {
+      this.ws.send(JSON.stringify({ type: 'join', payload: { playerId: this.playerId, name: this.name, team: this.team, role: this.role, gameId: this.gameId } }));
+      this._emit('open');
+    };
+    this.ws.onmessage = (ev) => {
+      const msg = JSON.parse(ev.data);
+      if (msg.type === 'joined' || msg.type === 'resumed') {
+        this.playerId = msg.payload.playerId;
+        localStorage.setItem('game.playerId', this.playerId);
+        this._emit('session', msg.payload);
+      }
+      if (msg.type === 'full_state') this._emit('state', msg.payload);
+      if (msg.type === 'players_update' || msg.type === 'score_broadcast' || msg.type === 'player_finished') this._emit('update', msg.payload);
+      if (msg.type === 'start') this._emit('start', msg.payload);
+      if (msg.type === 'end_session') this._emit('end', msg.payload);
+      if (msg.type === 'host_update') this._emit('host', msg.payload);
+      if (msg.type === 'error' || msg.type === 'info') this._emit('message', msg.payload);
+    };
+    this.ws.onclose = () => {
+      this._emit('close');
+      if (this.autoReconnect && !this._reconnectTimer) {
+        this._reconnectTimer = setTimeout(() => { this._reconnectTimer = null; this.connect(); }, 2000);
+      }
+    };
+  }
+  ready(){ this._send('ready', { ready: true }); }
+  updateScore(delta){ this._send('score_update', { scoreDelta: delta }); }
+  finish(finalScore){ this._send('finish', { finalScore }); }
+  claimHost(){ this._send('claim_host', {}); }
+  start(){ this._send('start_request', {}); }
+  end(){ this._send('end_session', {}); }
+  transferHost(targetPlayerId){ this._send('host_transfer', { targetPlayerId }); }
+  leave(){ this._send('leave', {}); try{ this.ws && this.ws.close(); }catch(e){} }
+  _send(type, payload){ if (!this.ws || this.ws.readyState !== WebSocket.OPEN) return; this.ws.send(JSON.stringify({ type, payload })); }
+}
+`;
