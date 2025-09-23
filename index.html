@@ -203,7 +203,7 @@ footer{border-top:1px solid var(--accent);color:var(--muted);padding:18px 0 28px
       </div>
 
       <div class="cta">
-        <button class="btn" id="btn-ics" type="button">Adicionar .ics</button>
+        <a class="btn" id="btn-site" target="_blank" rel="noopener" href="#">Site</a>
         <a class="btn" id="btn-gcal" target="_blank" rel="noopener" href="#">Google Calendar</a>
         <a class="btn" id="btn-mapa" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Av.+da+Liberdade,+532,+São+Paulo,+SP,+01502-001">Como chegar</a>
         <a class="btn" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar</a>
@@ -420,7 +420,13 @@ function toggleMenu(){
   toggle.setAttribute('aria-expanded',active?'true':'false');
   document.body.classList.toggle('menu-open',active);
 }
-toggle.addEventListener('click',toggleMenu);
+// URL do site que você quer abrir no botão "Site"
+const SITE_URL = 'https://senyurah.github.io/site/'; // mude aqui se quiser
+$('#btn-site')?.setAttribute('href', SITE_URL);
+
+// (opcional) log no HUD quando clicar
+$('#btn-site')?.addEventListener('click', ()=> hud('CTA → Site'));
+
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ nav.classList.remove('active'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false');}));
 
 /* ===== FAQ slide ===== */
