@@ -1,6 +1,6 @@
-# jogo/defesa-jogo.py
-# Modo jogador (DEFESA): nome -> PRONTO -> aguarda 'start' do host -> envia pontuação final.
-# Ajuste o IP do host abaixo e rode:  python defesa-jogo.py
+# jogo/ataque-jogo.py
+# Modo jogador (ATAQUE): nome -> PRONTO -> aguarda 'start' do host -> envia pontuação final.
+# Ajuste o IP do host abaixo e rode:  python ataque-jogo.py
 import asyncio, os, sys, random
 from jogo.net.kahoot_client import KahootClient
 
@@ -8,15 +8,15 @@ HOST_WS = "ws://192.168.0.10:3000"   # <<< ALTERE PARA O IP DO HOST NA SUA LAN
 
 def input_nome():
     try:
-        nome = input("Seu nome (DEFESA): ").strip()
+        nome = input("Seu nome (ATAQUE): ").strip()
     except EOFError:
         nome = ""
-    return nome or "Jogador-Defesa"
+    return nome or "Jogador-Ataque"
 
 async def main():
     print(f"Conectando ao host em: {HOST_WS} ...")
     nome = input_nome()
-    client = KahootClient(server_url=HOST_WS, name=nome, team="defense")
+    client = KahootClient(server_url=HOST_WS, name=nome, team="attack")
     st = await client.connect()
     print("Conectado. Jogadores atuais:", len(st.get("players", {})))
     print("Pressione ENTER para marcar 'PRONTO'...")
@@ -39,7 +39,7 @@ async def main():
         await asyncio.sleep(1.0)
         inc = random.randint(1, 10)
         score += inc
-        print(f"[Jogo DEFESA] +{inc} pontos (parcial={score})")
+        print(f"[Jogo ATAQUE] +{inc} pontos (parcial={score})")
         await client.update_score(inc)
     # -------------------------------------------------
 
