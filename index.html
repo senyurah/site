@@ -400,18 +400,51 @@ function setTheme(name){
 }
 
 /* ===== Countdown ===== */
-const EVENT_DATE=new Date('2025-09-27T13:00:00-03:00');
-function tick(){
-  const dd=$('#dd'),hh=$('#hh'),mm=$('#mm'),ss=$('#ss');
-  if(!dd) return;
-  let ms = EVENT_DATE - new Date();
-  if(ms<0) ms=0;
-  const s=Math.floor(ms/1000), d=Math.floor(s/86400);
-  const h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60), sec=s%60;
-  dd.textContent=d; hh.textContent=String(h).padStart(2,'0');
-  mm.textContent=String(m).padStart(2,'0'); ss.textContent=String(sec).padStart(2,'0');
+const EVENT_DATE = new Date('2025-09-27T13:00:00-03:00');
+let _countTimer = null;
+
+function showEventNow(){
+  const wrap = document.querySelector('.countwrap');
+  if (!wrap) return;
+  // troca todo o bloco por uma chamada direta
+  wrap.innerHTML = `
+    <div class="label" aria-live="polite" style="text-transform:none">
+      <strong>Venha ao Laboratório 200!</strong>
+    </div>
+  `;
 }
-tick(); setInterval(tick,1000);
+
+function tick(){
+  const dd = document.querySelector('#dd'),
+        hh = document.querySelector('#hh'),
+        mm = document.querySelector('#mm'),
+        ss = document.querySelector('#ss');
+
+  // se não houver tiles (ex.: em páginas de corp), não faz nada
+  if(!dd || !hh || !mm || !ss) return;
+
+  let ms = EVENT_DATE - new Date();
+  if (ms <= 0) {
+    clearInterval(_countTimer);
+    showEventNow();
+    return;
+  }
+
+  const s  = Math.floor(ms/1000);
+  const d  = Math.floor(s/86400);
+  const h  = Math.floor((s%86400)/3600);
+  const m  = Math.floor((s%3600)/60);
+  const sc = s%60;
+
+  dd.textContent = d;
+  hh.textContent = String(h).padStart(2,'0');
+  mm.textContent = String(m).padStart(2,'0');
+  ss.textContent = String(sc).padStart(2,'0');
+}
+
+// inicializa
+tick();
+_countTimer = setInterval(tick, 1000);
 
 /* ===== Mobile menu ===== */
 const toggle=$('#menu-toggle'); const nav=$('#menu');
