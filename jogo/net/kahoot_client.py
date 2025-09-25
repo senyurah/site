@@ -9,7 +9,7 @@ except Exception as e:
     raise
 
 class KahootClient:
-    def __init__(self, server_url="ws://192.168.0.10:3000", name="Player", team="attack", game_id="main"):
+    def __init__(self, server_url="ws://10.1.33.224:3000", name="Player", team="attack", game_id="main"):
         self.server_url = server_url
         self.name = name
         self.team = "defense" if team == "defense" else "attack"

@@ -4,7 +4,7 @@
 import asyncio, os, sys, random
 from jogo.net.kahoot_client import KahootClient
 
-HOST_WS = "ws://192.168.0.10:3000"   # <<< ALTERE PARA O IP DO HOST NA SUA LAN
+HOST_WS = "ws://10.1.33.224:3000"   # <<< ALTERE PARA O IP DO HOST NA SUA LAN
 
 def input_nome():
     try:
