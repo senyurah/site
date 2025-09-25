@@ -6,8 +6,12 @@
     <title>Aguarde...</title>
     <style>
         body {
-            background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
-            color: #e0f7fa;
+            background:
+                radial-gradient(60vw 40vh at 20% -10%, rgba(57,255,20,.08), transparent 60%),
+                radial-gradient(60vw 40vh at 120% 10%, rgba(22,242,160,.06), transparent 60%),
+                repeating-linear-gradient(0deg, transparent 0 24px, rgba(57,255,20,.05) 24px 25px),
+                linear-gradient(#061009, #061009);
+            color: #e6ffe8;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
@@ -23,14 +27,16 @@
         .message {
             font-size: 4vw;
             margin-bottom: 20px;
-            color: #ffcc00;
+            color: #16f2a0;
+            text-shadow: 0 0 8px rgba(22,242,160,.35);
             animation: fadeIn 1.5s ease-in-out;
         }
 
         .countdown {
             font-size: 15vw;
             font-weight: 700;
-            color: #aeea00;
+            color: #39ff14;
+            text-shadow: 0 0 12px rgba(57,255,20,.35);
             animation: pulse 1s infinite alternate;
         }
 
