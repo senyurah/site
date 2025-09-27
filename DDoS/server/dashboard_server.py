@@ -1,125 +1,143 @@
-import os, threading, time, shutil
-from collections import deque
-from flask import Flask, request, jsonify, render_template, send_from_directory, redirect, url_for
+# server_with_upload_and_maintenance.py
+from flask import Flask, request, jsonify, Response, render_template_string
+import time, threading, os, tempfile
 from werkzeug.utils import secure_filename
-from PIL import Image
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
+
+# Config
+UPLOAD_FOLDER = os.path.join(tempfile.gettempdir(), "demo_uploads")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
-lock = threading.Lock()
-total_uploads = 0
-total_bytes = 0
-logs = []                # [{filename, status, time, size_bytes}]
-byte_events = deque()    # deque de (timestamp, bytes) para cálculo de taxa
+BIND_HOST = '0.0.0.0'   # LOCAL ONLY
+BIND_PORT = 8080
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# Estado / métricas
+metrics = {
+    'total_uploads': 0
+}
+metrics_lock = threading.Lock()
+MAINTENANCE_THRESHOLD = 1000  # ajuste para 1000 para demo real; reduzir p/ testes
+# maintenance state
+maintenance_mode = {
+    'down': False,
+    'since': None
+}
 
-def bytes_to_human(n):
-    for unit in ['B','KB','MB','GB','TB']:
-        if n < 1024.0:
-            return f"{n:.2f} {unit}"
-        n /= 1024.0
-    return f"{n:.2f} PB"
+# Página de manutenção (substitua este HTML pelo seu template se quiser)
+MAINTENANCE_HTML = """
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Manutenção</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align:center; padding:60px; background:#f2f2f2; }
+    .card { display:inline-block; padding:30px; background:white; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    h1 { color:#c0392b; }
+  </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Serviço temporariamente indisponível</h1>
+      <p>O serviço entrou em modo de manutenção devido à alta carga (simulação).</p>
+      <p><small>Demo local — ambiente controlado.</small></p>
+    </div>
+  </body>
+</html>
+"""
 
-def calc_rate_mbps(window_secs=1):
-    now = time.time()
-    while byte_events and (now - byte_events[0][0]) > window_secs:
-        byte_events.popleft()
-    window_bytes = sum(b for _, b in byte_events)
-    return (window_bytes / max(window_secs, 1)) * 8 / 1_000_000
+# Utilitários
+def check_maintenance():
+    with metrics_lock:
+        return maintenance_mode['down']
 
-@app.after_request
-def add_cors(resp):
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
-    resp.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return resp
+def enter_maintenance():
+    with metrics_lock:
+        maintenance_mode['down'] = True
+        maintenance_mode['since'] = time.time()
 
-@app.route('/upload', methods=['POST', 'OPTIONS'])
-def upload_file():
-    global total_uploads, total_bytes
-    if request.method == 'OPTIONS':
-        return ('', 204)
-    if 'file' not in request.files:
-        return jsonify({"error": "Nenhum arquivo enviado"}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "Nome de arquivo vazio"}), 400
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-        try:
-            Image.open(filepath).verify()
-            size_bytes = os.path.getsize(filepath)
-            now_str = time.strftime("%H:%M:%S")
-            with lock:
-                global logs
-                total_uploads += 1
-                total_bytes += size_bytes
-                logs.append({"filename": filename, "status": "OK", "time": now_str, "size_bytes": size_bytes})
-                byte_events.append((time.time(), size_bytes))
-        except Exception:
-            if os.path.exists(filepath):
-                os.remove(filepath)
-            with lock:
-                logs.append({"filename": filename, "status": "Inválido", "time": time.strftime("%H:%M:%S"), "size_bytes": 0})
-            return jsonify({"error": "Arquivo não é imagem válida"}), 400
-        return jsonify({"message": "Upload OK", "file": filename}), 200
-    else:
-        with lock:
-            logs.append({"filename": file.filename, "status": "Extensão inválida", "time": time.strftime("%H:%M:%S"), "size_bytes": 0})
-        return jsonify({"error": "Extensão não permitida"}), 400
+def reset_maintenance():
+    with metrics_lock:
+        maintenance_mode['down'] = False
+        maintenance_mode['since'] = None
+        metrics['total_uploads'] = 0
 
-@app.route('/clear_uploads', methods=['POST'])
-def clear_uploads():
-    with lock:
-        for name in os.listdir(UPLOAD_FOLDER):
-            try:
-                os.remove(os.path.join(UPLOAD_FOLDER, name))
-            except Exception:
-                pass
-        # não zera contadores históricos; apenas limpa arquivos
-        # se quiser zerar tudo, descomente abaixo:
-        # global total_uploads, total_bytes, logs, byte_events
-        # total_uploads = 0
-        # total_bytes = 0
-        # logs = []
-        # byte_events.clear()
-    return redirect(url_for('dashboard'))
+# Middleware: se em manutenção, retorna a página (exceto rotas admin)
+@app.before_request
+def before_all_requests():
+    if request.path.startswith('/admin'):
+        return None
+    if check_maintenance():
+        return Response(MAINTENANCE_HTML, status=503, mimetype='text/html')
+    return None
 
+# Root status
 @app.route('/')
-def dashboard():
-    last_logs = list(reversed(logs[-10:]))
-    rate_mbps = calc_rate_mbps(window_secs=1)
-    return render_template(
-        "dashboard.html",
-        total=total_uploads,
-        total_bytes_human=bytes_to_human(total_bytes),
-        rate_mbps=f"{rate_mbps:.2f}",
-        logs=last_logs
-    )
+def index():
+    with metrics_lock:
+        return jsonify({
+            'status': 'up' if not maintenance_mode['down'] else 'maintenance',
+            'total_uploads': metrics['total_uploads'],
+            'maintenance': maintenance_mode.copy()
+        })
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+# Upload endpoint (multipart/form-data field 'file')
+@app.route('/upload', methods=['POST'])
+def upload():
+    # Segurança: limitar a requests de localhost nesta demo
+    remote = request.remote_addr
+    if remote not in ('127.0.0.1', '::1', 'localhost'):
+        return jsonify({'error': 'uploads permitidos apenas de localhost para esta demo'}), 403
 
-@app.errorhandler(500)
-def internal_error(e):
-    return render_template("error.html"), 500
+    if 'file' not in request.files:
+        return jsonify({'error': 'nenhum arquivo no campo "file"'}), 400
 
-@app.errorhandler(503)
-def service_unavailable(e):
-    return render_template("error.html"), 503
+    f = request.files['file']
+    filename = secure_filename(f.filename or f'upload_{int(time.time()*1000)}')
+    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    # salvando o arquivo (pode consumir espaço em disco; cuidado)
+    f.save(save_path)
+
+    # incrementar contador
+    with metrics_lock:
+        metrics['total_uploads'] += 1
+        current = metrics['total_uploads']
+
+    # checar threshold
+    if current >= MAINTENANCE_THRESHOLD and not check_maintenance():
+        enter_maintenance()
+
+    return jsonify({
+        'ok': True,
+        'filename': filename,
+        'total_uploads': current,
+        'maintenance_now': check_maintenance()
+    })
+
+# Admin: reset (token simples)
+ADMIN_TOKEN = "tioomB5bxY30y52XE69A6Sg6Ezjw_fg-njLu4K3YT80"  # troque antes de apresentar
+
+@app.route('/admin/reset', methods=['POST'])
+def admin_reset():
+    token = request.args.get('token') or request.headers.get('X-ADMIN-TOKEN')
+    if token != ADMIN_TOKEN:
+        return jsonify({'error': 'token inválido'}), 403
+    reset_maintenance()
+    return jsonify({'ok': True, 'message': 'contador resetado e site fora de manutenção'})
+
+@app.route('/admin/status', methods=['GET'])
+def admin_status():
+    token = request.args.get('token') or request.headers.get('X-ADMIN-TOKEN')
+    if token != ADMIN_TOKEN:
+        return jsonify({'error': 'token inválido'}), 403
+    with metrics_lock:
+        return jsonify({
+            'total_uploads': metrics['total_uploads'],
+            'maintenance': maintenance_mode.copy()
+        })
+
+if __name__ == '__main__':
+    print("Upload folder:", app.config['UPLOAD_FOLDER'])
+    print(f"Rodando em http://{BIND_HOST}:{BIND_PORT} — demo LOCAL apenas.")
+    app.run(host=BIND_HOST, port=BIND_PORT, threaded=True)
